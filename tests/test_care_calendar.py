@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 
 from care_calendar import Calendar, current_year
 
+
 class TestCalendar(unittest.TestCase):
     """Tests for care_calendar.Calendar"""
 
@@ -43,7 +44,6 @@ class TestCalendar(unittest.TestCase):
 
 
 class TestCalendarFormatDay(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
@@ -64,7 +64,6 @@ class TestCalendarFormatDay(unittest.TestCase):
 
 
 class TestCalendarFormatDayNumber(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
@@ -79,7 +78,6 @@ class TestCalendarFormatDayNumber(unittest.TestCase):
 
 
 class TestCalendarFormatDayName(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
@@ -94,7 +92,6 @@ class TestCalendarFormatDayName(unittest.TestCase):
 
 
 class TestCalendarFormatDayStatus(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
@@ -105,16 +102,17 @@ class TestCalendarFormatDayStatus(unittest.TestCase):
         first_tag = self.soup.find()
         self.assertEqual(first_tag.name, "td")
         self.assertIn("class", first_tag.attrs)
-        self.assertIn(self.calendar.css_class_day_status_blank, first_tag.attrs["class"])
+        self.assertIn(
+            self.calendar.css_class_day_status_blank, first_tag.attrs["class"]
+        )
 
     def test_day_status_is_empty(self):
         first_tag = self.soup.find()
         self.assertEqual(first_tag.name, "td")
-        self.assertEqual(first_tag.encode_contents(formatter='html'), b"&nbsp;")
+        self.assertEqual(first_tag.encode_contents(formatter="html"), b"&nbsp;")
 
 
 class TestCalendarFormatDayCare(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
@@ -129,7 +127,6 @@ class TestCalendarFormatDayCare(unittest.TestCase):
 
 
 class TestCalendarFormatWeekId(unittest.TestCase):
-
     def setUp(self):
         self.calendar = Calendar(2021)
         self.rowspan = 2
@@ -156,5 +153,3 @@ class TestCalendarFormatWeekId(unittest.TestCase):
         td_tag = self.soup.find().find()
         self.assertEqual(td_tag.name, "td")
         self.assertIn(self.calendar.css_class_week_number, td_tag.attrs["class"])
-
-

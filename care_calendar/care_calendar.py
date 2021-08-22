@@ -51,10 +51,7 @@ class Calendar:
     def iter_month_weeks(self, month: int) -> Iterator[List[datetime.date]]:
         """Iterate over a month weeks."""
         weeks = [
-            [
-                date for date in week
-                if date.month == month
-            ]
+            [date for date in week if date.month == month]
             for week in self._cal.monthdatescalendar(self.year, month)
         ]
         for week in weeks:
@@ -62,7 +59,9 @@ class Calendar:
 
     def format_month(self, month: int) -> str:
         header = self.format_month_name(month)
-        weeks = "\n".join(self.format_week(week) for week in self.iter_month_weeks(month))
+        weeks = "\n".join(
+            self.format_week(week) for week in self.iter_month_weeks(month)
+        )
         html = f"<table><tbody>{header}\n{weeks}</tbody></table>"
         with open("foo.html", "wt") as f:
             print(html, file=f)

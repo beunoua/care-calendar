@@ -31,7 +31,3 @@ class TestWeekId(unittest.TestCase):
                 else:
                     self.assertGreaterEqual(care_calendar.week_id(date), 1)
                     self.assertLessEqual(care_calendar.week_id(date), 53)
-
-
-
-
