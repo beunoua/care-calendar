@@ -27,20 +27,31 @@ class TestCalendar(unittest.TestCase):
     def test_initialize_with_current_year_by_default(self):
         self.assertEqual(self.calendar.year, current_year())
 
+
+
+class TestCalendarFormatMonth(unittest.TestCase):
+    def setUp(self):
+        self.calendar = Calendar(2021)
+        self.html = self.calendar.format_month(1)
+        self.soup = BeautifulSoup(self.html, "html.parser")
+
     def test_format_month_returns_an_html_table(self):
-        html = self.calendar.format_month(1)
-        self.assertTrue(html.startswith("<table>"))
-        self.assertTrue(html.endswith("</table>"))
+        self.assertEqual(self.soup.find().name, "table")
 
     def test_format_month_name_is_a_table_row_header(self):
         html = self.calendar.format_month_name(1)
-        self.assertTrue(html.startswith("<tr><th"))
-        self.assertTrue(html.endswith("</th></tr>"))
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "tr")
+        second_tag = first_tag.find()
+        self.assertEqual(second_tag.name, "th")
 
     def test_format_month_name_has_adequate_value(self):
         for month in range(1, 13):
             html = self.calendar.format_month_name(month)
-            self.assertIn(self.calendar.month_name[month], html)
+            soup = BeautifulSoup(html, "html.parser")
+            second_tag = soup.find().find()
+            self.assertEqual(second_tag.text, self.calendar.month_name[month])
 
 
 class TestCalendarFormatDay(unittest.TestCase):

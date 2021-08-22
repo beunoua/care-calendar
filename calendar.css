@@ -6,3 +6,11 @@ table, th, td {
 tr.weekend {
     background-color: #A9A9A9;
 }
+
+td.noday {
+    width: 10px;
+}
+
+td.weekid {
+    text-align: center;
+}

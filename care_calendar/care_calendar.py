@@ -16,6 +16,7 @@ class Calendar:
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
+    css_class_month_name = "month_name"
     css_class_week_number = "weekid"
     css_class_weekend = "weekend"
     css_class_weekday = "weekday"
@@ -71,7 +72,7 @@ class Calendar:
 
     def format_month_name(self, month: int) -> str:
         """Format the month name as an HTML table row header."""
-        return f'<tr><th colspan="5" class="{self.css_class_month}">{self.month_name[month]}</th></tr>'
+        return f'<tr><th colspan="5" class="{self.css_class_month_name}">{self.month_name[month]}</th></tr>'
 
     def format_week(self, dates: List[datetime.date]) -> str:
         """Format a full week has part of an HTML table."""
