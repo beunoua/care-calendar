@@ -12,6 +12,7 @@ from . import current_year, week_id
 class Calendar:
 
     year: int = current_year()
+    # holidays: List[datetime.date] = field(default_factory=list)
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
@@ -66,8 +67,6 @@ class Calendar:
             self.format_week(week) for week in self.iter_month_weeks(month)
         )
         html = f"<table><tbody>{header}\n{weeks}</tbody></table>"
-        with open("foo.html", "wt") as f:
-            print(html, file=f)
         return html
 
     def format_month_name(self, month: int) -> str:
