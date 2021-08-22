@@ -20,3 +20,13 @@ class TestCalendar(unittest.TestCase):
         self.assertIsInstance(html, str)
         self.assertTrue(html.startswith("<table>"))
         self.assertTrue(html.endswith("</table>"))
+
+    def test_format_month_name_is_a_table_row_header(self):
+        html = self.calendar.format_month_name(1)
+        self.assertTrue(html.startswith("<tr><th"))
+        self.assertTrue(html.endswith("</th></tr>"))
+
+    def test_format_month_name_has_adequate_value(self):
+        for month in range(1, 13):
+            html = self.calendar.format_month_name(month)
+            self.assertIn(self.calendar.month_name[month], html)
