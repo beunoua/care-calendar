@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from . import current_year
 
+
 @dataclass
 class Calendar:
 

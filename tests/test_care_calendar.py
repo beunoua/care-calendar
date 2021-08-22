@@ -12,3 +12,6 @@ class TestCalendar(unittest.TestCase):
     def test_initialize_with_current_year_by_default(self):
         cal = Calendar()
         self.assertEqual(cal.year, current_year())
+
+    def test_format_month_returns_html(self):
+        self.fail("nope")
