@@ -1,16 +1,38 @@
 """Console script for care_calendar."""
-import argparse
+
 import sys
+
+import jinja2
+
+import care_calendar
+
+HTML_TEMPLATE = """\
+<html>
+<head>
+<link rel="stylesheet" href="{{css_file}}">
+</head>
+<body>
+{{calendar_html}}
+</body>
+</html>
+"""
 
 
 def main():
     """Console script for care_calendar."""
-    parser = argparse.ArgumentParser()
-    parser.add_argument("_", nargs="*")
-    args = parser.parse_args()
 
-    print("Arguments: " + str(args._))
-    print("Replace this message by putting your code into " "care_calendar.cli.main")
+    css_file = "calendar.css"
+    template = jinja2.Template(HTML_TEMPLATE)
+
+    cal = care_calendar.Calendar()
+    html = template.render(
+        css_file=css_file,
+        calendar_html=cal.format_month(1)
+    )
+
+    with open("foo.html", "wt") as f:
+        print(html, file=f)
+
     return 0
 
 

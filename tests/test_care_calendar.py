@@ -76,7 +76,7 @@ class TestCalendarFormatDay(unittest.TestCase):
         soup = BeautifulSoup(html, "html.parser")
         tr_tag = soup.find()
         self.assertEqual(tr_tag.name, "tr")
-        self.assertIn(self.calendar.css_class_week, tr_tag.attrs["class"])
+        self.assertIn(self.calendar.css_class_weekday, tr_tag.attrs["class"])
 
 
 
@@ -148,7 +148,7 @@ class TestCalendarFormatWeekId(unittest.TestCase):
         self.calendar = Calendar(2021)
         self.rowspan = 2
         self.weekid = 12
-        html = self.calendar.format_week_number(self.weekid, self.rowspan)
+        html = self.calendar.format_week_number(self.weekid, self.rowspan, weekday=1)
         self.soup = BeautifulSoup(html, "html.parser")
 
     def test_weekid_is_first_column(self):
