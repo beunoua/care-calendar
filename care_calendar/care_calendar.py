@@ -81,7 +81,7 @@ class Calendar:
         week_id_html = self.format_week_number(weekid, rowspan)
         days = [self.format_day(day) for day in dates]
         # Remove <tr> from first day.
-        days[0] = days[0].replace("<tr>", "")
+        days[0] = days[0][days[0].find(">") + 1:]
         return "\n".join([week_id_html] + days)
 
     def format_week_number(self, weekid: int, rowspan: int) -> str:
