@@ -41,6 +41,12 @@ class TestCalendar(unittest.TestCase):
         self.assertTrue(html.startswith("<tr"))
         self.assertTrue(html.endswith("</tr>"))
 
+    def test_a_day_has_4_cells(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day(day)
+        soup = BeautifulSoup(html, "html.parser")
+        self.assertEqual(len(soup.find_all("td")), 4)
+
     def test_format_day_contains_the_date_data(self):
         day = datetime.datetime.now()
         html = self.calendar.format_day(day)
@@ -53,15 +59,46 @@ class TestCalendar(unittest.TestCase):
             self.assertEqual(date.month, month)
             self.assertEqual(date.year, self.year)
 
-    def test_day_number_has_adequate_class_(self):
+    def test_day_number_has_adequate_class(self):
         day = datetime.datetime.now()
-        html = self.calendar.format_day(day)
+        html = self.calendar.format_day_number(day)
         soup = BeautifulSoup(html, "html.parser")
         first_tag = soup.find()
-        self.assertEqual(first_tag.name, "tr")
-        td = first_tag.find()
-        self.assertEqual(td.name, "td")
-        self.assertIn("class", td.attrs)
-        self.assertIn(self.calendar.css_class_day_number, td.attrs["class"])
+        self.assertEqual(first_tag.name, "td")
+        self.assertIn("class", first_tag.attrs)
+        self.assertIn(self.calendar.css_class_day_number, first_tag.attrs["class"])
 
+    def test_day_name_has_adequate_class(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day_name(day)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "td")
+        self.assertIn("class", first_tag.attrs)
+        self.assertIn(self.calendar.css_class_day_name, first_tag.attrs["class"])
 
+    def test_day_status_has_adequate_class(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day_status(day)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "td")
+        self.assertIn("class", first_tag.attrs)
+        self.assertIn(self.calendar.css_class_day_status_blank, first_tag.attrs["class"])
+
+    def test_day_status_is_empty(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day_status(day)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "td")
+        self.assertEqual(first_tag.encode_contents(formatter='html'), b"&nbsp;")
+
+    def test_day_care_has_adequate_class(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day_custody(day)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "td")
+        self.assertIn("class", first_tag.attrs)
+        self.assertIn(self.calendar.css_class_day_custody, first_tag.attrs["class"])
