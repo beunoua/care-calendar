@@ -38,7 +38,11 @@ class Calendar:
 
     def iter_month_dates(self, month: int) -> datetime.date:
         """Iterate over a month dates."""
-        dates = [date for date in self._cal.itermonthdates(self.year, month) if date.month == month]
+        dates = [
+            date
+            for date in self._cal.itermonthdates(self.year, month)
+            if date.month == month
+        ]
         for day in dates:
             yield day
 
@@ -80,7 +84,3 @@ class Calendar:
     def format_day_custody(self, date: datetime.date) -> str:
         """Format the cell that contains the custody responsible."""
         return f'<td class="{self.css_class_day_custody}">non</td>'
-
-
-
-
