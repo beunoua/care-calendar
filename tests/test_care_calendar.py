@@ -2,6 +2,7 @@
 
 """Tests for `care_calendar` package."""
 
+import datetime
 import unittest
 
 from care_calendar import Calendar, current_year
@@ -17,7 +18,6 @@ class TestCalendar(unittest.TestCase):
 
     def test_format_month_returns_an_html_table(self):
         html = self.calendar.format_month(1)
-        self.assertIsInstance(html, str)
         self.assertTrue(html.startswith("<table>"))
         self.assertTrue(html.endswith("</table>"))
 
@@ -30,3 +30,17 @@ class TestCalendar(unittest.TestCase):
         for month in range(1, 13):
             html = self.calendar.format_month_name(month)
             self.assertIn(self.calendar.month_name[month], html)
+
+    def test_format_day_is_a_table_row(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day(day)
+        self.assertTrue(html.startswith("<tr"))
+        self.assertTrue(html.endswith("</tr>"))
+
+    def test_format_day_contains_the_date_data(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day(day)
+        self.assertIn(str(day.day), html)
+        self.assertIn(self.calendar.day_abbr[day.weekday()], html)
+
+

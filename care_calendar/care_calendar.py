@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 import calendar
+import datetime
 
 from . import current_year
 
@@ -33,8 +34,12 @@ class Calendar:
 
     def format_month(self, month: int) -> str:
         header = self.format_month_name(month)
-        return "<table></table>"
+        return f"<table></table>"
 
     def format_month_name(self, month: int) -> str:
         """Format the month name as an HTML table row header."""
         return f'<tr><th colspan="4" class="{self.css_class_month}">{self.month_name[month]}</th></tr>'
+
+    def format_day(self, date: datetime.date) -> str:
+        """Format a date as an HTML table row."""
+        return f"<tr><td>{date.day:02d}</td><td>{self.day_abbr[date.weekday()]}</td></tr>"
