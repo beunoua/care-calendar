@@ -126,3 +126,4 @@ class TestCalendarFormatDayCare(unittest.TestCase):
         self.assertEqual(first_tag.name, "td")
         self.assertIn("class", first_tag.attrs)
         self.assertIn(self.calendar.css_class_day_custody, first_tag.attrs["class"])
+

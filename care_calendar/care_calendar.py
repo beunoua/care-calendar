@@ -3,8 +3,9 @@
 from dataclasses import dataclass, field
 import calendar
 import datetime
+from typing import Iterator, List
 
-from . import current_year
+from . import current_year, week_id
 
 
 @dataclass
@@ -46,17 +47,39 @@ class Calendar:
         for day in dates:
             yield day
 
+    def iter_month_weeks(self, month: int) -> Iterator[List[datetime.date]]:
+        """Iterate over a month weeks."""
+        weeks = [
+            [
+                date for date in week
+                if date.month == month
+            ]
+            for week in self._cal.monthdatescalendar(self.year, month)
+        ]
+        for week in weeks:
+            yield week
+
     def format_month(self, month: int) -> str:
         header = self.format_month_name(month)
-        days = "\n".join(self.format_day(day) for day in self.iter_month_dates(month))
-        html = f"<table><tbody>{header}\n{days}</tbody></table>"
+        weeks = "\n".join(self.format_week(week) for week in self.iter_month_weeks(month))
+        html = f"<table><tbody>{header}\n{weeks}</tbody></table>"
         with open("foo.html", "wt") as f:
             print(html, file=f)
         return html
 
     def format_month_name(self, month: int) -> str:
         """Format the month name as an HTML table row header."""
-        return f'<tr><th colspan="4" class="{self.css_class_month}">{self.month_name[month]}</th></tr>'
+        return f'<tr><th colspan="5" class="{self.css_class_month}">{self.month_name[month]}</th></tr>'
+
+    def format_week(self, dates: List[datetime.date]) -> str:
+        rowspan = len(dates)
+        week_number = f'<tr><td rowspan="{rowspan}">{week_id(dates[0])}</td>'
+        days = [self.format_day(day) for day in dates]
+        # Remove <tr> from first day.
+        days[0] = days[0].replace("<tr>", "")
+        return "\n".join([week_number] + days)
+
+
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
