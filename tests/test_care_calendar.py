@@ -2,6 +2,7 @@
 
 """Tests for `care_calendar` package."""
 
+from calendar import month_name
 import datetime
 import unittest
 
@@ -11,7 +12,8 @@ class TestCalendar(unittest.TestCase):
     """Tests for care_calendar.Calendar"""
 
     def setUp(self):
-        self.calendar = Calendar()
+        self.year = 2021
+        self.calendar = Calendar(self.year)
 
     def test_initialize_with_current_year_by_default(self):
         self.assertEqual(self.calendar.year, current_year())
@@ -43,4 +45,9 @@ class TestCalendar(unittest.TestCase):
         self.assertIn(str(day.day), html)
         self.assertIn(self.calendar.day_abbr[day.weekday()], html)
 
+    def test_iter_month_dates(self):
+        month = 1
+        for date in self.calendar.iter_month_dates(month):
+            self.assertEqual(date.month, month)
+            self.assertEqual(date.year, self.year)
 

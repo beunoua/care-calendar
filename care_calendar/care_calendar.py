@@ -11,7 +11,7 @@ from . import current_year
 class Calendar:
 
     year: int = current_year()
-    _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar)
+    _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
 
@@ -32,9 +32,19 @@ class Calendar:
         "Décembre",
     ]
 
+    def iter_month_dates(self, month: int) -> datetime.date:
+        """Iterate over a month dates."""
+        dates = [date for date in self._cal.itermonthdates(self.year, month) if date.month == month]
+        for day in dates:
+            yield day
+
     def format_month(self, month: int) -> str:
         header = self.format_month_name(month)
-        return f"<table></table>"
+        days = "\n".join(self.format_day(day) for day in self.iter_month_dates(month))
+        html = f"<table><tbody>{header}\n{days}</tbody></table>"
+        with open("foo.html", "wt") as f:
+            print(html, file=f)
+        return html
 
     def format_month_name(self, month: int) -> str:
         """Format the month name as an HTML table row header."""
