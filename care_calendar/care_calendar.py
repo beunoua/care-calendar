@@ -15,6 +15,7 @@ class Calendar:
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
+    css_class_week_number = "weekid"
     css_class_day_number = "daynum"
     css_class_day_name = "dayname"
     css_class_day_status_blank = "noday"
@@ -73,13 +74,15 @@ class Calendar:
 
     def format_week(self, dates: List[datetime.date]) -> str:
         rowspan = len(dates)
-        week_number = f'<tr><td rowspan="{rowspan}">{week_id(dates[0])}</td>'
+        weekid = week_id(dates[0])
+        week_id_html = self.format_week_number(weekid, rowspan)
         days = [self.format_day(day) for day in dates]
         # Remove <tr> from first day.
         days[0] = days[0].replace("<tr>", "")
-        return "\n".join([week_number] + days)
+        return "\n".join([week_id_html] + days)
 
-
+    def format_week_number(self, weekid, rowspan):
+        return f'<tr><td rowspan="{rowspan}" class="{self.css_class_week_number}">{weekid}</td>'
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""

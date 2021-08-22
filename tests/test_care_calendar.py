@@ -118,12 +118,43 @@ class TestCalendarFormatDayCare(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
         self.day = datetime.date(1963, 7, 12)
+        html = self.calendar.format_day_custody(self.day)
+        self.soup = BeautifulSoup(html, "html.parser")
 
     def test_day_care_has_adequate_class(self):
-        html = self.calendar.format_day_custody(self.day)
-        soup = BeautifulSoup(html, "html.parser")
-        first_tag = soup.find()
+        first_tag = self.soup.find()
         self.assertEqual(first_tag.name, "td")
         self.assertIn("class", first_tag.attrs)
         self.assertIn(self.calendar.css_class_day_custody, first_tag.attrs["class"])
+
+
+class TestCalendarFormatWeekId(unittest.TestCase):
+
+    def setUp(self):
+        self.calendar = Calendar(2021)
+        self.rowspan = 2
+        self.weekid = 12
+        html = self.calendar.format_week_number(self.weekid, self.rowspan)
+        self.soup = BeautifulSoup(html, "html.parser")
+
+    def test_weekid_is_first_column(self):
+        first_tag = self.soup.find()
+        self.assertEqual(first_tag.name, "tr")
+
+    def test_weekid_value(self):
+        td_tag = self.soup.find().find()
+        self.assertEqual(td_tag.name, "td")
+        self.assertEqual(td_tag.text, str(self.weekid))
+
+    def test_rowspan_value(self):
+        td_tag = self.soup.find().find()
+        self.assertEqual(td_tag.name, "td")
+        self.assertIn("rowspan", td_tag.attrs)
+        self.assertEqual(str(self.rowspan), td_tag.attrs["rowspan"])
+
+    def test_week_cell_has_adequate_class(self):
+        td_tag = self.soup.find().find()
+        self.assertEqual(td_tag.name, "td")
+        self.assertIn(self.calendar.css_class_week_number, td_tag.attrs["class"])
+
 
