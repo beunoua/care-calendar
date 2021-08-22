@@ -5,5 +5,6 @@ __email__ = 'beunoua'
 __version__ = '0.1.0'
 
 from .utils import current_year
+from .care_calendar import Calendar
 
-__all__ = ["current_year"]
+__all__ = ["current_year", "Calendar"]
