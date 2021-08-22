@@ -9,3 +9,6 @@ from . import current_year
 class Calendar:
 
     year: int = current_year()
+
+    def format_month(self, month: int) -> str:
+        return "<table></table>"

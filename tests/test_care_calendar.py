@@ -9,9 +9,14 @@ from care_calendar import Calendar, current_year
 class TestCalendar(unittest.TestCase):
     """Tests for care_calendar.Calendar"""
 
-    def test_initialize_with_current_year_by_default(self):
-        cal = Calendar()
-        self.assertEqual(cal.year, current_year())
+    def setUp(self):
+        self.calendar = Calendar()
 
-    def test_format_month_returns_html(self):
-        self.fail("nope")
+    def test_initialize_with_current_year_by_default(self):
+        self.assertEqual(self.calendar.year, current_year())
+
+    def test_format_month_returns_an_html_table(self):
+        html = self.calendar.format_month(1)
+        self.assertIsInstance(html, str)
+        self.assertTrue(html.startswith("<table>"))
+        self.assertTrue(html.endswith("</table>"))
