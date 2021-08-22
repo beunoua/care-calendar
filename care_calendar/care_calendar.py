@@ -14,6 +14,7 @@ class Calendar:
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
+    css_class_day_number = "daynum"
 
     day_abbr = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"]
     month_name = [
@@ -52,4 +53,9 @@ class Calendar:
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
-        return f"<tr><td>{date.day:02d}</td><td>{self.day_abbr[date.weekday()]}</td></tr>"
+        return f"<tr>{self.format_day_number(date)}<td>{self.day_abbr[date.weekday()]}</td></tr>"
+
+    def format_day_number(self, date: datetime.date) -> str:
+        """Format the cell that contains the day number."""
+        return f'<td class="{self.css_class_day_number}">{date.day:02d}</td>'
+

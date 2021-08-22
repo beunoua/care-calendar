@@ -6,6 +6,8 @@ from calendar import month_name
 import datetime
 import unittest
 
+from bs4 import BeautifulSoup
+
 from care_calendar import Calendar, current_year
 
 class TestCalendar(unittest.TestCase):
@@ -50,4 +52,16 @@ class TestCalendar(unittest.TestCase):
         for date in self.calendar.iter_month_dates(month):
             self.assertEqual(date.month, month)
             self.assertEqual(date.year, self.year)
+
+    def test_day_number_has_adequate_class_(self):
+        day = datetime.datetime.now()
+        html = self.calendar.format_day(day)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "tr")
+        td = first_tag.find()
+        self.assertEqual(td.name, "td")
+        self.assertIn("class", td.attrs)
+        self.assertIn(self.calendar.css_class_day_number, td.attrs["class"])
+
 
