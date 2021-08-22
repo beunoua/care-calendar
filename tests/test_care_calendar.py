@@ -46,12 +46,19 @@ class TestCalendarFormatMonth(unittest.TestCase):
         second_tag = first_tag.find()
         self.assertEqual(second_tag.name, "th")
 
-    def test_format_month_name_has_adequate_value(self):
+    def test_format_month_name_value(self):
         for month in range(1, 13):
             html = self.calendar.format_month_name(month)
             soup = BeautifulSoup(html, "html.parser")
             second_tag = soup.find().find()
             self.assertEqual(second_tag.text, self.calendar.month_name[month])
+
+    def test_month_name_has_adequate_css_class(self):
+        html = self.calendar.format_month_name(1)
+        soup = BeautifulSoup(html, "html.parser")
+        first_tag = soup.find()
+        self.assertEqual(first_tag.name, "tr")
+        self.assertIn(self.calendar.css_class_month, first_tag.attrs["class"])
 
 
 class TestCalendarFormatDay(unittest.TestCase):

@@ -27,7 +27,7 @@ def main():
     cal = care_calendar.Calendar()
     html = template.render(
         css_file=css_file,
-        calendar_html=cal.format_month(1)
+        calendar_html=cal.format_year()
     )
 
     with open("foo.html", "wt") as f:

@@ -72,7 +72,7 @@ class Calendar:
 
     def format_month_name(self, month: int) -> str:
         """Format the month name as an HTML table row header."""
-        return f'<tr><th colspan="5" class="{self.css_class_month_name}">{self.month_name[month]}</th></tr>'
+        return f'<tr class={self.css_class_month}><th colspan="5" class="{self.css_class_month_name}">{self.month_name[month]}</th></tr>'
 
     def format_week(self, dates: List[datetime.date]) -> str:
         """Format a full week has part of an HTML table."""
@@ -116,3 +116,13 @@ class Calendar:
     def format_day_custody(self, date: datetime.date) -> str:
         """Format the cell that contains the custody responsible."""
         return f'<td class="{self.css_class_day_custody}">non</td>'
+
+    def format_year(self):
+        year_html = ['<table class="year">', "<tbody>", "<tr>"]
+        for month in range(1, 13):
+            year_html.append("<td>")
+            year_html.append(self.format_month(month))
+            year_html.append("<td>")
+        year_html += ["</tr>", "</tbody>", "/<table"]
+        return "\n".join(year_html)
+
