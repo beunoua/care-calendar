@@ -16,6 +16,8 @@ class Calendar:
 
     css_class_month = "month"
     css_class_week_number = "weekid"
+    css_class_weekend = "weekend"
+    css_class_week = "week"
     css_class_day_number = "daynum"
     css_class_day_name = "dayname"
     css_class_day_status_blank = "noday"
@@ -58,6 +60,7 @@ class Calendar:
             yield week
 
     def format_month(self, month: int) -> str:
+        """Format a month as a HTML table."""
         header = self.format_month_name(month)
         weeks = "\n".join(
             self.format_week(week) for week in self.iter_month_weeks(month)
@@ -72,6 +75,7 @@ class Calendar:
         return f'<tr><th colspan="5" class="{self.css_class_month}">{self.month_name[month]}</th></tr>'
 
     def format_week(self, dates: List[datetime.date]) -> str:
+        """Format a full week has part of an HTML table."""
         rowspan = len(dates)
         weekid = week_id(dates[0])
         week_id_html = self.format_week_number(weekid, rowspan)
@@ -80,13 +84,15 @@ class Calendar:
         days[0] = days[0].replace("<tr>", "")
         return "\n".join([week_id_html] + days)
 
-    def format_week_number(self, weekid, rowspan):
+    def format_week_number(self, weekid: int, rowspan: int) -> str:
+        """Format week number as the first cell of a row."""
         return f'<tr><td rowspan="{rowspan}" class="{self.css_class_week_number}">{weekid}</td>'
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
+        css = self.css_class_weekend if date.weekday() in (5, 6) else self.css_class_week
         return (
-            "<tr>"
+            f'<tr class="{css}">'
             f"{self.format_day_number(date)}"
             f"{self.format_day_name(date)}"
             f"{self.format_day_status(date)}"

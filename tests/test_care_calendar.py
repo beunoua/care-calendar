@@ -62,6 +62,23 @@ class TestCalendarFormatDay(unittest.TestCase):
         self.assertIn(str(self.day.day), html)
         self.assertIn(self.calendar.day_abbr[self.day.weekday()], html)
 
+    def test_weekend_rows_have_adequate_css_class(self):
+        day = datetime.date(2021, 1, 2)  # Saturday
+        html = self.calendar.format_day(day)
+        soup = BeautifulSoup(html, "html.parser")
+        tr_tag = soup.find()
+        self.assertEqual(tr_tag.name, "tr")
+        self.assertIn(self.calendar.css_class_weekend, tr_tag.attrs["class"])
+
+    def test_week_rows_have_adequate_css_class(self):
+        day = datetime.date(2021, 1, 1)  # Friday
+        html = self.calendar.format_day(day)
+        soup = BeautifulSoup(html, "html.parser")
+        tr_tag = soup.find()
+        self.assertEqual(tr_tag.name, "tr")
+        self.assertIn(self.calendar.css_class_week, tr_tag.attrs["class"])
+
+
 
 class TestCalendarFormatDayNumber(unittest.TestCase):
     def setUp(self):
