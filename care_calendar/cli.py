@@ -25,10 +25,7 @@ def main():
     template = jinja2.Template(HTML_TEMPLATE)
 
     cal = care_calendar.Calendar()
-    html = template.render(
-        css_file=css_file,
-        calendar_html=cal.format_year()
-    )
+    html = template.render(css_file=css_file, calendar_html=cal.format_year())
 
     with open("foo.html", "wt") as f:
         print(html, file=f)

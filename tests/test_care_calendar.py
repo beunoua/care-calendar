@@ -28,7 +28,6 @@ class TestCalendar(unittest.TestCase):
         self.assertEqual(self.calendar.year, current_year())
 
 
-
 class TestCalendarFormatMonth(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(2021)
@@ -95,7 +94,6 @@ class TestCalendarFormatDay(unittest.TestCase):
         tr_tag = soup.find()
         self.assertEqual(tr_tag.name, "tr")
         self.assertIn(self.calendar.css_class_weekday, tr_tag.attrs["class"])
-
 
 
 class TestCalendarFormatDayNumber(unittest.TestCase):

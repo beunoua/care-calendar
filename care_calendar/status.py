@@ -10,6 +10,7 @@ import yaml
 
 from .utils import current_year
 
+
 def str_to_date(date_string: str, year: int = None) -> datetime.date:
     """Returns a `datetime.date` from a string."""
     tokens = [token.strip() for token in date_string.split("/")]
@@ -32,7 +33,9 @@ def str_to_date(date_string: str, year: int = None) -> datetime.date:
         raise ValueError(f"day is out of range: {year}/{month}/{day}") from exc
 
 
-def date_range_to_list(daterange: tuple[str, str], year: int = None) -> List[datetime.date]:
+def date_range_to_list(
+    daterange: tuple[str, str], year: int = None
+) -> List[datetime.date]:
     """Returns a list of dates from a string representing a date range."""
     start, end = [str_to_date(s, year) for s in daterange.split("-")]
     print(f"{start=}")

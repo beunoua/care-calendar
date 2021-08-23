@@ -81,7 +81,7 @@ class Calendar:
         week_id_html = self.format_week_number(weekid, rowspan, dates[0].weekday())
         days = [self.format_day(day) for day in dates]
         # Remove <tr> from first day.
-        days[0] = days[0][days[0].find(">") + 1:]
+        days[0] = days[0][days[0].find(">") + 1 :]
         return "\n".join([week_id_html] + days)
 
     def format_week_number(self, weekid: int, rowspan: int, weekday: int) -> str:
@@ -91,7 +91,11 @@ class Calendar:
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
-        css = self.css_class_weekend if date.weekday() in (5, 6) else self.css_class_weekday
+        css = (
+            self.css_class_weekend
+            if date.weekday() in (5, 6)
+            else self.css_class_weekday
+        )
         return (
             f'<tr class="{css}">'
             f"{self.format_day_number(date)}"
@@ -125,4 +129,3 @@ class Calendar:
             year_html.append("<td>")
         year_html += ["</tr>", "</tbody>", "/<table"]
         return "\n".join(year_html)
-
