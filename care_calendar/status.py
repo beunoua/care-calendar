@@ -5,22 +5,36 @@ so that it will be displayed in a specific fashion.
 """
 
 import datetime
+from typing import List
 
 from .utils import current_year
 
-def str_to_date(date_string: str, year: int = current_year()) -> datetime.date:
+def str_to_date(date_string: str, year: int = None) -> datetime.date:
     """Returns a `datetime.date` from a string."""
-    tokens = date_string.split("/")
-    if len(tokens) == 2:
-        day, month = tokens
-    elif len(tokens) == 3:
+    tokens = [token.strip() for token in date_string.split("/")]
+    if len(tokens) == 3:
+        if year is not None:
+            raise ValueError(
+                f"Cannot pass year in date string ({date_string}) and as argument ({year})"
+            )
         day, month, year = tokens
         if len(year) == 2:
             year = "20{}".format(year)
+    elif len(tokens) == 2:
+        year = current_year() if year is None else year
+        day, month = tokens
     else:
-        raise ValueError("Invalid date string: '{}'".format(date_string))
+        raise ValueError(f"Invalid date string: {date_string:!r}")
     try:
         return datetime.date(int(year), int(month), int(day))
     except ValueError as exc:
         raise ValueError(f"day is out of range: {year}/{month}/{day}") from exc
 
+
+def date_range_to_list(daterange: tuple[str, str], year: int = None) -> List[datetime.date]:
+    """Returns a list of dates from a string representing a date range."""
+    start, end = [str_to_date(s, year) for s in daterange.split("-")]
+    print(f"{start=}")
+    print(f"{end=}")
+    print(f"{end - start}")
+    return [start + datetime.timedelta(days=i) for i in range((end - start).days + 1)]
