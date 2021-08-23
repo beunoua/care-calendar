@@ -5,7 +5,7 @@ import unittest
 from care_calendar import cli
 
 
-class TestFoo(unittest.TestCase):
+# class TestFoo(unittest.TestCase):
 
-    def test_foo(self):
-        cli.main()
+#     def test_foo(self):
+#         cli.main()

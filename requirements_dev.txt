@@ -3,6 +3,6 @@ beautifulsoup4==4.9.3
 bump2version==0.5.11
 flake8==3.7.8
 coverage==4.5.4
-
+pyyaml==5.4.1
 pytest==6.2.4
 black==21.7b0
