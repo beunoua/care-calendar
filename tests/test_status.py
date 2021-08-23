@@ -28,3 +28,14 @@ class TestStrToDate(unittest.TestCase):
         self.assertEqual(date.day, 12)
         self.assertEqual(date.month, 1)
         self.assertEqual(date.year, 2022)
+
+    def test_too_many_tokens(self):
+        date_str = "12/01/22/43"
+        with self.assertRaises(ValueError):
+            str_to_date(date_str)
+
+    def test_invalid_date(self):
+        date_str = "12/14/22"  # invalid month "14"
+        with self.assertRaises(ValueError):
+            str_to_date(date_str)
+
