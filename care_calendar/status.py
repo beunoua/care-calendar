@@ -6,7 +6,9 @@ so that it will be displayed in a specific fashion.
 
 import datetime
 
-def str_to_date(date_string: str, year: int = None) -> datetime.date:
+from .utils import current_year
+
+def str_to_date(date_string: str, year: int = current_year()) -> datetime.date:
     """Returns a `datetime.date` from a string."""
     tokens = date_string.split("/")
     if len(tokens) == 2:

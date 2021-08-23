@@ -15,6 +15,14 @@ class TestStrToDate(unittest.TestCase):
         self.assertEqual(date.month, 1)
         self.assertEqual(date.year, 2021)
 
+    def test_date_from_day_month_no_year(self):
+        date_str = "12/01"
+        date = str_to_date(date_str)
+        self.assertEqual(date.day, 12)
+        self.assertEqual(date.month, 1)
+        self.assertEqual(date.year, 2021)
+
+
     def test_date_from_day_month_and_year(self):
         date_str = "12/01/2000"
         date = str_to_date(date_str)
