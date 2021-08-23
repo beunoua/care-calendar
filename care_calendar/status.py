@@ -6,6 +6,7 @@ so that it will be displayed in a specific fashion.
 
 import datetime
 from typing import List
+import yaml
 
 from .utils import current_year
 
@@ -38,3 +39,25 @@ def date_range_to_list(daterange: tuple[str, str], year: int = None) -> List[dat
     print(f"{end=}")
     print(f"{end - start}")
     return [start + datetime.timedelta(days=i) for i in range((end - start).days + 1)]
+
+
+def read_status_yaml(path: str, year: int = None):
+    """Reads a yaml file containing categories and date ranges for each categories."""
+    with open(path, "rt") as f:
+        data = yaml.load(f, Loader=yaml.Loader)
+
+    categories = {}
+    for category, datestrlist in data.items():
+        datelist = []
+        if datestrlist is not None:
+            for datestr in datestrlist:
+                if datestr is None:
+                    raise ValueError(f"category: {category}: empty date string")
+                if "-" in datestr:
+                    # date is a range.
+                    datelist.extend(date_range_to_list(datestr, year))
+                else:
+                    datelist.append(str_to_date(datestr, year))
+        categories[category.lower()] = set(datelist)
+
+    return categories

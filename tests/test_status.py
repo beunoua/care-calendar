@@ -2,9 +2,10 @@
 
 
 import datetime
+import os
 import unittest
 
-from care_calendar.status import str_to_date, date_range_to_list
+from care_calendar.status import str_to_date, date_range_to_list, read_status_yaml
 
 
 class TestStrToDate(unittest.TestCase):
@@ -111,3 +112,14 @@ class TestDateRangeToList(unittest.TestCase):
             self.assertEqual(dates[i + 4].year, 2021)
 
 
+class TestReadStatusYaml(unittest.TestCase):
+    """Tests for care_calendar.status.read_status_yaml."""
+
+    def test_read_yaml(self):
+        path = os.path.join(os.path.dirname(__file__), "data", "test_status.yaml")
+        data = read_status_yaml(path)
+        self.assertEqual(len(data), 2)
+        self.assertIn("vacances scolaires", data)
+        self.assertIn("férié", data)
+        self.assertEqual(len(data["vacances scolaires"]), 13)
+        self.assertEqual(len(data["férié"]), 4)
