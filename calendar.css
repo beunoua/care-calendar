@@ -3,7 +3,7 @@ table, th, td {
     border: 1px solid black;
 }
 
-td.month {
+tr.year {
     vertical-align: baseline;
 }
 
