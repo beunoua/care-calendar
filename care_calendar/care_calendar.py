@@ -15,7 +15,6 @@ class Calendar:
     status_list: List[Status] = field(default_factory=list)
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
-    css_class_month = "month"
     css_class_month_name = "month_name"
     css_class_week_number = "weekid"
     css_class_weekend = "weekend"
@@ -72,7 +71,7 @@ class Calendar:
 
     def format_month_name(self, month: int) -> str:
         """Formats the month name as an HTML table row header."""
-        return f'<tr class={self.css_class_month}><th colspan="5" class="{self.css_class_month_name}">{self.month_name[month]}</th></tr>'
+        return f'<tr class={self.css_class_month_name}><th colspan="5" class="{self.css_class_month_name}">{self.month_name[month]}</th></tr>'
 
     def format_week(self, dates: List[datetime.date]) -> str:
         """Formats a full week has part of an HTML table."""
@@ -135,7 +134,7 @@ class Calendar:
         return f'<td class="{self.css_class_day_custody}">non</td>'
 
     def format_year(self):
-        year_html = ['<table class="year">', "<tbody>", "<tr>"]
+        year_html = ['<table class="year">', "<tbody>", '<tr class="year">']
         for month in range(1, 13):
             year_html.append("<td>")
             year_html.append(self.format_month(month))

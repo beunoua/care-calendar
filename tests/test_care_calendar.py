@@ -61,7 +61,7 @@ class TestCalendarFormatMonth(unittest.TestCase):
         soup = BeautifulSoup(html, "html.parser")
         first_tag = soup.find()
         self.assertEqual(first_tag.name, "tr")
-        self.assertIn(self.calendar.css_class_month, first_tag.attrs["class"])
+        self.assertIn(self.calendar.css_class_month_name, first_tag.attrs["class"])
 
 
 class TestCalendarFormatDay(unittest.TestCase):
@@ -212,7 +212,7 @@ class TestCalendarWithStatus(unittest.TestCase):
         tr_tag = BeautifulSoup(html, "html.parser").find("tr")
         status_cell = tr_tag.find_all("td")[2]
         self.assertEqual(
-            status_cell.attrs["class"], 
+            status_cell.attrs["class"],
             [self.calendar.css_class_day_status, self.status.css_name],
         )
 
@@ -222,6 +222,6 @@ class TestCalendarWithStatus(unittest.TestCase):
         tr_tag = BeautifulSoup(html, "html.parser").find("tr").find_next_sibling("tr")
         status_cell = tr_tag.find_all("td")[3]
         self.assertEqual(
-            status_cell.attrs["class"], 
+            status_cell.attrs["class"],
             [self.calendar.css_class_day_status, self.status.css_name],
         )
