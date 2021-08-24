@@ -90,7 +90,7 @@ class Calendar:
         if day.weekday() in (5, 6):
             return self.css_class_weekend
         return self.css_class_weekday
-    
+
     def format_css_status_day(self, day: datetime.date) -> str:
         """Returns status specific css classes for a specific day."""
         css = [self.css_class_day_status]
@@ -139,6 +139,6 @@ class Calendar:
         for month in range(1, 13):
             year_html.append("<td>")
             year_html.append(self.format_month(month))
-            year_html.append("<td>")
+            year_html.append("</td>")
         year_html += ["</tr>", "</tbody>", "/<table"]
         return "\n".join(year_html)
