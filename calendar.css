@@ -21,12 +21,9 @@ tr.weekend {
 
 td.férié {
     background-color: #FF0000;
-  }
-  
-td.vacancesscolaires {
-    background-color: #6495ED;
 }
 
-
-
-
+/* Color holidays but not weekends */
+tr.weekday td.vacancesscolaires {
+    background-color: #6495ED;
+}
