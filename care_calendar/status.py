@@ -4,11 +4,13 @@ Status is essentially a day that will have a specific css
 so that it will be displayed in a specific fashion.
 """
 
+from dataclasses import dataclass
 import datetime
 from typing import List
 import yaml
 
 from .utils import current_year
+
 
 
 def str_to_date(date_string: str, year: int = None) -> datetime.date:
@@ -38,9 +40,6 @@ def date_range_to_list(
 ) -> List[datetime.date]:
     """Returns a list of dates from a string representing a date range."""
     start, end = [str_to_date(s, year) for s in daterange.split("-")]
-    print(f"{start=}")
-    print(f"{end=}")
-    print(f"{end - start}")
     return [start + datetime.timedelta(days=i) for i in range((end - start).days + 1)]
 
 
