@@ -4,6 +4,7 @@ Status is essentially a day that will have a specific css
 so that it will be displayed in a specific fashion.
 """
 
+import collections
 from dataclasses import dataclass
 import datetime
 from typing import List
@@ -13,7 +14,7 @@ from .utils import current_year
 
 
 @dataclass
-class Status:
+class Status(collections.abc.Collection):
     """Stores the list of dates that will be assigned a particular status."""
 
     name: str
