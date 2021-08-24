@@ -87,9 +87,13 @@ class Calendar:
     def format_css_day(self, day: datetime.date) -> str:
         """Returns css classes for a specific day."""
         # Weekend/weekday specific classes.
+        css = []
         if day.weekday() in (5, 6):
-            return self.css_class_weekend
-        return self.css_class_weekday
+            css.append(self.css_class_weekend)
+        else:
+            css.append(self.css_class_weekday)
+        css.append(self.day_abbr[day.weekday()].lower())
+        return " ".join(css)
 
     def format_css_status_day(self, day: datetime.date) -> str:
         """Returns status specific css classes for a specific day."""
