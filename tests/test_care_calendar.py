@@ -5,10 +5,12 @@
 from calendar import month_name
 import datetime
 import unittest
+from unittest.case import TestCase
 
 from bs4 import BeautifulSoup
 
 from care_calendar import Calendar, current_year
+from care_calendar.status import Status
 
 
 class TestCalendar(unittest.TestCase):
@@ -186,3 +188,21 @@ class TestCalendarFormatWeekId(unittest.TestCase):
         td_tag = self.soup.find().find()
         self.assertEqual(td_tag.name, "td")
         self.assertIn(self.calendar.css_class_week_number, td_tag.attrs["class"])
+
+
+class TestCalendarWithStatus(unittest.TestCase):
+    """Tests that providing statuses actually changes day css classes."""
+    def setUp(self):
+        self.calendar = Calendar(2021)
+        self.day = datetime.date(2021, 1, 1)  # a Friday
+        self.status = Status("my status", [self.day])
+
+    def test_status_changed_css(self):
+        html = self.calendar.format_day(self.day)
+        tr_tag = BeautifulSoup(html, "html.parser").find("tr")
+        self.assertEqual(tr_tag.attrs["class"], ["weekday"])
+
+        self.calendar.status_list = [self.status]
+        html = self.calendar.format_day(self.day)
+        tr_tag = BeautifulSoup(html, "html.parser").find("tr")
+        self.assertEqual(tr_tag.attrs["class"], ["weekday", "mystatus"])

@@ -6,13 +6,13 @@ import datetime
 from typing import Iterator, List
 
 from . import current_year, week_id
-
+from .status import Status
 
 @dataclass
 class Calendar:
 
     year: int = current_year()
-    # holidays: List[datetime.date] = field(default_factory=list)
+    status_list: List[Status] = field(default_factory=list)
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_month = "month"
@@ -91,13 +91,16 @@ class Calendar:
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
-        css = (
+        css = [
             self.css_class_weekend
             if date.weekday() in (5, 6)
             else self.css_class_weekday
-        )
+        ]
+        for status in self.status_list:
+            if date in status:
+                css.append(status.css_name)
         return (
-            f'<tr class="{css}">'
+            f'<tr class="{" ".join(css)}">'
             f"{self.format_day_number(date)}"
             f"{self.format_day_name(date)}"
             f"{self.format_day_status(date)}"
