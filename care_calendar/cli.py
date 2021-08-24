@@ -19,7 +19,7 @@ HTML_TEMPLATE = """\
 
 
 import datetime
-from care_calendar.status import Status
+from care_calendar.status import read_status_yaml
 
 def main():
     """Console script for care_calendar."""
@@ -29,9 +29,9 @@ def main():
 
     cal = care_calendar.Calendar(2021)
     day = datetime.date(2021, 1, 1)  # a Friday
-    cal.status_list = [Status("my status", [day])]
+    cal.status_list = read_status_yaml("holidays-2021.yaml")
 
-    html = template.render(css_file=css_file, calendar_html=cal.format_month(1))
+    html = template.render(css_file=css_file, calendar_html=cal.format_year())
     with open("foo.html", "wt") as f:
         print(html, file=f)
 

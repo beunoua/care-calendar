@@ -3,9 +3,6 @@ table, th, td {
     border: 1px solid black;
 }
 
-tr.weekend {
-    background-color: #A9A9A9;
-}
 
 td.weekid {
     text-align: center;
@@ -16,6 +13,20 @@ td.status {
     width: 10px;
 }
 
-td.mystatus {
-    background-color: #ce1818;
+
+tr.weekend {
+    background-color: #A9A9A9;
 }
+
+
+td.férié {
+    background-color: #FF0000;
+  }
+  
+td.vacancesscolaires {
+    background-color: #6495ED;
+}
+
+
+
+
