@@ -7,10 +7,11 @@ so that it will be displayed in a specific fashion.
 import collections
 from dataclasses import dataclass
 import datetime
-from typing import List
+from typing import List, Iterator
 import yaml
 
 from .utils import current_year
+
 
 
 @dataclass
@@ -19,6 +20,15 @@ class Status(collections.abc.Collection):
 
     name: str
     date_list: List[datetime.time]
+
+    def __contains__(self, date: datetime.date) -> bool:
+        return date in self.date_list
+    
+    def __iter__(self) -> Iterator[datetime.date]:
+        return iter(self.date_list)
+    
+    def __len__(self) -> int:
+        return len(self.date_list)
     
 
 
