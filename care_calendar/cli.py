@@ -18,15 +18,20 @@ HTML_TEMPLATE = """\
 """
 
 
+import datetime
+from care_calendar.status import Status
+
 def main():
     """Console script for care_calendar."""
 
     css_file = "calendar.css"
     template = jinja2.Template(HTML_TEMPLATE)
 
-    cal = care_calendar.Calendar()
-    html = template.render(css_file=css_file, calendar_html=cal.format_year())
+    cal = care_calendar.Calendar(2021)
+    day = datetime.date(2021, 1, 1)  # a Friday
+    cal.status_list = [Status("my status", [day])]
 
+    html = template.render(css_file=css_file, calendar_html=cal.format_month(1))
     with open("foo.html", "wt") as f:
         print(html, file=f)
 

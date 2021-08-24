@@ -7,10 +7,15 @@ tr.weekend {
     background-color: #A9A9A9;
 }
 
-td.noday {
+td.weekid {
+    text-align: center;
+}
+
+
+td.status {
     width: 10px;
 }
 
-td.weekid {
-    text-align: center;
+td.mystatus {
+    background-color: #ce1818;
 }

@@ -3,6 +3,7 @@
 """Tests for `care_calendar` package."""
 
 from calendar import month_name
+from care_calendar import status
 from care_calendar.utils import week_id
 import datetime
 import unittest
@@ -139,7 +140,7 @@ class TestCalendarFormatDayStatus(unittest.TestCase):
         self.assertEqual(first_tag.name, "td")
         self.assertIn("class", first_tag.attrs)
         self.assertIn(
-            self.calendar.css_class_day_status_blank, first_tag.attrs["class"]
+            self.calendar.css_class_day_status, first_tag.attrs["class"]
         )
 
     def test_day_status_is_empty(self):
@@ -200,11 +201,27 @@ class TestCalendarWithStatus(unittest.TestCase):
         self.status = Status("my status", [self.day])
 
     def test_status_changed_css(self):
+        """Tests css changed in the "status" cell."""
         html = self.calendar.format_day(self.day)
         tr_tag = BeautifulSoup(html, "html.parser").find("tr")
-        self.assertEqual(tr_tag.attrs["class"], ["weekday"])
+        status_cell = tr_tag.find_all("td")[2]
+        self.assertEqual(status_cell.attrs["class"], [self.calendar.css_class_day_status])
 
         self.calendar.status_list = [self.status]
         html = self.calendar.format_day(self.day)
         tr_tag = BeautifulSoup(html, "html.parser").find("tr")
-        self.assertEqual(tr_tag.attrs["class"], ["mystatus", "weekday"])
+        status_cell = tr_tag.find_all("td")[2]
+        self.assertEqual(
+            status_cell.attrs["class"], 
+            [self.calendar.css_class_day_status, self.status.css_name],
+        )
+
+    def test_still_working_when_formatting_month(self):
+        self.calendar.status_list = [self.status]
+        html = self.calendar.format_month(1)
+        tr_tag = BeautifulSoup(html, "html.parser").find("tr").find_next_sibling("tr")
+        status_cell = tr_tag.find_all("td")[3]
+        self.assertEqual(
+            status_cell.attrs["class"], 
+            [self.calendar.css_class_day_status, self.status.css_name],
+        )
