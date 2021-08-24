@@ -15,6 +15,7 @@ class Calendar:
     status_list: List[Status] = field(default_factory=list)
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
+    css_class_month = "month"
     css_class_month_name = "month_name"
     css_class_week_number = "weekid"
     css_class_weekend = "weekend"
@@ -66,7 +67,7 @@ class Calendar:
         weeks = "\n".join(
             self.format_week(week) for week in self.iter_month_weeks(month)
         )
-        html = f"<table><tbody>{header}\n{weeks}</tbody></table>"
+        html = f'<table class="{self.css_class_month}"><tbody>{header}\n{weeks}</tbody></table>'
         return html
 
     def format_month_name(self, month: int) -> str:
