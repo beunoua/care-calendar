@@ -5,7 +5,7 @@ import datetime
 import os
 import unittest
 
-from care_calendar.status import str_to_date, date_range_to_list, read_status_yaml
+from care_calendar.status import str_to_date, date_range_to_list, read_status_yaml, Status
 
 
 class TestStrToDate(unittest.TestCase):
@@ -115,11 +115,24 @@ class TestDateRangeToList(unittest.TestCase):
 class TestReadStatusYaml(unittest.TestCase):
     """Tests for care_calendar.status.read_status_yaml."""
 
+    def setUp(self):
+        self.yaml_path = os.path.join(
+            os.path.dirname(__file__), "data", "test_status.yaml"
+        )
+        self.data = read_status_yaml(self.yaml_path)
+
+    def test_read_yaml_returns_a_list_of_status_instances(self):
+        self.assertIsInstance(self.data, list)
+        for element in self.data:
+            self.assertIsInstance(element, Status)
+
     def test_read_yaml(self):
-        path = os.path.join(os.path.dirname(__file__), "data", "test_status.yaml")
-        data = read_status_yaml(path)
-        self.assertEqual(len(data), 2)
-        self.assertIn("vacances scolaires", data)
-        self.assertIn("férié", data)
-        self.assertEqual(len(data["vacances scolaires"]), 13)
-        self.assertEqual(len(data["férié"]), 4)
+        self.assertEqual(len(self.data), 2)
+        status_vacances = self.data[0]
+        self.assertEqual(status_vacances.name, "vacances scolaires")
+        self.assertEqual(len(status_vacances.date_list), 13)
+        
+        status_ferie = self.data[1]
+        self.assertEqual(status_ferie.name, "férié")
+        self.assertEqual(len(status_ferie.date_list), 4)
+

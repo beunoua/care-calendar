@@ -12,6 +12,14 @@ import yaml
 from .utils import current_year
 
 
+@dataclass
+class Status:
+    """Stores the list of dates that will be assigned a particular status."""
+
+    name: str
+    date_list: List[datetime.time]
+    
+
 
 def str_to_date(date_string: str, year: int = None) -> datetime.date:
     """Returns a `datetime.date` from a string."""
@@ -48,7 +56,7 @@ def read_status_yaml(path: str, year: int = None):
     with open(path, "rt") as f:
         data = yaml.load(f, Loader=yaml.Loader)
 
-    categories = {}
+    categories = []
     for category, datestrlist in data.items():
         datelist = []
         if datestrlist is not None:
@@ -60,6 +68,7 @@ def read_status_yaml(path: str, year: int = None):
                     datelist.extend(date_range_to_list(datestr, year))
                 else:
                     datelist.append(str_to_date(datestr, year))
-        categories[category.lower()] = set(datelist)
+
+        categories.append(Status(category.lower(), list(set(datelist))))
 
     return categories
