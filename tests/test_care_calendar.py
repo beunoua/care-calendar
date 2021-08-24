@@ -3,6 +3,7 @@
 """Tests for `care_calendar` package."""
 
 from calendar import month_name
+from care_calendar.utils import week_id
 import datetime
 import unittest
 from unittest.case import TestCase
@@ -161,12 +162,13 @@ class TestCalendarFormatDayCare(unittest.TestCase):
         self.assertIn(self.calendar.css_class_day_custody, first_tag.attrs["class"])
 
 
-class TestCalendarFormatWeekId(unittest.TestCase):
+class TestCalendarFormatWeekNumber(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(2021)
         self.rowspan = 2
-        self.weekid = 12
-        html = self.calendar.format_week_number(self.weekid, self.rowspan, weekday=1)
+        self.day = datetime.date(2021, 1, 1)
+        self.weekid = week_id(self.day)
+        html = self.calendar.format_week_number(self.day, self.rowspan)
         self.soup = BeautifulSoup(html, "html.parser")
 
     def test_weekid_is_first_column(self):
@@ -205,4 +207,4 @@ class TestCalendarWithStatus(unittest.TestCase):
         self.calendar.status_list = [self.status]
         html = self.calendar.format_day(self.day)
         tr_tag = BeautifulSoup(html, "html.parser").find("tr")
-        self.assertEqual(tr_tag.attrs["class"], ["weekday", "mystatus"])
+        self.assertEqual(tr_tag.attrs["class"], ["mystatus", "weekday"])

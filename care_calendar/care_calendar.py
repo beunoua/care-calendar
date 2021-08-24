@@ -78,29 +78,39 @@ class Calendar:
         """Format a full week has part of an HTML table."""
         rowspan = len(dates)
         weekid = week_id(dates[0])
-        week_id_html = self.format_week_number(weekid, rowspan, dates[0].weekday())
+        week_id_html = self.format_week_number(dates[0], rowspan)
         days = [self.format_day(day) for day in dates]
         # Remove <tr> from first day.
         days[0] = days[0][days[0].find(">") + 1 :]
         return "\n".join([week_id_html] + days)
 
-    def format_week_number(self, weekid: int, rowspan: int, weekday: int) -> str:
+    def format_css_day(self, day: datetime.date) -> str:
+        """Return css classes for a specific day."""
+        css = []
+        # Status specific classes.
+        for status in self.status_list:
+            if day in status:
+                css.append(status.css_name)
+
+        # Weekend/weekday specific classes.
+        if day.weekday() in (5, 6):
+            css.append(self.css_class_weekend)
+        else:
+            css.append(self.css_class_weekday)
+        return " ".join(css)
+
+    def format_week_number(self, date: datetime.date, rowspan: int) -> str:
         """Format week number as the first cell of a row."""
-        css = self.css_class_weekend if weekday in (5, 6) else self.css_class_weekday
-        return f'<tr class="{css}"><td rowspan="{rowspan}" class="{self.css_class_week_number}">{weekid}</td>'
+        return (
+            f"""<tr class="{self.format_css_day(date)}">"""
+            f'<td rowspan="{rowspan}" '
+            f'class="{self.css_class_week_number}">{week_id(date)}</td>'
+        )
 
     def format_day(self, date: datetime.date) -> str:
         """Format a date as an HTML table row."""
-        css = [
-            self.css_class_weekend
-            if date.weekday() in (5, 6)
-            else self.css_class_weekday
-        ]
-        for status in self.status_list:
-            if date in status:
-                css.append(status.css_name)
         return (
-            f'<tr class="{" ".join(css)}">'
+            f'<tr class="{self.format_css_day(date)}">'
             f"{self.format_day_number(date)}"
             f"{self.format_day_name(date)}"
             f"{self.format_day_status(date)}"
