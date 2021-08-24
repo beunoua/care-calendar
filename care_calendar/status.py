@@ -21,6 +21,9 @@ class Status(collections.abc.Collection):
     name: str
     date_list: List[datetime.time]
 
+    def __post_init__(self):
+        self.date_list = self.date_list.copy()  # copies input list
+
     def __contains__(self, date: datetime.date) -> bool:
         return date in self.date_list
     

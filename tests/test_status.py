@@ -136,3 +136,28 @@ class TestReadStatusYaml(unittest.TestCase):
         self.assertEqual(status_ferie.name, "férié")
         self.assertEqual(len(status_ferie.date_list), 4)
 
+
+class TestStatus(unittest.TestCase):
+    """Tests for care_calendar.status.Status class."""
+
+    def setUp(self):
+        self.dates = [datetime.date(1921, 12, 1), datetime.date(1922, 11, 2)]
+        self.status = Status("the name", self.dates)
+    
+    def test_name_stays_untouched(self):
+        self.assertEqual(self.status.name, "the name")
+    
+    def test_constructor_copies_input_list(self):
+        self.assertNotEqual(id(self.dates), id(self.status.date_list))
+
+    def test_len(self):
+        self.assertEqual(len(self.status), 2)
+
+    def test_contains(self):
+        self.assertIn(self.dates[0], self.status)
+        self.assertIn(self.dates[1], self.status)
+    
+    def test_iter(self):
+        for i, date in enumerate(self.status):
+            self.assertIn(date, self.dates)
+    
