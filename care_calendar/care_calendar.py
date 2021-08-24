@@ -140,5 +140,5 @@ class Calendar:
             year_html.append("<td>")
             year_html.append(self.format_month(month))
             year_html.append("</td>")
-        year_html += ["</tr>", "</tbody>", "/<table"]
+        year_html += ["</tr>", "</tbody>", "</table>"]
         return "\n".join(year_html)
