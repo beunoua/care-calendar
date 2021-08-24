@@ -149,6 +149,9 @@ class TestStatus(unittest.TestCase):
     
     def test_constructor_copies_input_list(self):
         self.assertNotEqual(id(self.dates), id(self.status.date_list))
+    
+    def test_css_class_name_initialization(self):
+        self.assertEqual(self.status.css_name, "thename")
 
     def test_len(self):
         self.assertEqual(len(self.status), 2)
@@ -160,4 +163,3 @@ class TestStatus(unittest.TestCase):
     def test_iter(self):
         for i, date in enumerate(self.status):
             self.assertIn(date, self.dates)
-    

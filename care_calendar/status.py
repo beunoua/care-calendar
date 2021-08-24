@@ -5,13 +5,12 @@ so that it will be displayed in a specific fashion.
 """
 
 import collections
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import datetime
 from typing import List, Iterator
 import yaml
 
 from .utils import current_year
-
 
 
 @dataclass
@@ -20,19 +19,20 @@ class Status(collections.abc.Collection):
 
     name: str
     date_list: List[datetime.time]
+    css_name: str = ""
 
     def __post_init__(self):
         self.date_list = self.date_list.copy()  # copies input list
+        self.css_name = self.name.lower().replace(" ", "")
 
     def __contains__(self, date: datetime.date) -> bool:
         return date in self.date_list
-    
+
     def __iter__(self) -> Iterator[datetime.date]:
         return iter(self.date_list)
-    
+
     def __len__(self) -> int:
         return len(self.date_list)
-    
 
 
 def str_to_date(date_string: str, year: int = None) -> datetime.date:
