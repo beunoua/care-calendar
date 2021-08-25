@@ -73,11 +73,6 @@ class TestStrToDate(unittest.TestCase):
         with self.assertRaises(ValueError):
             str_to_date(date_str)
 
-    def test_passed_but_also_in_str(self):
-        date_str = "12/01/22"
-        with self.assertRaises(ValueError):
-            str_to_date(date_str, 2021)
-
 
 class TestDateRangeFromStr(unittest.TestCase):
     """Tests for care_calendar.status.date_range_from_str."""
