@@ -88,7 +88,7 @@ def read_status_yaml(path: str, year: int = None):
                     raise ValueError(f"category: {category}: empty date string")
                 # date is a range.
                 if "-" in datestr:
-                    dates = date_range(datestr, year_from_str)
+                    dates = date_range(datestr, year)
                     status.add_range(dates)
                     status.date_list.extend(dates)
                 else:
