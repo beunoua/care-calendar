@@ -3,6 +3,7 @@
 from dataclasses import dataclass, field, make_dataclass
 import calendar
 import datetime
+from datetime import timedelta
 from typing import Iterator, List
 
 from . import current_year, week_id
@@ -41,6 +42,13 @@ class Calendar:
         "Novembre",
         "Décembre",
     ]
+
+    @property
+    def holidays(self):
+        for status in self.status_list:
+            if status.name == "vacances scolaires":
+                return status
+        return []
 
     def iter_month_dates(self, month: int) -> datetime.date:
         """Iterates over a month dates."""
@@ -151,7 +159,11 @@ class Calendar:
         """Returns who's got the children custody."""
         cust = "B"
         week_is_even =  week_id(date) % 2 == 0
-        if week_is_even:  
+        if date in self.holidays:
+            return self._get_custody_holidays(date)
+        if date + timedelta(1) in self.holidays:
+            return self._get_custody_holidays(date + timedelta(1))
+        if week_is_even:
             cust = self._get_custody_even_weeks(date)
         else:
             cust = self._get_custody_odd_weeks(date)
@@ -176,9 +188,19 @@ class Calendar:
         if date.weekday() > 3:
             cust = "L"
         return cust
-    
 
     def _get_custody_holidays(self, date: datetime.date) -> str:
         """Returns who's got the children custody during holidays."""
         year_is_even =  date.year % 2 == 0
-        return ""
+        holidays = [r for r in self.holidays.ranges if date in r][0]
+        # date is in first half of holidays
+        delta = timedelta(len(holidays) / 2)
+        is_first_half = date < holidays[0] + delta
+
+        if year_is_even:
+            if is_first_half:
+                return "L"
+            return "B"
+        elif is_first_half:
+                return "B"  
+        return "L"

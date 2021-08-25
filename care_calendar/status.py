@@ -18,8 +18,9 @@ class Status(collections.abc.Collection):
     """Stores the list of dates that will be assigned a particular status."""
 
     name: str
-    date_list: List[datetime.time]
+    date_list: List[datetime.time] = field(default_factory=list)
     css_name: str = ""
+    ranges: List[List[List[datetime.time]]] = field(init=False, repr=False, default_factory=list)
 
     def __post_init__(self):
         self.date_list = self.date_list.copy()  # copies input list
@@ -33,6 +34,9 @@ class Status(collections.abc.Collection):
 
     def __len__(self) -> int:
         return len(self.date_list)
+    
+    def add_range(self, date_range: List[datetime.time]):
+        self.ranges.append(date_range.copy())
 
 
 def str_to_date(date_string: str, year: int = None) -> datetime.date:
@@ -72,17 +76,19 @@ def read_status_yaml(path: str, year: int = None):
 
     categories = []
     for category, datestrlist in data.items():
-        datelist = []
+        status = Status(category.lower())
         if datestrlist is not None:
             for datestr in datestrlist:
                 if datestr is None:
                     raise ValueError(f"category: {category}: empty date string")
+                # date is a range.
                 if "-" in datestr:
-                    # date is a range.
-                    datelist.extend(date_range_to_list(datestr, year))
+                    dates = date_range_to_list(datestr, year)
+                    status.add_range(dates)
+                    status.date_list.extend(dates)
                 else:
-                    datelist.append(str_to_date(datestr, year))
+                    status.date_list.append(str_to_date(datestr, year))
 
-        categories.append(Status(category.lower(), list(set(datelist))))
+        categories.append(status)
 
     return categories
