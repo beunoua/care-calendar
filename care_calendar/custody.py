@@ -99,8 +99,18 @@ def guardian_transition(first: str, second: str) -> str:
     return f"{first}→{second}"
 
 
+def is_last_day_of_holidays(day: date, holidays: List[date]) -> bool:
+    """Returns True if a day is the last day of holidays."""
+    return day == holidays[-1]
+
+
 def get_guardian_even_week(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, on even weeks."""
+    if next_day_is_holiday(day, holiday_list):
+        guardian = get_guardian_holidays(next_day(day), holiday_list)
+        if guardian == "L":
+            return "L"
+        return guardian_transition("L", "B")
     if day_is_tuesday(day):
         return guardian_transition("L", "B")
     if day_is_wednesday(day):
@@ -114,20 +124,16 @@ def get_guardian_even_week(day: date, holiday_list: List[List[date]]) -> str:
 
 def get_guardian_odd_week(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, on even weeks."""
+    if next_day_is_holiday(day, holiday_list):
+        guardian = get_guardian_holidays(next_day(day), holiday_list)
+        if guardian == "B":
+            return "B"
+        return guardian_transition("B", "L")
     if day_is_friday(day):
-        if next_day_is_holiday(day, holiday_list):
-            guardian = get_guardian_holidays(next_day(day), holiday_list)
-            if guardian == "B":
-                return "B"
         return guardian_transition("B", "L")
     if day_is_weekend(day):
         return "L"
     return "B"
-
-
-def is_last_day_of_holidays(day: date, holidays: List[date]) -> bool:
-    """Returns True if a day is the last day of holidays."""
-    return day == holidays[-1]
 
 
 def get_guardian_holidays(day: date, holiday_list: List[List[date]]) -> str:
