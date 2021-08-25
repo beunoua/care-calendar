@@ -99,7 +99,7 @@ def guardian_transition(first: str, second: str) -> str:
     return f"{first}→{second}"
 
 
-def get_guardian_even_week(day: date) -> str:
+def get_guardian_even_week(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, on even weeks."""
     if day_is_tuesday(day):
         return guardian_transition("L", "B")
@@ -112,9 +112,13 @@ def get_guardian_even_week(day: date) -> str:
     return "L"
 
 
-def get_guardian_odd_week(day: date) -> str:
+def get_guardian_odd_week(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, on even weeks."""
     if day_is_friday(day):
+        if next_day_is_holiday(day, holiday_list):
+            guardian = get_guardian_holidays(next_day(day), holiday_list)
+            if guardian == "B":
+                return "B"
         return guardian_transition("B", "L")
     if day_is_weekend(day):
         return "L"
@@ -139,22 +143,22 @@ def get_guardian_holidays(day: date, holiday_list: List[List[date]]) -> str:
     if day < day_before_half:
         return first
     if is_last_day_of_holidays(day, holidays):
-        guardian = get_guardian_regular_week(next_day(day))
+        guardian = get_guardian_regular_week(next_day(day), holiday_list)
         if guardian != second:
             return guardian_transition(second, guardian)
     return second
 
 
-def get_guardian_regular_week(day: date) -> str:
+def get_guardian_regular_week(day: date, holiday_list: List[List[date]]) -> str:
     """Returns the guardian on a regular week i.e. not holidays."""
     if is_even_week(day):
-        return get_guardian_even_week(day)
+        return get_guardian_even_week(day, holiday_list)
     if is_odd_week(day):
-        return get_guardian_odd_week(day)
+        return get_guardian_odd_week(day, holiday_list)
 
 
 def get_guardian(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, according to the holidays."""
     if day_is_holiday(day, holiday_list):
         return get_guardian_holidays(day, holiday_list)
-    return get_guardian_regular_week(day)
+    return get_guardian_regular_week(day, holiday_list)
