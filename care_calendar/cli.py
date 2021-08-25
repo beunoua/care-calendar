@@ -18,7 +18,7 @@ HTML_TEMPLATE = """\
 </head>
 <body>
 
-<h1>Calendrier de Garde {{this_year}}</h1>
+<h1 class="title">Calendrier de Garde {{this_year}}</h1>
 
 <div id="legend">
 {{html_legend}}
@@ -26,7 +26,7 @@ HTML_TEMPLATE = """\
 <div id="calendar">
 {{html_calendar}}
 </div>
-<div class="comments">
+<div id="comments">
 {{html_comments}}
 </div>
 </body>

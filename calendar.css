@@ -3,7 +3,7 @@ table, th, td {
     border: 1px solid black;
 } */
 
-h1 {
+h1.title {
     text-align: center;
 }
 
@@ -23,10 +23,6 @@ table.month {
     min-width: 120px;
     border-bottom: 2px solid;
 }
-
-/* td.month {
-    padding-left: 20%;
-} */
 
 tr.year {
     vertical-align: baseline;
@@ -75,8 +71,8 @@ tr.weekend,tr.weekday {
 }
 
 /* -----------------------------------------------*/
-
 /* Legend */
+
 div#legend {
     padding-top: 20px;
     padding-bottom: 30px;
@@ -87,5 +83,15 @@ table.legend {
     border-collapse: separate;
     border-spacing: 10px 5px;
   }
+
+/* -----------------------------------------------*/
+/* Comments */
+div#comments {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:smaller;
+    padding-top: 30px
+}
+
+
 
 /* -----------------------------------------------*/
