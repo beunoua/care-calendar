@@ -29,9 +29,27 @@ def read_template_jinja(path: str) -> jinja2.Template:
     return jinja2.Template(text)
 
 
-def parse_command_line() -> argparse.ArgumentParser:
+def parse_command_line() -> argparse.Namespace:
     """Command-line parsing."""
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "holidays",
+        help="holidays YAML file",
+    )
+    parser.add_argument(
+        "comments",
+        help="comments Markdown file",
+    )
+    parser.add_argument(
+        "--template",
+        help="jinja2 template for HTML rendering",
+        default="calendar.j2"
+    )
+    parser.add_argument(
+        "--css",
+        help="css styling file",
+        default="calendar.css"
+    )
     return parser.parse_args()
 
 
@@ -40,17 +58,13 @@ def main():
 
     args = parse_command_line()
 
-    print(type(args))
-    exit()
-
-    html_template = read_template_jinja("template.j2")
-    html_comments = read_comments_markdown("comments.md")
-
-    css_file = "calendar.css"
+    css_file = args.css
+    html_template = read_template_jinja(args.template)
+    html_comments = read_comments_markdown(args.comments)
+    status_list = read_status_yaml(args.holidays)
 
     cal = care_calendar.Calendar(2021)
-    day = datetime.date(2021, 1, 1)  # a Friday
-    cal.status_list = read_status_yaml("holidays-2021.yaml")
+    cal.status_list = status_list
 
     html = html_template.render(
         css_file=css_file,
