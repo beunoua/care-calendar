@@ -3,6 +3,9 @@ table, th, td {
     border: 1px solid black;
 } */
 
+h1 {
+    text-align: center;
+}
 
 table {
     border-collapse: collapse;
@@ -70,3 +73,19 @@ tr.weekend,tr.weekday {
     border-left: 2px solid;
     border-right: 2px solid;
 }
+
+/* -----------------------------------------------*/
+
+/* Legend */
+div#legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+table.legend {
+    padding-left: 30px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+  }
+
+/* -----------------------------------------------*/
