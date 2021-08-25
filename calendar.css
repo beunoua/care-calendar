@@ -4,12 +4,16 @@ table, th, td {
 } */
 
 
+table {
+    border-collapse: collapse;
+}
 
 table.month {
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
     padding: 0px 10px 0px 10px;
     width: 150px;
+    border-bottom: 2px solid;
 }
 
 
@@ -20,6 +24,7 @@ tr.year {
 td.weekid {
     text-align: center;
     width: 20px;
+    border-right: 2px solid;
 }
 
 td.status, td.daynum, td.dayname, td.status, td.daycust {
@@ -41,6 +46,23 @@ tr.weekday td.vacancesscolaires {
     background-color: #6495ED;
 }
 
+
 tr.di {
-    border: 1px solid black;
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+
+th.month_name {
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+tr.weekend,tr.weekday {
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+
+td.month {
+    padding-left: 20px;
 }

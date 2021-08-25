@@ -141,7 +141,7 @@ class Calendar:
     def format_year(self):
         year_html = ['<table class="year">', "<tbody>", '<tr class="year">']
         for month in range(1, 13):
-            year_html.append("<td>")
+            year_html.append(f'<td class="{self.css_class_month}">')
             year_html.append(self.format_month(month))
             year_html.append("</td>")
         year_html += ["</tr>", "</tbody>", "</table>"]
