@@ -6,9 +6,10 @@ import datetime
 from datetime import timedelta
 from typing import Iterator, List
 
-from . import current_year, week_id
-from .status import Status
 
+from .custody import get_guardian
+from .status import Status
+from .utils import current_year, week_id
 
 @dataclass
 class Calendar:
@@ -47,10 +48,10 @@ class Calendar:
     ]
 
     @property
-    def holidays(self):
+    def holidays(self) -> List[List[datetime.date]]:
         for status in self.status_list:
             if status.name == "vacances scolaires":
-                return status
+                return status.ranges
         return []
 
     def iter_month_dates(self, month: int) -> datetime.date:
@@ -160,77 +161,81 @@ class Calendar:
 
     def get_custody(self, date: datetime.date) -> str:
         """Returns who's got the children custody."""
-        cust = "B"
-        week_is_even = week_id(date) % 2 == 0
-        if date in self.holidays:
-            return self._get_custody_holidays(date)
+        return get_guardian(date, self.holidays)
 
-        # Holidays: give children on Friday evening.
-        if date + timedelta(1) in self.holidays:
-            first = self._get_custody_holidays(date + timedelta(1))
-            second = "L" if first == "B" else "B"
-            return f"{second}→{first}"
+    # def get_custody(self, date: datetime.date) -> str:
+    #     """Returns who's got the children custody."""
+    #     cust = "B"
+    #     week_is_even = week_id(date) % 2 == 0
+    #     if date in self.holidays:
+    #         return self._get_custody_holidays(date)
 
-        # Not holidays.
-        if week_is_even:
-            cust = self._get_custody_even_weeks(date)
-        else:
-            cust = self._get_custody_odd_weeks(date)
-        return cust
+    #     # Holidays: give children on Friday evening.
+    #     if date + timedelta(1) in self.holidays:
+    #         first = self._get_custody_holidays(date + timedelta(1))
+    #         second = "L" if first == "B" else "B"
+    #         return f"{second}→{first}"
 
-    def _get_custody_even_weeks(self, date: datetime.date) -> str:
-        """Returns who's got the childen custody during even weeks."""
-        cust = "L"
-        # B has the children on Tuesday nights.
-        if date.weekday() == 1:
-            cust = "L→B"
-        # B has the children on Wednesdays.
-        elif date.weekday() == 2:
-            cust = "B→L"
-        # B got the children back on Fridays.
-        elif date.weekday() > 3:
-            cust = "B"
-        return cust
+    #     # Not holidays.
+    #     if week_is_even:
+    #         cust = self._get_custody_even_weeks(date)
+    #     else:
+    #         cust = self._get_custody_odd_weeks(date)
+    #     return cust
 
-    def _get_custody_odd_weeks(self, date: datetime.date) -> str:
-        """Returns who's got the childen custody during odd weeks."""
-        cust = "B"
-        # L got the children back on Fridays.
-        if date.weekday() > 3:
-            cust = "L"
-        return cust
+    # def _get_custody_even_weeks(self, date: datetime.date) -> str:
+    #     """Returns who's got the childen custody during even weeks."""
+    #     cust = "L"
+    #     # B has the children on Tuesday nights.
+    #     if date.weekday() == 1:
+    #         cust = "L→B"
+    #     # B has the children on Wednesdays.
+    #     elif date.weekday() == 2:
+    #         cust = "B→L"
+    #     # B got the children back on Fridays.
+    #     elif date.weekday() > 3:
+    #         cust = "B"
+    #     return cust
 
-    def _get_custody_holidays(self, date: datetime.date) -> str:
-        """Returns who's got the children custody during holidays."""
+    # def _get_custody_odd_weeks(self, date: datetime.date) -> str:
+    #     """Returns who's got the childen custody during odd weeks."""
+    #     cust = "B"
+    #     # L got the children back on Fridays.
+    #     if date.weekday() > 3:
+    #         cust = "L"
+    #     return cust
 
-        def is_first_half_of_holidays(date):
-            holidays = [r for r in self.holidays.ranges if date in r][0]
-            delta = timedelta(len(holidays) / 2)
-            return date < holidays[0] + delta
-        
-        def transition_saturday():
-            holidays = [r for r in self.holidays.ranges if date in r][0]
-            delta = timedelta(len(holidays) / 2) - timedelta(1)
-            return holidays[0] + delta
+    # def _get_custody_holidays(self, date: datetime.date) -> str:
+    #     """Returns who's got the children custody during holidays."""
 
-        def custody():
-            if is_first_half:
-                return first
-            return second
+    #     def is_first_half_of_holidays(date):
+    #         holidays = [r for r in self.holidays.ranges if date in r][0]
+    #         delta = timedelta(len(holidays) / 2)
+    #         return date < holidays[0] + delta
 
-        year_is_even = date.year % 2 == 0
-        is_first_half = is_first_half_of_holidays(date)
+    #     def transition_saturday():
+    #         holidays = [r for r in self.holidays.ranges if date in r][0]
+    #         delta = timedelta(len(holidays) / 2) - timedelta(1)
+    #         return holidays[0] + delta
 
-        if year_is_even:
-            first, second = "L", "B"
-        else:
-            first, second = "B", "L"
-        
-        cust = custody()
-        if date == transition_saturday():
-            cust = f"{first}→{second}"
+    #     def custody():
+    #         if is_first_half:
+    #             return first
+    #         return second
 
-        return cust
+    #     year_is_even = date.year % 2 == 0
+    #     is_first_half = is_first_half_of_holidays(date)
+
+    #     if year_is_even:
+    #         first, second = "L", "B"
+    #     else:
+    #         first, second = "B", "L"
+
+    #     cust = custody()
+    #     if date == transition_saturday():
+    #         cust = f"{first}→{second}"
+
+    #     return cust
 
     def format_legend(self):
         html = [f'<table class="{self.css_class_legend}">']
