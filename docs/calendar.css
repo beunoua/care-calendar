@@ -39,6 +39,11 @@ td.status, td.daynum, td.dayname, td.status, td.daycust {
     text-align: center;
 }
 
+td.daycust {
+    width: 35px;
+    text-align: center;
+}
+
 tr.weekend {
     background-color: #A9A9A9;
 }

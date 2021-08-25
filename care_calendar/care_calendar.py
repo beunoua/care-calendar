@@ -164,8 +164,14 @@ class Calendar:
         week_is_even = week_id(date) % 2 == 0
         if date in self.holidays:
             return self._get_custody_holidays(date)
+
+        # Holidays: give children on Friday evening.
         if date + timedelta(1) in self.holidays:
-            return self._get_custody_holidays(date + timedelta(1))
+            first = self._get_custody_holidays(date + timedelta(1))
+            second = "L" if first == "B" else "B"
+            return f"{second}→{first}"
+
+        # Not holidays.
         if week_is_even:
             cust = self._get_custody_even_weeks(date)
         else:
@@ -177,9 +183,12 @@ class Calendar:
         cust = "L"
         # B has the children on Tuesday nights.
         if date.weekday() == 1:
-            cust = "L/B"
-        # B has the children on Wednesdays and got them back on Fridays.
-        if date.weekday() == 2 or date.weekday() > 3:
+            cust = "L→B"
+        # B has the children on Wednesdays.
+        elif date.weekday() == 2:
+            cust = "B→L"
+        # B got the children back on Fridays.
+        elif date.weekday() > 3:
             cust = "B"
         return cust
 
@@ -193,19 +202,35 @@ class Calendar:
 
     def _get_custody_holidays(self, date: datetime.date) -> str:
         """Returns who's got the children custody during holidays."""
+
+        def is_first_half_of_holidays(date):
+            holidays = [r for r in self.holidays.ranges if date in r][0]
+            delta = timedelta(len(holidays) / 2)
+            return date < holidays[0] + delta
+        
+        def transition_saturday():
+            holidays = [r for r in self.holidays.ranges if date in r][0]
+            delta = timedelta(len(holidays) / 2) - timedelta(1)
+            return holidays[0] + delta
+
+        def custody():
+            if is_first_half:
+                return first
+            return second
+
         year_is_even = date.year % 2 == 0
-        holidays = [r for r in self.holidays.ranges if date in r][0]
-        # date is in first half of holidays
-        delta = timedelta(len(holidays) / 2)
-        is_first_half = date < holidays[0] + delta
+        is_first_half = is_first_half_of_holidays(date)
 
         if year_is_even:
-            if is_first_half:
-                return "L"
-            return "B"
-        elif is_first_half:
-            return "B"
-        return "L"
+            first, second = "L", "B"
+        else:
+            first, second = "B", "L"
+        
+        cust = custody()
+        if date == transition_saturday():
+            cust = f"{first}→{second}"
+
+        return cust
 
     def format_legend(self):
         html = [f'<table class="{self.css_class_legend}">']
