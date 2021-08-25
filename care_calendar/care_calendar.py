@@ -136,7 +136,7 @@ class Calendar:
 
     def format_day_custody(self, date: datetime.date) -> str:
         """Formats the cell that contains the custody responsible."""
-        return f'<td class="{self.css_class_day_custody}">non</td>'
+        return f'<td class="{self.css_class_day_custody}">{self.get_custody(date)}</td>'
 
     def format_year(self):
         year_html = ['<table class="year">', "<tbody>", '<tr class="year">']
@@ -146,3 +146,39 @@ class Calendar:
             year_html.append("</td>")
         year_html += ["</tr>", "</tbody>", "</table>"]
         return "\n".join(year_html)
+
+    def get_custody(self, date: datetime.date) -> str:
+        """Returns who's got the children custody."""
+        cust = "B"
+        week_is_even =  week_id(date) % 2 == 0
+        if week_is_even:  
+            cust = self._get_custody_even_weeks(date)
+        else:
+            cust = self._get_custody_odd_weeks(date)
+        return cust
+
+
+    def _get_custody_even_weeks(self, date: datetime.date) -> str:
+        """Returns who's got the childen custody during even weeks."""
+        cust = "L"
+        # B has the children on Tuesday nights.
+        if date.weekday() == 1:
+            cust = "L/B"
+        # B has the children on Wednesdays and got them back on Fridays.
+        if date.weekday() == 2 or date.weekday() > 3:
+            cust = "B"
+        return cust
+
+    def _get_custody_odd_weeks(self, date: datetime.date) -> str:
+        """Returns who's got the childen custody during odd weeks."""
+        cust = "B"
+        # L got the children back on Fridays.
+        if date.weekday() > 3:
+            cust = "L"
+        return cust
+    
+
+    def _get_custody_holidays(self, date: datetime.date) -> str:
+        """Returns who's got the children custody during holidays."""
+        year_is_even =  date.year % 2 == 0
+        return ""
