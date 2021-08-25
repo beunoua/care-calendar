@@ -42,6 +42,9 @@ def parse_command_line() -> argparse.Namespace:
     parser.add_argument("holidays", help="holidays YAML file")
     parser.add_argument("comments", help="comments Markdown file")
     parser.add_argument(
+        "-y", "--year", help="calendar year", default=care_calendar.current_year()
+    )
+    parser.add_argument(
         "--template", help="jinja2 template for HTML rendering", default="calendar.j2"
     )
     parser.add_argument(
@@ -82,7 +85,7 @@ def write_output_pdf(path: str, html: str, zoom: float = 1.0):
         "dpi": 300,
         "background": "",
         # "zoom": zoom,
-        "quiet": ""
+        "quiet": "",
     }
 
     pdfkit.from_string(html, path, options=options)
@@ -96,7 +99,9 @@ def main():
     args = parse_command_line()
 
     output_html = args.output
-    output_pdf = os.path.splitext(output_html)[0] + ".pdf"
+    output_pdf = os.path.join(
+        os.path.dirname(output_html)[0], f"calendar{args.year}.pdf"
+    )
 
     html_template = read_template_jinja(args.template)
     html_comments = read_comments_markdown(args.comments)
