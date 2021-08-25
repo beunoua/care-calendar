@@ -8,14 +8,22 @@ table {
     border-collapse: collapse;
 }
 
+table.year {
+    width:  100%;
+    max-width: 2000px;
+}
+
 table.month {
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
     padding: 0px 10px 0px 10px;
-    width: 150px;
+    min-width: 120px;
     border-bottom: 2px solid;
 }
 
+/* td.month {
+    padding-left: 20%;
+} */
 
 tr.year {
     vertical-align: baseline;
@@ -42,9 +50,6 @@ td.férié {
 }
 
 /* Color holidays but not weekends */
-/* tr.weekday td.vacancesscolaires {
-    background-color: #6495ED;
-} */
 td.vacancesscolaires {
     background-color: #6495ED;
 }
@@ -64,8 +69,4 @@ th.month_name {
 tr.weekend,tr.weekday {
     border-left: 2px solid;
     border-right: 2px solid;
-}
-
-td.month {
-    padding-left: 20px;
 }
