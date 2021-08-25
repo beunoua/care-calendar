@@ -31,6 +31,13 @@ def read_template_jinja(path: str) -> jinja2.Template:
 
 def parse_command_line() -> argparse.Namespace:
     """Command-line parsing."""
+
+    def valid_month(month: int) -> int:
+        month = int(month)
+        if month < 1 or month > 12:
+            raise argparse.ArgumentTypeError("must be an integer in the range [1 - 12]")
+        return month
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "holidays",
@@ -55,6 +62,12 @@ def parse_command_line() -> argparse.Namespace:
         help="HTML output file name",
         default="calendar.html"
     )
+    parser.add_argument(
+        "--first-month",
+        help="starts year at month id (between 1 and 12)",
+        type=valid_month,
+        default=1,
+    )
     return parser.parse_args()
 
 
@@ -68,7 +81,7 @@ def main():
     html_comments = read_comments_markdown(args.comments)
     status_list = read_status_yaml(args.holidays)
 
-    cal = care_calendar.Calendar(2021)
+    cal = care_calendar.Calendar(2021, first_month=args.first_month)
     cal.status_list = status_list
 
     html = html_template.render(

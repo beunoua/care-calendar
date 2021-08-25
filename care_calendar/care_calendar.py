@@ -15,6 +15,7 @@ class Calendar:
 
     year: int = current_year()
     status_list: List[Status] = field(default_factory=list)
+    first_month: int = 1
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     css_class_legend = "legend"
@@ -150,7 +151,7 @@ class Calendar:
 
     def format_year(self):
         year_html = ['<table class="year">', "<tbody>", '<tr class="year">']
-        for month in range(1, 13):
+        for month in range(self.first_month, 13):
             year_html.append(f'<td class="{self.css_class_month}">')
             year_html.append(self.format_month(month))
             year_html.append("</td>")
