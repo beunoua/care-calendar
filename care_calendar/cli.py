@@ -1,10 +1,14 @@
 """Console script for care_calendar."""
 
+import datetime
 import sys
 
 import jinja2
+import markdown
 
 import care_calendar
+from care_calendar.status import read_status_yaml
+
 
 HTML_TEMPLATE = """\
 <html>
@@ -17,25 +21,35 @@ HTML_TEMPLATE = """\
 <h1>Calendrier de Garde {{this_year}}</h1>
 
 <div id="legend">
-{{legend_html}}
+{{html_legend}}
 </div>
 <div id="calendar">
-{{calendar_html}}
+{{html_calendar}}
 </div>
 <div class="comments">
-This is a comment
+{{html_comments}}
 </div>
 </body>
 </html>
 """
 
 
-import datetime
-from care_calendar.status import read_status_yaml
+
+
+def read_comments_markdown(path: str) -> str:
+    """Read the markdown comment file.
+    
+    Returns the comments formatted in HTML.
+    """
+    with open(path, "rt") as f:
+        text = f.read()
+    return markdown.markdown(text)
 
 
 def main():
     """Console script for care_calendar."""
+
+    html_comments = read_comments_markdown("comments.md")
 
     css_file = "calendar.css"
     template = jinja2.Template(HTML_TEMPLATE)
@@ -46,8 +60,9 @@ def main():
 
     html = template.render(
         css_file=css_file,
-        legend_html=cal.format_legend(),
-        calendar_html=cal.format_year(),
+        html_legend=cal.format_legend(),
+        html_calendar=cal.format_year(),
+        html_comments=html_comments,
         this_year=care_calendar.current_year(),
     )
 
