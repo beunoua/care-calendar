@@ -100,7 +100,7 @@ def main():
 
     output_html = args.output
     output_pdf = os.path.join(
-        os.path.dirname(output_html)[0], f"calendar{args.year}.pdf"
+        os.path.dirname(output_html), f"calendar-{args.year}.pdf"
     )
 
     html_template = read_template_jinja(args.template)
