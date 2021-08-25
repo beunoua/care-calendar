@@ -45,10 +45,6 @@ def str_to_date(date_string: str, year: int = None) -> datetime.date:
     """Returns a `datetime.date` from a string."""
     tokens = [token.strip() for token in date_string.split("/")]
     if len(tokens) == 3:
-        if year is not None:
-            raise ValueError(
-                f"Cannot pass year in date string ({date_string}) and as argument ({year})"
-            )
         day, month, year = tokens
         if len(year) == 2:
             year = "20{}".format(year)

@@ -42,7 +42,7 @@ def parse_command_line() -> argparse.Namespace:
     parser.add_argument("holidays", help="holidays YAML file")
     parser.add_argument("comments", help="comments Markdown file")
     parser.add_argument(
-        "-y", "--year", help="calendar year", default=care_calendar.current_year()
+        "-y", "--year", help="calendar year", type=int, default=care_calendar.current_year()
     )
     parser.add_argument(
         "--template", help="jinja2 template for HTML rendering", default="calendar.j2"
@@ -105,7 +105,7 @@ def main():
 
     html_template = read_template_jinja(args.template)
     html_comments = read_comments_markdown(args.comments)
-    status_list = read_status_yaml(args.holidays)
+    status_list = read_status_yaml(args.holidays, args.year)
 
     cal = care_calendar.Calendar(args.year, first_month=args.first_month)
     cal.status_list = status_list
