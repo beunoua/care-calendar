@@ -1,10 +1,67 @@
 """Calculates custody."""
 
+import calendar
 from datetime import date, datetime, timedelta
 from typing import List
 
 from .utils import week_id
 
+
+EASTER_SUNDAY = {
+    2022: date(2022, 4, 17),
+    2023: date(2023, 4, 9),
+    2024: date(2024, 3, 31),
+    2025: date(2025, 4, 20),
+    2026: date(2026, 4, 5),
+    2027: date(2027, 3, 28),
+    2028: date(2028, 4, 16),
+    2029: date(2029, 4, 1),
+    2030: date(2030, 4, 21),
+    2031: date(2031, 4, 13),
+    2032: date(2032, 3, 28),
+    2033: date(2033, 4, 17),
+    2034: date(2034, 4, 9),
+    2035: date(2035, 3, 25),
+    2036: date(2036, 4, 13),
+    2037: date(2037, 4, 5),
+    2038: date(2038, 4, 25),
+    2039: date(2039, 4, 10),
+    2040: date(2040, 4, 1),
+}
+
+PENTECOST = {year: day + timedelta(39) for year, day in EASTER_SUNDAY.items()}
+
+
+
+def is_mother_day(day: date) -> bool:
+    """Returns True if a day is mother's day.
+
+    Mother's day is the last Sunday of May except if it is the Pentecost.
+    """
+    if day.weekday() != 6:
+        return False
+    sundays = [
+        d
+        for d in calendar.Calendar().itermonthdates(day.year, 5)
+        if d.weekday() == 6
+    ]
+    if sundays[-1] == PENTECOST[day.year]:
+        return sundays[-1] + timedelta(8)
+    return sundays[-1]
+
+
+
+def is_father_day(day: date) -> bool:
+    """Returns True if a day is father's day (3rd Sunday of June)."""
+    if day.month != 6 and day.weekday() != 6:
+        return False
+
+    sundays = [
+        d
+        for d in calendar.Calendar().itermonthdates(day.year, 6)
+        if d.weekday() == 6
+    ]
+    return day == sundays[2]
 
 def is_even_year(day: date) -> bool:
     """Returns True is a year is even."""
@@ -165,6 +222,10 @@ def get_guardian_regular_week(day: date, holiday_list: List[List[date]]) -> str:
 
 def get_guardian(day: date, holiday_list: List[List[date]]) -> str:
     """Get the guardian for a day, according to the holidays."""
+    if is_father_day(day):
+        return "B"
+    if is_mother_day(day):
+        return "L"
     if day_is_holiday(day, holiday_list):
         return get_guardian_holidays(day, holiday_list)
     return get_guardian_regular_week(day, holiday_list)
