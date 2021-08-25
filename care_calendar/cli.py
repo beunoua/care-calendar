@@ -1,5 +1,6 @@
-"""Console script for care_calendar."""
+"""Creates a calendar for children custody."""
 
+import argparse
 import datetime
 import sys
 
@@ -28,14 +29,24 @@ def read_template_jinja(path: str) -> jinja2.Template:
     return jinja2.Template(text)
 
 
+def parse_command_line() -> argparse.ArgumentParser:
+    """Command-line parsing."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    return parser.parse_args()
+
+
 def main():
     """Console script for care_calendar."""
+
+    args = parse_command_line()
+
+    print(type(args))
+    exit()
 
     html_template = read_template_jinja("template.j2")
     html_comments = read_comments_markdown("comments.md")
 
     css_file = "calendar.css"
-    
 
     cal = care_calendar.Calendar(2021)
     day = datetime.date(2021, 1, 1)  # a Friday
