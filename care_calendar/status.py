@@ -63,11 +63,14 @@ def str_to_date(date_string: str, year: int = None) -> datetime.date:
         raise ValueError(f"day is out of range: {year}/{month}/{day}") from exc
 
 
-def date_range_to_list(
-    daterange: tuple[str, str], year: int = None
-) -> List[datetime.date]:
+def date_range_from_str(daterange: str, year: int = None) -> List[datetime.date]:
     """Returns a list of dates from a string representing a date range."""
     start, end = [str_to_date(s, year) for s in daterange.split("-")]
+    return date_range(start, end)
+
+
+def date_range(start: datetime.date, end: datetime.date) -> List[datetime.date]:
+    """Returns a list of dates between two dates."""
     return [start + datetime.timedelta(days=i) for i in range((end - start).days + 1)]
 
 
@@ -85,7 +88,7 @@ def read_status_yaml(path: str, year: int = None):
                     raise ValueError(f"category: {category}: empty date string")
                 # date is a range.
                 if "-" in datestr:
-                    dates = date_range_to_list(datestr, year)
+                    dates = date_range(datestr, year_from_str)
                     status.add_range(dates)
                     status.date_list.extend(dates)
                 else:

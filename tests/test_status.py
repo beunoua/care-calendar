@@ -7,7 +7,7 @@ import unittest
 
 from care_calendar.status import (
     str_to_date,
-    date_range_to_list,
+    date_range_from_str,
     read_status_yaml,
     Status,
 )
@@ -79,17 +79,17 @@ class TestStrToDate(unittest.TestCase):
             str_to_date(date_str, 2021)
 
 
-class TestDateRangeToList(unittest.TestCase):
-    """Tests for care_calendar.status.date_range_to_list."""
+class TestDateRangeFromStr(unittest.TestCase):
+    """Tests for care_calendar.status.date_range_from_str."""
 
     def test_returns_a_list_of_dates(self):
-        dates = date_range_to_list("13/02 - 15/02", 1912)
+        dates = date_range_from_str("13/02 - 15/02", 1912)
         self.assertIsInstance(dates, list)
         for date in dates:
             self.assertIsInstance(date, datetime.date)
 
     def test_returns_correct_dates(self):
-        dates = date_range_to_list("13/02 - 15/02", 1912)
+        dates = date_range_from_str("13/02 - 15/02", 1912)
         self.assertEqual(len(dates), 3)
         for i, day in enumerate(range(13, 16)):
             self.assertEqual(dates[i].day, day)
@@ -97,7 +97,7 @@ class TestDateRangeToList(unittest.TestCase):
             self.assertEqual(dates[i].year, 1912)
 
     def test_returns_correct_dates_no_year(self):
-        dates = date_range_to_list("13/02 - 15/02", 1912)
+        dates = date_range_from_str("13/02 - 15/02", 1912)
         self.assertEqual(len(dates), 3)
         for i, day in enumerate(range(13, 16)):
             self.assertEqual(dates[i].day, day)
@@ -105,7 +105,7 @@ class TestDateRangeToList(unittest.TestCase):
             self.assertEqual(dates[i].year, 1912)
 
     def test_accross_years(self):
-        dates = date_range_to_list("28/12/20 - 06/01/21")
+        dates = date_range_from_str("28/12/20 - 06/01/21")
         self.assertEqual(len(dates), 10)
         for i, day in enumerate(range(28, 32)):
             self.assertEqual(dates[i].day, day)
