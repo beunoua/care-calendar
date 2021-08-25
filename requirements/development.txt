@@ -1,3 +1,4 @@
+-r base.txt
 pip==19.2.3
 beautifulsoup4==4.9.3
 bump2version==0.5.11
