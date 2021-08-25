@@ -50,6 +50,11 @@ def parse_command_line() -> argparse.Namespace:
         help="css styling file",
         default="calendar.css"
     )
+    parser.add_argument(
+        "--output",
+        help="HTML output file name",
+        default="calendar.html"
+    )
     return parser.parse_args()
 
 
@@ -74,7 +79,7 @@ def main():
         this_year=care_calendar.current_year(),
     )
 
-    with open("foo.html", "wt") as f:
+    with open(args.output, "wt") as f:
         print(html, file=f)
 
     return 0
