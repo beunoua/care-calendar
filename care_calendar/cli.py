@@ -45,7 +45,7 @@ def parse_command_line() -> argparse.Namespace:
         "--template", help="jinja2 template for HTML rendering", default="calendar.j2"
     )
     parser.add_argument(
-        "-o", "--output", help="HTML output file name", default="calendar.html"
+        "-o", "--output", help="HTML output file name", default="index.html"
     )
     parser.add_argument(
         "--first-month",
