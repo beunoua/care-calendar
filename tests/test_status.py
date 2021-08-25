@@ -5,7 +5,12 @@ import datetime
 import os
 import unittest
 
-from care_calendar.status import str_to_date, date_range_to_list, read_status_yaml, Status
+from care_calendar.status import (
+    str_to_date,
+    date_range_to_list,
+    read_status_yaml,
+    Status,
+)
 
 
 class TestStrToDate(unittest.TestCase):
@@ -131,7 +136,7 @@ class TestReadStatusYaml(unittest.TestCase):
         status_vacances = self.data[0]
         self.assertEqual(status_vacances.name, "vacances scolaires")
         self.assertEqual(len(status_vacances.date_list), 13)
-        
+
         status_ferie = self.data[1]
         self.assertEqual(status_ferie.name, "férié")
         self.assertEqual(len(status_ferie.date_list), 4)
@@ -143,13 +148,13 @@ class TestStatus(unittest.TestCase):
     def setUp(self):
         self.dates = [datetime.date(1921, 12, 1), datetime.date(1922, 11, 2)]
         self.status = Status("the name", self.dates)
-    
+
     def test_name_stays_untouched(self):
         self.assertEqual(self.status.name, "the name")
-    
+
     def test_constructor_copies_input_list(self):
         self.assertNotEqual(id(self.dates), id(self.status.date_list))
-    
+
     def test_css_class_name_initialization(self):
         self.assertEqual(self.status.css_name, "thename")
 
@@ -159,7 +164,7 @@ class TestStatus(unittest.TestCase):
     def test_contains(self):
         self.assertIn(self.dates[0], self.status)
         self.assertIn(self.dates[1], self.status)
-    
+
     def test_iter(self):
         for i, date in enumerate(self.status):
             self.assertIn(date, self.dates)

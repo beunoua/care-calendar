@@ -139,9 +139,7 @@ class TestCalendarFormatDayStatus(unittest.TestCase):
         first_tag = self.soup.find()
         self.assertEqual(first_tag.name, "td")
         self.assertIn("class", first_tag.attrs)
-        self.assertIn(
-            self.calendar.css_class_day_status, first_tag.attrs["class"]
-        )
+        self.assertIn(self.calendar.css_class_day_status, first_tag.attrs["class"])
 
     def test_day_status_is_empty(self):
         first_tag = self.soup.find()
@@ -195,6 +193,7 @@ class TestCalendarFormatWeekNumber(unittest.TestCase):
 
 class TestCalendarWithStatus(unittest.TestCase):
     """Tests that providing statuses actually changes day css classes."""
+
     def setUp(self):
         self.calendar = Calendar(2021)
         self.day = datetime.date(2021, 1, 1)  # a Friday
@@ -205,7 +204,9 @@ class TestCalendarWithStatus(unittest.TestCase):
         html = self.calendar.format_day(self.day)
         tr_tag = BeautifulSoup(html, "html.parser").find("tr")
         status_cell = tr_tag.find_all("td")[2]
-        self.assertEqual(status_cell.attrs["class"], [self.calendar.css_class_day_status])
+        self.assertEqual(
+            status_cell.attrs["class"], [self.calendar.css_class_day_status]
+        )
 
         self.calendar.status_list = [self.status]
         html = self.calendar.format_day(self.day)

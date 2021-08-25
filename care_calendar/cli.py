@@ -33,6 +33,7 @@ This is a comment
 import datetime
 from care_calendar.status import read_status_yaml
 
+
 def main():
     """Console script for care_calendar."""
 
@@ -47,7 +48,7 @@ def main():
         css_file=css_file,
         legend_html=cal.format_legend(),
         calendar_html=cal.format_year(),
-        this_year = care_calendar.current_year(),
+        this_year=care_calendar.current_year(),
     )
 
     with open("foo.html", "wt") as f:

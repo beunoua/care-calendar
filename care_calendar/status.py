@@ -20,7 +20,9 @@ class Status(collections.abc.Collection):
     name: str
     date_list: List[datetime.time] = field(default_factory=list)
     css_name: str = ""
-    ranges: List[List[List[datetime.time]]] = field(init=False, repr=False, default_factory=list)
+    ranges: List[List[List[datetime.time]]] = field(
+        init=False, repr=False, default_factory=list
+    )
 
     def __post_init__(self):
         self.date_list = self.date_list.copy()  # copies input list
@@ -34,7 +36,7 @@ class Status(collections.abc.Collection):
 
     def __len__(self) -> int:
         return len(self.date_list)
-    
+
     def add_range(self, date_range: List[datetime.time]):
         self.ranges.append(date_range.copy())
 

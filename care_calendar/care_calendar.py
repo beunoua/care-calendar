@@ -9,6 +9,7 @@ from typing import Iterator, List
 from . import current_year, week_id
 from .status import Status
 
+
 @dataclass
 class Calendar:
 
@@ -159,7 +160,7 @@ class Calendar:
     def get_custody(self, date: datetime.date) -> str:
         """Returns who's got the children custody."""
         cust = "B"
-        week_is_even =  week_id(date) % 2 == 0
+        week_is_even = week_id(date) % 2 == 0
         if date in self.holidays:
             return self._get_custody_holidays(date)
         if date + timedelta(1) in self.holidays:
@@ -169,7 +170,6 @@ class Calendar:
         else:
             cust = self._get_custody_odd_weeks(date)
         return cust
-
 
     def _get_custody_even_weeks(self, date: datetime.date) -> str:
         """Returns who's got the childen custody during even weeks."""
@@ -192,7 +192,7 @@ class Calendar:
 
     def _get_custody_holidays(self, date: datetime.date) -> str:
         """Returns who's got the children custody during holidays."""
-        year_is_even =  date.year % 2 == 0
+        year_is_even = date.year % 2 == 0
         holidays = [r for r in self.holidays.ranges if date in r][0]
         # date is in first half of holidays
         delta = timedelta(len(holidays) / 2)
@@ -203,9 +203,9 @@ class Calendar:
                 return "L"
             return "B"
         elif is_first_half:
-                return "B"  
+            return "B"
         return "L"
-    
+
     def format_legend(self):
         html = [f'<table class="{self.css_class_legend}">']
         for status in self.status_list:
