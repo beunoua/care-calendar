@@ -107,14 +107,14 @@ def main():
     html_comments = read_comments_markdown(args.comments)
     status_list = read_status_yaml(args.holidays)
 
-    cal = care_calendar.Calendar(2021, first_month=args.first_month)
+    cal = care_calendar.Calendar(args.year, first_month=args.first_month)
     cal.status_list = status_list
 
     html = html_template.render(
         html_legend=cal.format_legend(),
         html_calendar=cal.format_year(),
         html_comments=html_comments,
-        this_year=care_calendar.current_year(),
+        this_year=cal.year,
         pdf_name=output_pdf,
     )
 
