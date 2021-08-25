@@ -129,14 +129,14 @@ def is_last_day_of_holidays(day: date, holidays: List[date]) -> bool:
 def get_guardian_holidays(day: date, holiday_list: List[List[date]]) -> str:
     """Returns the guardian on an holiday day."""
     holidays = get_holidays(day, holiday_list)
-    half = half_holiday(holidays)
+    day_before_half = previous_day(half_holiday(holidays))
     if is_even_year(day):
         first, second = "L", "B"
     else:
         first, second = "B", "L"
-    if day == half:
+    if day == day_before_half:
         return guardian_transition(first, second)
-    if day < half:
+    if day < day_before_half:
         return first
     if is_last_day_of_holidays(day, holidays):
         guardian = get_guardian_regular_week(next_day(day))
