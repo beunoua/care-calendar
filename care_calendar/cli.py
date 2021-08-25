@@ -11,10 +11,9 @@ import care_calendar
 from care_calendar.status import read_status_yaml
 
 
-
 def read_comments_markdown(path: str) -> str:
     """Read the markdown comment file.
-    
+
     Returns the comments formatted in HTML.
     """
     with open(path, "rt") as f:
@@ -39,28 +38,14 @@ def parse_command_line() -> argparse.Namespace:
         return month
 
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("holidays", help="holidays YAML file")
+    parser.add_argument("comments", help="comments Markdown file")
     parser.add_argument(
-        "holidays",
-        help="holidays YAML file",
+        "--template", help="jinja2 template for HTML rendering", default="calendar.j2"
     )
+    parser.add_argument("--css", help="css styling file", default="calendar.css")
     parser.add_argument(
-        "comments",
-        help="comments Markdown file",
-    )
-    parser.add_argument(
-        "--template",
-        help="jinja2 template for HTML rendering",
-        default="calendar.j2"
-    )
-    parser.add_argument(
-        "--css",
-        help="css styling file",
-        default="calendar.css"
-    )
-    parser.add_argument(
-        "--output",
-        help="HTML output file name",
-        default="calendar.html"
+        "--output", help="HTML output file name", default="calendar.html"
     )
     parser.add_argument(
         "--first-month",
