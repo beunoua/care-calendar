@@ -17,16 +17,7 @@ HTML_TEMPLATE = """\
 <h1>Calendrier de Garde {{this_year}}</h1>
 
 <div id="legend">
-    <table class="legend">
-        <tr>
-            <td class="status férié"></td>
-            <td>Férié</td>
-        </tr>
-        <tr>
-            <td class="status vacancesscolaires"></td>
-            <td>Vacances scolaires</td>
-        </tr>
-    </table>
+{{legend_html}}
 </div>
 <div id="calendar">
 {{calendar_html}}
@@ -54,6 +45,7 @@ def main():
 
     html = template.render(
         css_file=css_file,
+        legend_html=cal.format_legend(),
         calendar_html=cal.format_year(),
         this_year = care_calendar.current_year(),
     )

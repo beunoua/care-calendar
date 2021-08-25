@@ -16,6 +16,7 @@ class Calendar:
     status_list: List[Status] = field(default_factory=list)
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
+    css_class_legend = "legend"
     css_class_month = "month"
     css_class_month_name = "month_name"
     css_class_week_number = "weekid"
@@ -204,3 +205,15 @@ class Calendar:
         elif is_first_half:
                 return "B"  
         return "L"
+    
+    def format_legend(self):
+        html = [f'<table class="{self.css_class_legend}">']
+        for status in self.status_list:
+            html += [
+                "<tr>",
+                f'<td class="{self.css_class_day_status} {status.css_name}"</td>',
+                f"<td>{status.name}</td>",
+                "</tr>",
+            ]
+        html += ["</table>"]
+        return "\n".join(html)
