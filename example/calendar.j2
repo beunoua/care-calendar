@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Calendrier de Garde {{this_year}}</title>
-<link rel="stylesheet" href="{{css_file}}">
+<style type="text/css">{% include 'calendar.css' %}</style>
 </head>
 <body>
 
@@ -16,5 +16,8 @@
 <div id="comments">
 {{html_comments}}
 </div>
+<footer>
+    <p><a href="{{pdf_name}}">Télécharger au format pdf</a></p>
+</footer>
 </body>
 </html>
