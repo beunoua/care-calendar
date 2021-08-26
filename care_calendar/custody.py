@@ -36,7 +36,9 @@ def get_all_sunday(month: int, year: int) -> List[date]:
     """Returns all Sundays for a given month and year."""
     cal = calendar.Calendar()
     return [
-        d for d in cal.itermonthdates(year, month) if d.month == month and day_is_sunday(d)
+        d
+        for d in cal.itermonthdates(year, month)
+        if d.month == month and day_is_sunday(d)
     ]
 
 
