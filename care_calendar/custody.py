@@ -8,6 +8,7 @@ from .utils import week_id
 
 
 EASTER_SUNDAY = {
+    2021: date(2021, 4, 4),
     2022: date(2022, 4, 17),
     2023: date(2023, 4, 9),
     2024: date(2024, 3, 31),

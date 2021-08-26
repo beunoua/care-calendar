@@ -67,7 +67,7 @@ class TestCalendarFormatMonth(unittest.TestCase):
 class TestCalendarFormatDay(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
-        self.day = datetime.date(1963, 7, 12)
+        self.day = datetime.date(2021, 7, 12)
         self.html = self.calendar.format_day(self.day)
         self.soup = BeautifulSoup(self.html, "html.parser")
 
@@ -103,7 +103,7 @@ class TestCalendarFormatDay(unittest.TestCase):
 class TestCalendarFormatDayNumber(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
-        self.day = datetime.date(1963, 7, 12)
+        self.day = datetime.date(2021, 7, 12)
         self.html = self.calendar.format_day_number(self.day)
         self.soup = BeautifulSoup(self.html, "html.parser")
 
@@ -117,7 +117,7 @@ class TestCalendarFormatDayNumber(unittest.TestCase):
 class TestCalendarFormatDayName(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
-        self.day = datetime.date(1963, 7, 12)
+        self.day = datetime.date(2021, 7, 12)
         self.html = self.calendar.format_day_name(self.day)
         self.soup = BeautifulSoup(self.html, "html.parser")
 
@@ -131,7 +131,7 @@ class TestCalendarFormatDayName(unittest.TestCase):
 class TestCalendarFormatDayStatus(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
-        self.day = datetime.date(1963, 7, 12)
+        self.day = datetime.date(2021, 7, 12)
         self.html = self.calendar.format_day_status(self.day)
         self.soup = BeautifulSoup(self.html, "html.parser")
 
@@ -150,7 +150,7 @@ class TestCalendarFormatDayStatus(unittest.TestCase):
 class TestCalendarFormatDayCare(unittest.TestCase):
     def setUp(self):
         self.calendar = Calendar(1021)
-        self.day = datetime.date(1963, 7, 12)
+        self.day = datetime.date(2021, 7, 12)
         html = self.calendar.format_day_custody(self.day)
         self.soup = BeautifulSoup(html, "html.parser")
 
