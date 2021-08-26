@@ -32,30 +32,41 @@ EASTER_SUNDAY = {
 PENTECOST = {year: day + timedelta(49) for year, day in EASTER_SUNDAY.items()}
 
 
-def is_mother_day(day: date) -> bool:
-    """Returns True if a day is mother's day.
-
-    Mother's day is the last Sunday of May except if it is the Pentecost.
-    """
-    if day.weekday() != 6:
-        return False
-    sundays = [
-        d for d in calendar.Calendar().itermonthdates(day.year, 5) if d.weekday() == 6
+def get_all_sunday(month: int, year: int) -> List[date]:
+    """Returns all Sundays for a given month and year."""
+    cal = calendar.Calendar()
+    return [
+        d for d in cal.itermonthdates(year, month) if d.month == month and day_is_sunday(d)
     ]
-    if sundays[-1] == PENTECOST[day.year]:
-        return sundays[-1] + timedelta(8)
+
+
+def get_mother_day(year: int) -> date:
+    """Returns the day of Mother's day.
+
+    Mother's day is the last Sunday of May unless it is the Pentecost.
+    """
+    sundays = get_all_sunday(5, year)
+    if sundays[-1] == PENTECOST[year]:
+        return sundays[-1] + timedelta(7)
     return sundays[-1]
+
+
+def get_father_day(year: int) -> date:
+    """Returns the day of Father's day.
+
+    Father's day is the 3rd Sunday of June.
+    """
+    return get_all_sunday(6, year)[2]
+
+
+def is_mother_day(day: date) -> bool:
+    """Returns True if a day is Mother's day."""
+    return day == get_mother_day(day.year)
 
 
 def is_father_day(day: date) -> bool:
     """Returns True if a day is father's day (3rd Sunday of June)."""
-    if day.month != 6 and day.weekday() != 6:
-        return False
-
-    sundays = [
-        d for d in calendar.Calendar().itermonthdates(day.year, 6) if d.weekday() == 6
-    ]
-    return day == sundays[2]
+    return day == get_father_day(day.year)
 
 
 def is_even_year(day: date) -> bool:
