@@ -215,6 +215,10 @@ def get_guardian_holidays(day: date, holiday_list: List[List[date]]) -> str:
         return guardian_transition(first, second)
     if day < day_before_half:
         return first
+    # Now we're in the second half.
+    # If is January, the guardian is the second guardian from last year.
+    if day.month == 1:
+        first, second = second, first
     if is_last_day_of_holidays(day, holidays):
         guardian = get_guardian_regular_week(next_day(day), holiday_list)
         if guardian != second:
