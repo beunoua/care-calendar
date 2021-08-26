@@ -11,6 +11,7 @@ from .custody import get_guardian
 from .status import Status
 from .utils import current_year, week_id
 
+
 @dataclass
 class Calendar:
 

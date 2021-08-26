@@ -40,14 +40,11 @@ def is_mother_day(day: date) -> bool:
     if day.weekday() != 6:
         return False
     sundays = [
-        d
-        for d in calendar.Calendar().itermonthdates(day.year, 5)
-        if d.weekday() == 6
+        d for d in calendar.Calendar().itermonthdates(day.year, 5) if d.weekday() == 6
     ]
     if sundays[-1] == PENTECOST[day.year]:
         return sundays[-1] + timedelta(8)
     return sundays[-1]
-
 
 
 def is_father_day(day: date) -> bool:
@@ -56,11 +53,10 @@ def is_father_day(day: date) -> bool:
         return False
 
     sundays = [
-        d
-        for d in calendar.Calendar().itermonthdates(day.year, 6)
-        if d.weekday() == 6
+        d for d in calendar.Calendar().itermonthdates(day.year, 6) if d.weekday() == 6
     ]
     return day == sundays[2]
+
 
 def is_even_year(day: date) -> bool:
     """Returns True is a year is even."""
@@ -70,6 +66,7 @@ def is_even_year(day: date) -> bool:
 def is_even_week(day: date) -> bool:
     """Returns True is a week is even."""
     return week_id(day) % 2 == 0
+
 
 def is_odd_week(day: date) -> bool:
     """Returns True is a week is odd."""

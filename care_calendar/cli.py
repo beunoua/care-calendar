@@ -42,7 +42,11 @@ def parse_command_line() -> argparse.Namespace:
     parser.add_argument("holidays", help="holidays YAML file")
     parser.add_argument("comments", help="comments Markdown file")
     parser.add_argument(
-        "-y", "--year", help="calendar year", type=int, default=care_calendar.current_year()
+        "-y",
+        "--year",
+        help="calendar year",
+        type=int,
+        default=care_calendar.current_year(),
     )
     parser.add_argument(
         "--template", help="jinja2 template for HTML rendering", default="calendar.j2"
@@ -72,7 +76,7 @@ def write_output_pdf(path: str, html: str, zoom: float = 1.0):
     import re
 
     # Remove footer that contains the download to pdf link.
-    regex = re.compile("(<footer>.*</footer>)", re.S|re.M)
+    regex = re.compile("(<footer>.*</footer>)", re.S | re.M)
     match = regex.search(html)
     if match:
         html = html.replace(match.group(1), "")
@@ -92,16 +96,13 @@ def write_output_pdf(path: str, html: str, zoom: float = 1.0):
     print(f"Wrote output pdf to {path}", file=sys.stderr)
 
 
-
 def main():
     """Console script for care_calendar."""
 
     args = parse_command_line()
 
     output_html = args.output
-    output_pdf = os.path.join(
-        os.path.dirname(output_html), f"calendar-{args.year}.pdf"
-    )
+    output_pdf = os.path.join(os.path.dirname(output_html), f"calendar-{args.year}.pdf")
 
     html_template = read_template_jinja(args.template)
     html_comments = read_comments_markdown(args.comments)
@@ -120,7 +121,6 @@ def main():
 
     write_output_html(output_html, html)
     write_output_pdf(output_pdf, html)
-
 
     return 0
 
