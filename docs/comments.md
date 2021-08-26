@@ -1,5 +1,8 @@
 
-# Détails
+# Détails.
+
+Ce calendrier reprend les règles de l'ordonnance d'orientation et de mesure provisoires
+du 27 juillet 2021.
 
 ## En période scolaire
 
@@ -19,7 +22,7 @@ paires à la sortie des classes au mercredi des semaines paires à 18h30
 
 1. À charge pour le parent qui débute sa période de résidence d'aller chercher
 les enfants à l'école ou au domicile de l'autre parent ou de les faire chercher
-par une période de confiance.
+par une personne de confiance.
 
 2. Tout changement de résidence des enfants doit faire l'objet d'une information
 préalable de l'autre parent.
