@@ -29,8 +29,7 @@ EASTER_SUNDAY = {
     2040: date(2040, 4, 1),
 }
 
-PENTECOST = {year: day + timedelta(39) for year, day in EASTER_SUNDAY.items()}
-
+PENTECOST = {year: day + timedelta(49) for year, day in EASTER_SUNDAY.items()}
 
 
 def is_mother_day(day: date) -> bool:
