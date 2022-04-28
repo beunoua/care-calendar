@@ -221,8 +221,8 @@ def get_guardian_holidays(day: date, holiday_list: List[List[date]]) -> str:
         first, second = second, first
     if is_last_day_of_holidays(day, holidays):
         guardian = get_guardian_regular_week(next_day(day), holiday_list)
-        if guardian != second:
-            return guardian_transition(second, guardian)
+        if guardian[0] != second:
+            return guardian_transition(second, first)
     return second
 
 
