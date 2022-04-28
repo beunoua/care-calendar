@@ -1,5 +1,5 @@
 
-# Détails.
+# Détails
 
 Ce calendrier reprend les règles de l'ordonnance d'orientation et de mesure provisoires
 du 27 juillet 2021.
