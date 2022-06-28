@@ -70,7 +70,7 @@ def date_range(start: datetime.date, end: datetime.date) -> List[datetime.date]:
     return [start + datetime.timedelta(days=i) for i in range((end - start).days + 1)]
 
 
-def read_status_yaml(path: str, year: int = None):
+def read_status_yaml(path: str, year: int = None) -> List[Status]:
     """Reads a yaml file containing categories and date ranges for each categories."""
     with open(path, "rt") as f:
         data = yaml.load(f, Loader=yaml.Loader)

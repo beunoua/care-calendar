@@ -169,7 +169,7 @@ class Calendar:
         for status in self.status_list:
             html += [
                 "<tr>",
-                f'<td class="{self.css_class_day_status} {status.css_name}"</td>',
+                f'<td class="{self.css_class_day_status} {status.css_name}"></td>',
                 f"<td>{status.name}</td>",
                 "</tr>",
             ]
