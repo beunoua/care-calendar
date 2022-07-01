@@ -5,6 +5,22 @@ from dataclasses import dataclass, field
 import datetime
 from typing import List, Iterator
 
+from bs4 import BeautifulSoup as BS
+
+import jinja2
+from jinja2.loaders import FileSystemLoader
+
+def read_template_jinja(path: str) -> jinja2.Template:
+    """Reads the jinja template for the calendar HTML rendering."""
+    with open(path, "rt") as f:
+        text = f.read()
+    return jinja2.Environment(loader=FileSystemLoader(searchpath=".")).from_string(text)
+
+
+def prettify_html(html: str) -> str:
+    soup = BS(html, features="html.parser")
+    return soup.prettify()
+
 
 EASTER_SUNDAY = {
     2021: date(2021, 4, 4),
@@ -73,6 +89,7 @@ class MasterCalendar:
     css_class_legend = "legend"
     css_class_month = "month"
     css_class_month_name = "month_name"
+    css_class_week = "week"
     css_class_week_number = "weekid"
     css_class_weekend = "weekend"
     css_class_weekday = "weekday"
@@ -102,5 +119,42 @@ class MasterCalendar:
         self._cal = Calendar(self.year)
 
     def render(self):
+        self.format_month(1)
         return ""
 
+    def format_month(self, month: int) -> str:
+        html_template = read_template_jinja("templates/month.j2")
+        html = html_template.render(
+            month_name = self.month_name[month],
+            month_id = month,
+            cal = self._cal,
+            format_week = self.format_week,
+        )
+        print(prettify_html(html))
+
+    def format_week(self, week: List[date]) -> str:
+        html_template = read_template_jinja("templates/week.j2")
+        html = html_template.render(
+            week_id = week[0].weekid(),
+            week = week,
+            master = self,
+        )
+        return html
+
+    def format_css_day(self, day: date) -> str:
+        """Returns css classes for a specific day."""
+        # Weekend/weekday specific classes.
+        css = []
+        if day.weekday() in (5, 6):
+            css.append(self.css_class_weekend)
+        else:
+            css.append(self.css_class_weekday)
+        css.append(self.day_abbr[day.weekday()].lower())
+        return " ".join(css)
+
+            # <tr class="weekday lu">
+            #     <td class="daynum">01</td>
+            #     <td class="dayname">Lu</td>
+            #     <td class="status">&nbsp;</td>
+            #     <td class="daycust">B</td>
+            # </tr>

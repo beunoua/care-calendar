@@ -1,0 +1,10 @@
+<table class="month">
+    <tbody>
+        <tr class="month">
+            <th colspan="3" class="month">{{month_name}}</th>
+        </tr>
+        {% for week in cal.iter_month_weeks(month_id) %}
+        {{ format_week(week) }}
+        {% endfor %}
+    </tbody>
+</table>

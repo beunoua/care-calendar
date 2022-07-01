@@ -1,0 +1,11 @@
+<tr class="week">
+    <td>{{week_id}}</td>
+    <td>
+        <table class="weekdays">
+            {% for day in week %}
+            <tr class="{{master.format_css_day(day)}}">
+            </tr>
+            {% endfor %}
+        </table>
+    </td>
+</tr>

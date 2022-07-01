@@ -20,7 +20,9 @@ def main():
     """Main function"""
 
     cal = kaloot.calendar.MasterCalendar()
-    # cal.render()
+    cal.render()
+
+    exit()
 
     html_template_path = "calendar.j2"
     html_template = read_template_jinja(html_template_path)
