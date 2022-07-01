@@ -1,0 +1,102 @@
+
+table, th, td {
+    border: 1px solid black;
+}
+
+h1.title {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+table.month {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    padding: 0px 10px 0px 10px;
+    min-width: 120px;
+    border-bottom: 2px solid;
+}
+
+tr.year {
+    vertical-align: baseline;
+}
+
+td.month {
+    padding-left: 20px;
+}
+
+td.weekid {
+    text-align: center;
+    width: 20px;
+    border-right: 2px solid;
+}
+
+td.status, td.daynum, td.dayname, td.status, td.daycust {
+    width: 20px;
+    text-align: center;
+}
+
+td.daycust {
+    width: 35px;
+    text-align: center;
+}
+
+tr.weekend {
+    background-color: #A9A9A9;
+}
+
+
+td.férié {
+    background-color: #FF0000;
+}
+
+/* Color holidays but not weekends */
+td.vacancesscolaires {
+    background-color: #6495ED;
+}
+
+
+tr.di {
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+
+th.month_name {
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+tr.weekend,tr.weekday {
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+
+/* -----------------------------------------------*/
+/* Legend */
+
+div#legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+table.legend {
+    padding-left: 30px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+  }
+
+/* -----------------------------------------------*/
+/* Comments */
+div#comments {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:smaller;
+    padding-top: 30px
+}
+
+
+
+/* -----------------------------------------------*/
