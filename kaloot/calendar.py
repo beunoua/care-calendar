@@ -11,11 +11,6 @@ from bs4 import BeautifulSoup as BS
 import jinja2
 
 
-def prettify_html(html: str) -> str:
-    soup = BS(html, features="html.parser")
-    return soup.prettify()
-
-
 EASTER_SUNDAY = {
     2021: date(2021, 4, 4),
     2022: date(2022, 4, 17),
@@ -72,6 +67,25 @@ class Calendar:
     def month_sundays(self, month: int) -> list[date]:
         """Returns all Sundays for a given month."""
         return [d for d in self.iter_month_dates(month) if d.is_sunday()]
+
+    def mothers_day(self) -> date:
+        """Returns the day of Mother's day.
+
+        Mother's day is the last Sunday of May unless it is the Pentecost.
+        """
+        sundays = self.month_sundays(5)
+        if sundays[-1] == PENTECOST[self.year]:
+            return sundays[-1] + datetime.timedelta(7)
+        return sundays[-1]
+
+    def fathers_day(self) -> date:
+        """Returns the day of Father's day.
+
+        Father's day is the 3rd Sunday of June.
+        """
+        return self.month_sundays(6)[2]
+
+
 
 
 @dataclass
