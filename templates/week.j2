@@ -1,11 +1,14 @@
 <tr class="week">
-    <td>{{week_id}}</td>
+    <td class="{{master.config.css_class["week_number"]}}">{{week_id}}</td>
     <td>
-        <table class="weekdays">
-            {% for day in week %}
+        <table class="features">
+        {% for day in week %}
             <tr class="{{master.format_css_day(day)}}">
-            </tr>
+            {% for feat in master.features %}
+                <td {{feat.format_attrs(day)}}>{{feat.format_text(day)}}</td>
             {% endfor %}
+            </tr>
+        {% endfor %}
         </table>
     </td>
 </tr>

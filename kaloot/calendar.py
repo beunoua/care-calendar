@@ -1,20 +1,14 @@
+from kaloot.feature import Feature, DayAbbrFeature, DayNumberFeature
 from .date import date
 
 import calendar
 from dataclasses import dataclass, field
 import datetime
-from typing import List, Iterator
+from typing import Iterator
 
 from bs4 import BeautifulSoup as BS
 
 import jinja2
-from jinja2.loaders import FileSystemLoader
-
-def read_template_jinja(path: str) -> jinja2.Template:
-    """Reads the jinja template for the calendar HTML rendering."""
-    with open(path, "rt") as f:
-        text = f.read()
-    return jinja2.Environment(loader=FileSystemLoader(searchpath=".")).from_string(text)
 
 
 def prettify_html(html: str) -> str:
@@ -65,7 +59,7 @@ class Calendar:
             if date.month == month:
                 yield date
 
-    def iter_month_weeks(self, month: int) -> Iterator[List[date]]:
+    def iter_month_weeks(self, month: int) -> Iterator[list[date]]:
         """Iterates over a month weeks."""
         for week in self._cal.monthdatescalendar(self.year, month):
             yield [date.from_date(d) for d in week if d.month == month]
@@ -75,66 +69,80 @@ class Calendar:
             if d.month == month:
                 yield date(d.year, d.month, d.day)
 
-    def month_sundays(self, month: int) -> List[date]:
+    def month_sundays(self, month: int) -> list[date]:
         """Returns all Sundays for a given month."""
         return [d for d in self.iter_month_dates(month) if d.is_sunday()]
 
 
 @dataclass
+class MasterConfiguration:
+
+    css_class: dict[str: str] = field(default_factory=lambda : {
+        "legend": "legend",
+        "month": "month",
+        "month_name": "month_name",
+        "week": "week",
+        "week_number": "weekid",
+        "weekend": "weekend",
+        "weekday": "weekday",
+        "day_number": "daynum",
+        "day_name": "dayname",
+        "day_status": "status",
+        "day_custody": "daycust",
+    })
+
+    day_abbr: list[str] = field(default_factory=lambda : ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"])
+
+    month_name: dict[int, str] = field(default_factory=lambda : {
+        1: "Janvier",
+        2: "Février",
+        3: "Mars",
+        4: "Avril",
+        5: "Mai",
+        6: "Juin",
+        7: "Juillet",
+        8: "Août",
+        9: "Septembre",
+        10: "Octobre",
+        11: "Novembre",
+        12: "Décembre",
+    })
+
+@dataclass
 class MasterCalendar:
 
+    env: jinja2.Environment
     year: int = current_year()
+    config: MasterConfiguration = MasterConfiguration()
     _cal: Calendar = field(init=False, repr=False, default=None)
+    features: list[Feature] = field(default_factory=list)
 
-    css_class_legend = "legend"
-    css_class_month = "month"
-    css_class_month_name = "month_name"
-    css_class_week = "week"
-    css_class_week_number = "weekid"
-    css_class_weekend = "weekend"
-    css_class_weekday = "weekday"
-    css_class_day_number = "daynum"
-    css_class_day_name = "dayname"
-    css_class_day_status = "status"
-    css_class_day_custody = "daycust"
 
-    day_abbr = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"]
-    month_name = [
-        "",
-        "Janvier",
-        "Février",
-        "Mars",
-        "Avril",
-        "Mai",
-        "Juin",
-        "Juillet",
-        "Août",
-        "Septembre",
-        "Octobre",
-        "Novembre",
-        "Décembre",
-    ]
 
     def __post_init__(self):
         self._cal = Calendar(self.year)
+        self.features = [
+            DayNumberFeature(css_class=[self.config.css_class["day_number"]]),
+            DayAbbrFeature(css_class=[self.config.css_class["day_name"]], names=self.config.day_abbr)
+        ]
 
     def render(self):
-        self.format_month(1)
-        return ""
+        return self.format_month(1)
 
     def format_month(self, month: int) -> str:
-        html_template = read_template_jinja("templates/month.j2")
-        html = html_template.render(
-            month_name = self.month_name[month],
+        template = self.env.get_template("month.j2")
+        html = template.render(
+            month_name = self.config.month_name[month],
             month_id = month,
             cal = self._cal,
             format_week = self.format_week,
         )
-        print(prettify_html(html))
+        soup = BS(html, features="html.parser")
+        return soup.prettify(formatter="html")
 
-    def format_week(self, week: List[date]) -> str:
-        html_template = read_template_jinja("templates/week.j2")
-        html = html_template.render(
+    def format_week(self, week: list[date]) -> str:
+        template = self.env.get_template("week.j2")
+        html = template.render(
             week_id = week[0].weekid(),
             week = week,
             master = self,
@@ -146,10 +154,10 @@ class MasterCalendar:
         # Weekend/weekday specific classes.
         css = []
         if day.weekday() in (5, 6):
-            css.append(self.css_class_weekend)
+            css.append(self.config.css_class["weekend"])
         else:
-            css.append(self.css_class_weekday)
-        css.append(self.day_abbr[day.weekday()].lower())
+            css.append(self.config.css_class["weekday"])
+        css.append(self.config.day_abbr[day.weekday()].lower())
         return " ".join(css)
 
             # <tr class="weekday lu">

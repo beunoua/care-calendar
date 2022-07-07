@@ -7,27 +7,19 @@ import kaloot
 import sys
 
 import jinja2
-from jinja2.loaders import FileSystemLoader
-
-def read_template_jinja(path: str) -> jinja2.Template:
-    """Reads the jinja template for the calendar HTML rendering."""
-    with open(path, "rt") as f:
-        text = f.read()
-    return jinja2.Environment(loader=FileSystemLoader(searchpath=".")).from_string(text)
 
 
 def main():
     """Main function"""
 
-    cal = kaloot.calendar.MasterCalendar()
-    cal.render()
+    env = jinja2.Environment(
+        loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
+    )
 
-    exit()
+    cal = kaloot.calendar.MasterCalendar(env)
 
-    html_template_path = "calendar.j2"
-    html_template = read_template_jinja(html_template_path)
-
-    html = html_template.render(
+    template = env.get_template("master.j2")
+    html = template.render(
     #     html_legend=cal.format_legend(),
         html_calendar=cal.render(),
     #     html_comments=html_comments,
