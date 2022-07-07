@@ -13,10 +13,10 @@ def main():
     )
 
 
-    holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")[0]
+    holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")
 
     cal = kaloot.calendar.MasterCalendar(env)
-    cal.features.append(kaloot.feature.EventCollectionFeature(holidays))
+    cal.features.append(kaloot.feature.EventCollectionFeatureMerge(holidays))
 
     template = env.get_template("master.j2")
     html = template.render(

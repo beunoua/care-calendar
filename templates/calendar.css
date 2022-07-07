@@ -34,6 +34,10 @@ td.weekid {
     border-right: 2px solid;
 }
 
+td.coloredcell {
+    min-width: 20px;
+}
+
 td.holidays, td.daynum, td.dayname, td.daycust {
     width: 20px;
     text-align: center;

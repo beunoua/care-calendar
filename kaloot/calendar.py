@@ -146,7 +146,7 @@ class MasterCalendar:
             format_week=self.format_week,
         )
         soup = BS(html, features="html.parser")
-        return soup.prettify(formatter="html")
+        return soup.prettify()
 
     def format_week(self, week: list[date]) -> str:
         template = self.env.get_template("week.j2")
@@ -167,10 +167,3 @@ class MasterCalendar:
             css.append(self.config.css_class["weekday"])
         css.append(self.config.day_abbr[day.weekday()].lower())
         return " ".join(css)
-
-        # <tr class="weekday lu">
-        #     <td class="daynum">01</td>
-        #     <td class="dayname">Lu</td>
-        #     <td class="status">&nbsp;</td>
-        #     <td class="daycust">B</td>
-        # </tr>
