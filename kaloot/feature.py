@@ -1,6 +1,8 @@
 from calendar import day_abbr
 from dataclasses import dataclass, field
+
 from .date import date
+from .event import EventCollection
 
 
 @dataclass(kw_only=True)
@@ -43,9 +45,12 @@ class ColorFeature(Feature):
         return "&nbsp"
 
 
-class HolidayFeature(ColorFeature):
-    def dynamic_css_class(self, day: date) -> list[str]:
-        return self.get_css_holiday(day)
+@dataclass
+class EventCollectionFeature(ColorFeature):
+    collection: EventCollection
 
-    def get_css_holiday(self, day: date) -> list[str]:
-        return ["status", "vacancesscolaires"]
+    def dynamic_css_class(self, day: date) -> list[str]:
+        css = self.css_class.copy()
+        if day in self.collection:
+            css.append(self.collection.css_name)
+        return css

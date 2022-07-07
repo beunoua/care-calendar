@@ -1,4 +1,4 @@
-from kaloot.feature import Feature, DayAbbrFeature, DayNumberFeature, HolidayFeature
+from kaloot.feature import Feature, DayAbbrFeature, DayNumberFeature
 from .date import date
 
 import calendar
@@ -88,7 +88,7 @@ class MasterConfiguration:
             "weekday": "weekday",
             "day_number": "daynum",
             "day_name": "dayname",
-            "day_status": "status",
+            "day_holiday": "holidays",
             "day_custody": "daycust",
         }
     )
@@ -132,7 +132,6 @@ class MasterCalendar:
                 css_class=[self.config.css_class["day_name"]],
                 names=self.config.day_abbr,
             ),
-            HolidayFeature(),
         ]
 
     def render(self):

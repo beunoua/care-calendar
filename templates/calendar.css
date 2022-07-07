@@ -16,7 +16,7 @@ table.month {
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
     padding: 0px 10px 0px 10px;
-    min-width: 120px;
+    /* min-width: 120px; */
     border-bottom: 2px solid;
 }
 
@@ -24,9 +24,9 @@ tr.year {
     vertical-align: baseline;
 }
 
-td.month {
+/* td.month {
     padding-left: 20px;
-}
+} */
 
 td.weekid {
     text-align: center;
@@ -34,7 +34,7 @@ td.weekid {
     border-right: 2px solid;
 }
 
-td.status, td.daynum, td.dayname, td.status, td.daycust {
+td.holidays, td.daynum, td.dayname, td.daycust {
     width: 20px;
     text-align: center;
 }

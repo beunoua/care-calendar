@@ -15,22 +15,26 @@ class EventCollection(collections.abc.Collection):
     """Stores the list of dates."""
 
     name: str
-    date_list: list[date.date] = field(default_factory=list)
     css_name: str = ""
+    date_list: list[date.date] = field(default_factory=list)
     ranges: list[date.date_range] = field(init=False, default_factory=list)
 
     def __post_init__(self):
         self.date_list = self.date_list.copy()  # copies input list
         self.css_name = self.name.lower().replace(" ", "")
 
+    @property
+    def all_dates(self) -> list[date.date]:
+        return self.date_list + [date for r in self.ranges for date in r.to_list()]
+
     def __contains__(self, date: date.date) -> bool:
-        return date in self.date_list
+        return date in self.all_dates
 
     def __iter__(self) -> Iterator[date.date]:
-        return iter(self.date_list)
+        return iter(self.all_dates)
 
     def __len__(self) -> int:
-        return len(self.date_list)
+        return len(self.all_dates)
 
     def add_range(self, date_range: date.date_range):
         self.ranges.append(date_range)
