@@ -1,5 +1,3 @@
-
-
 from calendar import day_abbr
 from dataclasses import dataclass, field
 from .date import date
@@ -27,7 +25,6 @@ class TextFeature(Feature):
     pass
 
 
-
 class DayNumberFeature(TextFeature):
     def format_text(self, day: date) -> str:
         return f"{day.day:02d}"
@@ -41,15 +38,12 @@ class DayAbbrFeature(TextFeature):
         return f"{self.names[day.weekday()]}"
 
 
-
 class ColorFeature(Feature):
     def format_text(self, day: date) -> str:
         return "&nbsp"
 
 
-
 class HolidayFeature(ColorFeature):
-
     def dynamic_css_class(self, day: date) -> list[str]:
         return self.get_css_holiday(day)
 

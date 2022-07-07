@@ -3,12 +3,12 @@ from dataclasses import dataclass
 
 import datetime
 
+
 def current_year() -> int:
     return datetime.datetime.now().year
 
 
 class date(datetime.date):
-
     @classmethod
     def from_string(cls, date_string: str, year: int = None) -> date:
         """Returns a new `date` from a string."""
@@ -79,5 +79,7 @@ class date_range:
 
     def to_list(self) -> list[date]:
         """Returns a list of all days in the range."""
-        return [self.start + datetime.timedelta(days=i) for i in range((self.end - self.start).days + 1)]
-
+        return [
+            self.start + datetime.timedelta(days=i)
+            for i in range((self.end - self.start).days + 1)
+        ]

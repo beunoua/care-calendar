@@ -77,36 +77,43 @@ class Calendar:
 @dataclass
 class MasterConfiguration:
 
-    css_class: dict[str: str] = field(default_factory=lambda : {
-        "legend": "legend",
-        "month": "month",
-        "month_name": "month_name",
-        "week": "week",
-        "week_number": "weekid",
-        "weekend": "weekend",
-        "weekday": "weekday",
-        "day_number": "daynum",
-        "day_name": "dayname",
-        "day_status": "status",
-        "day_custody": "daycust",
-    })
+    css_class: dict[str:str] = field(
+        default_factory=lambda: {
+            "legend": "legend",
+            "month": "month",
+            "month_name": "month_name",
+            "week": "week",
+            "week_number": "weekid",
+            "weekend": "weekend",
+            "weekday": "weekday",
+            "day_number": "daynum",
+            "day_name": "dayname",
+            "day_status": "status",
+            "day_custody": "daycust",
+        }
+    )
 
-    day_abbr: list[str] = field(default_factory=lambda : ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"])
+    day_abbr: list[str] = field(
+        default_factory=lambda: ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"]
+    )
 
-    month_name: dict[int, str] = field(default_factory=lambda : {
-        1: "Janvier",
-        2: "Février",
-        3: "Mars",
-        4: "Avril",
-        5: "Mai",
-        6: "Juin",
-        7: "Juillet",
-        8: "Août",
-        9: "Septembre",
-        10: "Octobre",
-        11: "Novembre",
-        12: "Décembre",
-    })
+    month_name: dict[int, str] = field(
+        default_factory=lambda: {
+            1: "Janvier",
+            2: "Février",
+            3: "Mars",
+            4: "Avril",
+            5: "Mai",
+            6: "Juin",
+            7: "Juillet",
+            8: "Août",
+            9: "Septembre",
+            10: "Octobre",
+            11: "Novembre",
+            12: "Décembre",
+        }
+    )
+
 
 @dataclass
 class MasterCalendar:
@@ -117,13 +124,14 @@ class MasterCalendar:
     _cal: Calendar = field(init=False, repr=False, default=None)
     features: list[Feature] = field(default_factory=list)
 
-
-
     def __post_init__(self):
         self._cal = Calendar(self.year)
         self.features = [
             DayNumberFeature(css_class=[self.config.css_class["day_number"]]),
-            DayAbbrFeature(css_class=[self.config.css_class["day_name"]], names=self.config.day_abbr),
+            DayAbbrFeature(
+                css_class=[self.config.css_class["day_name"]],
+                names=self.config.day_abbr,
+            ),
             HolidayFeature(),
         ]
 
@@ -133,10 +141,10 @@ class MasterCalendar:
     def format_month(self, month: int) -> str:
         template = self.env.get_template("month.j2")
         html = template.render(
-            month_name = self.config.month_name[month],
-            month_id = month,
-            cal = self._cal,
-            format_week = self.format_week,
+            month_name=self.config.month_name[month],
+            month_id=month,
+            cal=self._cal,
+            format_week=self.format_week,
         )
         soup = BS(html, features="html.parser")
         return soup.prettify(formatter="html")
@@ -144,9 +152,9 @@ class MasterCalendar:
     def format_week(self, week: list[date]) -> str:
         template = self.env.get_template("week.j2")
         html = template.render(
-            week_id = week[0].weekid(),
-            week = week,
-            master = self,
+            week_id=week[0].weekid(),
+            week=week,
+            master=self,
         )
         return html
 
@@ -161,9 +169,9 @@ class MasterCalendar:
         css.append(self.config.day_abbr[day.weekday()].lower())
         return " ".join(css)
 
-            # <tr class="weekday lu">
-            #     <td class="daynum">01</td>
-            #     <td class="dayname">Lu</td>
-            #     <td class="status">&nbsp;</td>
-            #     <td class="daycust">B</td>
-            # </tr>
+        # <tr class="weekday lu">
+        #     <td class="daynum">01</td>
+        #     <td class="dayname">Lu</td>
+        #     <td class="status">&nbsp;</td>
+        #     <td class="daycust">B</td>
+        # </tr>

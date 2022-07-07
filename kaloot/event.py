@@ -58,4 +58,3 @@ def read_event_yaml(path: str, year: int = None) -> list[EventCollection]:
         events.append(collection)
 
     return events
-
