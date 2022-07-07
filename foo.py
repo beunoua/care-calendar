@@ -1,7 +1,4 @@
 
-from pip import main
-
-
 import kaloot
 
 import sys
@@ -11,6 +8,13 @@ import jinja2
 
 def main():
     """Main function"""
+
+
+    events = kaloot.event.read_event_yaml("holidays-2022.yaml")
+    # print(events)
+
+
+    exit(0)
 
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
@@ -28,22 +32,6 @@ def main():
     )
 
     print(html)
-
-
-
-
-
-    # sundays = kaloot.calendar.Calendar().month_sundays(1)
-    # print(cal.format_week(sundays))
-
-
-
-    # import timeit
-    # N = 100000
-    # setup = "import kaloot; master = kaloot.calendar.Calendar()"
-    # print(timeit.timeit("for _ in master.iter_month_dates(1): pass", setup=setup, number=N))
-    # print(timeit.timeit("for _ in master.iter_month_dates2(1): pass", setup=setup, number=N))
-
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from kaloot.feature import Feature, DayAbbrFeature, DayNumberFeature
+from kaloot.feature import Feature, DayAbbrFeature, DayNumberFeature, HolidayFeature
 from .date import date
 
 import calendar
@@ -123,7 +123,8 @@ class MasterCalendar:
         self._cal = Calendar(self.year)
         self.features = [
             DayNumberFeature(css_class=[self.config.css_class["day_number"]]),
-            DayAbbrFeature(css_class=[self.config.css_class["day_name"]], names=self.config.day_abbr)
+            DayAbbrFeature(css_class=[self.config.css_class["day_name"]], names=self.config.day_abbr),
+            HolidayFeature(),
         ]
 
     def render(self):
