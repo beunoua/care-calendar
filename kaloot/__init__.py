@@ -1,3 +1,4 @@
+from . import calendar
 from . import event
 from . import feature
 from . import html

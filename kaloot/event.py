@@ -43,6 +43,92 @@ class EventCollection(collections.abc.Collection):
         self.date_list.append(date)
 
 
+
+@dataclass
+class PublicHolidays:
+
+    year: int = date.current_year()
+
+    def jour_de_l_an(self) -> date:
+        return date(self.year, 1, 1)
+
+    def fete_du_travail(self) -> date:
+        return date(self.year, 5, 1)
+
+    def armistice_ww2(self) -> date:
+        return date(self.year, 5, 8)
+
+    def fete_nationale(self) -> date:
+        return date(self.year, 7, 14)
+
+    def assomption(self) -> date:
+        return date(self.year, 8, 15)
+
+    def toussaint(self) -> date:
+        return date(self.year, 11, 1)
+
+    def armistice_ww1(self) -> date:
+        return date(self.year, 11, 11)
+
+    def noel(self) -> date:
+        return date(self.year, 12, 25)
+
+    def paques(self) -> date:
+        return EASTER_SUNDAY[self.year]
+
+    def lundi_de_paques(self) -> date:
+        return self.paques() + datetime.timedelta(1)
+
+    def ascension(self) -> date:
+        return self.paques() + datetime.timedelta(39)
+
+    def pentecote(self) -> date:
+        return self.paques() + datetime.timedelta(49)
+
+    def lundi_de_pentecote(self) -> date:
+        return self.pentecote() + datetime.timedelta(1)
+
+    def _all(self):
+        return [
+            self.jour_de_l_an(),
+            self.fete_du_travail(),
+            self.armistice_ww2(),
+            self.fete_nationale(),
+            self.assomption(),
+            self.toussaint(),
+            self.armistice_ww1(),
+            self.noel(),
+            self.paques(),
+            self.lundi_de_paques(),
+            self.ascension(),
+            self.pentecote(),
+            self.lundi_de_pentecote(),
+        ]
+
+    def __iter__(self) -> Iterator[date]:
+        all_dates = self._all()
+        for d in all_dates:
+            yield d
+
+    def asdict(self):
+        return {
+            "jour de l'an": self.jour_de_l_an(),
+            "fete du travail": self.fete_du_travail(),
+            "armistice 2nde guerre": self.armistice_ww2(),
+            "fête nationale": self.fete_nationale(),
+            "assomption": self.assomption(),
+            "toussaint": self.toussaint(),
+            "armistice 1ère guerre": self.armistice_ww1(),
+            "noël": self.noel(),
+            "pâques": self.paques(),
+            "lundi de pâques": self.lundi_de_paques(),
+            "ascension": self.ascension(),
+            "pentecôte": self.pentecote(),
+            "lundi de pentecôte": self.lundi_de_pentecote(),
+        }
+
+
+
 def read_event_yaml(path: str, year: int = None) -> list[EventCollection]:
     """Reads a yaml file containing events and dates (or date ranges) for each event."""
     with open(path, "rt") as f:

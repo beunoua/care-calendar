@@ -42,7 +42,6 @@ class DayAbbrFeature(TextFeature):
 
 @dataclass
 class ColorFeature(Feature):
-
     def __post_init__(self):
         self.css_class = ["coloredcell"]
 

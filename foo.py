@@ -15,11 +15,9 @@ def main():
 
     holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")
 
-    # for d in holidays[1]:
-    #     print(d)
+    print(holidays)
 
-
-    # exit()
+    exit()
 
 
     cal = kaloot.MasterCalendar(env)

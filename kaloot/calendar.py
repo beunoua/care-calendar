@@ -29,8 +29,6 @@ EASTER_SUNDAY = {
     2040: date(2040, 4, 1),
 }
 
-PENTECOST = {year: day + datetime.timedelta(49) for year, day in EASTER_SUNDAY.items()}
-
 
 @dataclass
 class Calendar:
@@ -75,6 +73,5 @@ class Calendar:
         Father's day is the 3rd Sunday of June.
         """
         return self.month_sundays(6)[2]
-
 
 

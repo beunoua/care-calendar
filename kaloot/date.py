@@ -81,10 +81,12 @@ class date(datetime.date):
 
     def is_mothers_day(self) -> bool:
         from .calendar import Calendar
+
         return self == Calendar(self.year).mothers_day()
 
     def is_fathers_day(self) -> bool:
         from .calendar import Calendar
+
         return self == Calendar(self.year).fathers_day()
 
     def is_even_year(self) -> bool:
@@ -98,7 +100,6 @@ class date(datetime.date):
 
     def is_odd_week(self) -> bool:
         return not self.is_even_week()
-
 
 
 @dataclass
