@@ -9,16 +9,14 @@ import jinja2
 def main():
     """Main function"""
 
+
+
+
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
     )
 
     holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")
-
-    print(holidays)
-
-    exit()
-
 
     cal = kaloot.MasterCalendar(env)
     cal.features.append(kaloot.feature.EventCollectionFeatureMerge(holidays))

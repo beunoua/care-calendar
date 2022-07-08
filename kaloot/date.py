@@ -1,4 +1,5 @@
 from __future__ import annotations
+import collections
 
 from dataclasses import dataclass
 import datetime
@@ -30,6 +31,9 @@ class date(datetime.date):
     @classmethod
     def from_date(cls, d: datetime.date) -> date:
         return cls.fromordinal(d.toordinal())
+
+    def astuple(self) -> tuple(int):
+        return (self.year, self.month, self.day)
 
     def weekid(self) -> int:
         return self.isocalendar()[1]
@@ -101,6 +105,7 @@ class date(datetime.date):
     def is_odd_week(self) -> bool:
         return not self.is_even_week()
 
+named_date = collections.namedtuple("named_date", ["name", "date"])
 
 @dataclass
 class date_range:
@@ -127,3 +132,4 @@ class date_range:
     def __iter__(self):
         for delta in range((self.end - self.start).days + 1):
             yield self.start + datetime.timedelta(days=delta)
+

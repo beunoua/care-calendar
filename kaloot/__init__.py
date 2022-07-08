@@ -1,4 +1,5 @@
 from . import calendar
+from . import date
 from . import event
 from . import feature
 from . import html
