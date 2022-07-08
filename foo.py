@@ -1,4 +1,6 @@
 
+
+from datetime import timedelta
 import kaloot
 
 import sys
@@ -8,10 +10,6 @@ import jinja2
 
 def main():
     """Main function"""
-
-
-
-
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
     )

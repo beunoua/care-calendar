@@ -3,6 +3,7 @@ import collections
 
 from dataclasses import dataclass
 import datetime
+from typing import Union
 
 
 def current_year() -> int:
@@ -105,7 +106,6 @@ class date(datetime.date):
     def is_odd_week(self) -> bool:
         return not self.is_even_week()
 
-named_date = collections.namedtuple("named_date", ["name", "date"])
 
 @dataclass
 class date_range:
@@ -122,8 +122,8 @@ class date_range:
         start, end = [date.from_string(tok, year) for tok in tokens]
         return cls(start, end)
 
-    def to_list(self) -> list[date]:
-        """Returns a list of all days in the range."""
+    def aslist(self) -> list[date]:
+        """Returns the list of all dates in the range."""
         return list(self)
 
     def __contains__(self, day: date) -> bool:
@@ -133,3 +133,13 @@ class date_range:
         for delta in range((self.end - self.start).days + 1):
             yield self.start + datetime.timedelta(days=delta)
 
+
+def date_description(description: str, year: Union[int, date], month: int=None, day: int=None):
+    if isinstance(year, int):
+        assert month is not None
+        assert day is not None
+        obj = date(year, month, day)
+    else:
+        obj = year
+    obj.description = description
+    return obj

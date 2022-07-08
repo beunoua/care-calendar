@@ -1,4 +1,5 @@
 from . import calendar
+from . import collections
 from . import date
 from . import event
 from . import feature
