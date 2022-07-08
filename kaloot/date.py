@@ -64,7 +64,7 @@ class date(datetime.date):
     def previous_day(self):
         return self - datetime.timedelta(1)
 
-    def is_holiday(self, holiday_list: list[list[date]]) -> bool:
+    def is_holiday(self, holiday_list: list[date_range]) -> bool:
         for holiday in holiday_list:
             if self in holiday:
                 return True
