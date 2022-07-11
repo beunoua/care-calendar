@@ -1,8 +1,10 @@
 from calendar import day_abbr
 from dataclasses import dataclass, field
 
+
 from .date import date
 from .collections import date_collection
+from .event import Event
 
 
 @dataclass(kw_only=True)
@@ -51,7 +53,7 @@ class ColorFeature(Feature):
 
 @dataclass
 class EventCollectionFeature(ColorFeature):
-    collection: date_collection
+    event: Event
 
     def dynamic_css_class(self, day: date) -> list[str]:
         css = self.css_class.copy()
@@ -64,11 +66,15 @@ class EventCollectionFeature(ColorFeature):
 
 @dataclass
 class EventCollectionFeatureMerge(ColorFeature):
-    collection_list: list[date_collection]
+    event_list: list[Event]
 
-    # def dynamic_css_class(self, day: date) -> list[str]:
-    #     css = self.css_class.copy()
-    #     for col in self.collection_list:
-    #         if day in col:
-    #             css.append(col.css_name)
-    #     return css
+    def dynamic_css_class(self, day: date) -> list[str]:
+        css = self.css_class.copy()
+        for event in self.event_list:
+            if day in event.dates:
+                css.append(event.css_class)
+        return css
+
+
+def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
+    return EventCollectionFeatureMerge(event_list)

@@ -1,5 +1,4 @@
-from .date import current_year, date
-from .event import pentecote
+from .date import current_year, date, pentecote
 
 import calendar
 from dataclasses import dataclass, field

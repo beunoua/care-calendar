@@ -12,7 +12,7 @@ import yaml
 @dataclass
 class Event:
     name: str
-    css_name: str
+    css_class: str
     dates: collections.date_collection
 
     @classmethod
@@ -46,12 +46,12 @@ def read_event_yaml(path: str, year: int = None) -> list[collections.date_collec
     with open(path, "rt") as f:
         data = yaml.load(f, Loader=yaml.Loader)
 
-    events = {}
+    events = []
     for data in data.items():
         e = Event.from_yaml(data)
-        events[e.name] = e
+        events.append(e)
     return events
 
 
-def pentecote(year: int = date.current_year()):
-    return collections.EASTER_SUNDAY[year] + timedelta.delta(49)
+def public_holidays(name: str, css_class: str) -> Event:
+    return Event(name, css_class, collections.public_holidays())

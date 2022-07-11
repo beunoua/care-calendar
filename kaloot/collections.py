@@ -5,29 +5,6 @@ from dataclasses import dataclass, field
 import datetime
 from typing import Iterator
 
-EASTER_SUNDAY = {
-    2021: date.date(2021, 4, 4),
-    2022: date.date(2022, 4, 17),
-    2023: date.date(2023, 4, 9),
-    2024: date.date(2024, 3, 31),
-    2025: date.date(2025, 4, 20),
-    2026: date.date(2026, 4, 5),
-    2027: date.date(2027, 3, 28),
-    2028: date.date(2028, 4, 16),
-    2029: date.date(2029, 4, 1),
-    2030: date.date(2030, 4, 21),
-    2031: date.date(2031, 4, 13),
-    2032: date.date(2032, 3, 28),
-    2033: date.date(2033, 4, 17),
-    2034: date.date(2034, 4, 9),
-    2035: date.date(2035, 3, 25),
-    2036: date.date(2036, 4, 13),
-    2037: date.date(2037, 4, 5),
-    2038: date.date(2038, 4, 25),
-    2039: date.date(2039, 4, 10),
-    2040: date.date(2040, 4, 1),
-}
-
 
 @dataclass
 class date_collection(collections.abc.Collection):
@@ -66,8 +43,8 @@ def public_holidays(year: int = date.current_year()) -> date_collection:
     Each date has a description.
     """
     delta = datetime.timedelta
-    paques = EASTER_SUNDAY[year]
-    pentecote = paques + delta(49)
+    paques = date.paques(year)
+    pentecote = date.pentecote(year)
 
     col = date_collection(
         [

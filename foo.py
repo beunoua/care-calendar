@@ -1,6 +1,7 @@
 
 
 from datetime import timedelta
+from turtle import pu
 import kaloot
 
 import sys
@@ -8,21 +9,25 @@ import sys
 import jinja2
 
 
+
+def read_holidays(path: str) -> kaloot.event.Event:
+    event_list = kaloot.event.read_event_yaml(path)
+    assert len(event_list) == 1
+    return event_list[0]
+
 def main():
     """Main function"""
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
     )
 
-    holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")
-
-    print(holidays)
-
-    exit()
+    holidays = read_holidays("holidays-2022.yaml")
+    public_holidays = kaloot.event.public_holidays("férié", "férié")
+    merge = kaloot.feature.merge([holidays, public_holidays])
 
 
     cal = kaloot.MasterCalendar(env)
-    cal.features.append(kaloot.feature.EventCollectionFeatureMerge(holidays))
+    cal.features.append(merge)
 
     template = env.get_template("master.j2")
     html = template.render(
