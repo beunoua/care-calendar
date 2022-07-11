@@ -23,11 +23,11 @@ def main():
 
     holidays = read_holidays("holidays-2022.yaml")
     public_holidays = kaloot.event.public_holidays("férié", "férié")
-    merge = kaloot.feature.merge([holidays, public_holidays])
+    all_holidays = kaloot.feature.merge([holidays, public_holidays])
 
 
     cal = kaloot.MasterCalendar(env)
-    cal.features.append(merge)
+    cal.features.append(all_holidays)
 
     template = env.get_template("master.j2")
     html = template.render(

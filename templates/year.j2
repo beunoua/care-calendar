@@ -1,0 +1,10 @@
+
+<table class="master_calendar">
+<tr class="year">
+{% for month in range(1, 13) %}
+  <td>
+  {{ cal.format_month(month) }}
+  </td>
+{% endfor %}
+</tr>
+</table>

@@ -70,6 +70,9 @@ class MasterCalendar:
         ]
 
     def render(self):
+        template = self.env.get_template("year.j2")
+        html = template.render(cal=self)
+        return html
         return self.format_month(1)
 
     def format_month(self, month: int) -> str:
