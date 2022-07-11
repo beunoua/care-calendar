@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Calendrier de garde {{this_year}}{% endblock %}
+{% block content %}
+    <h1 class="title">Calendrier de Garde {{this_year}}</h1>
+    <div id="calendar">
+        {{html_calendar}}
+    </div>
+{% endblock %}
