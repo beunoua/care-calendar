@@ -29,7 +29,7 @@ def main():
     cal = kaloot.MasterCalendar(env)
     cal.features.append(all_holidays)
 
-    template = env.get_template("index.html")
+    template = env.get_template("index.html.j2")
     html = template.render(
     #     html_legend=cal.format_legend(),
         html_calendar=cal.render(),

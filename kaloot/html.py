@@ -70,13 +70,13 @@ class MasterCalendar:
         ]
 
     def render(self):
-        template = self.env.get_template("year.j2")
+        template = self.env.get_template("year.html.j2")
         html = template.render(cal=self)
         return html
         return self.format_month(1)
 
     def format_month(self, month: int) -> str:
-        template = self.env.get_template("month.j2")
+        template = self.env.get_template("month.html.j2")
         html = template.render(
             month_name=self.config.month_name[month],
             month_id=month,
@@ -87,7 +87,7 @@ class MasterCalendar:
         return soup.prettify()
 
     def format_week(self, week: list[date]) -> str:
-        template = self.env.get_template("week.j2")
+        template = self.env.get_template("week.html.j2")
         html = template.render(
             week_id=week[0].weekid(),
             week=week,
