@@ -134,7 +134,9 @@ class date_range:
             yield self.start + datetime.timedelta(days=delta)
 
 
-def date_description(description: str, year: Union[int, date], month: int=None, day: int=None):
+def date_description(
+    description: str, year: Union[int, date], month: int = None, day: int = None
+):
     if isinstance(year, int):
         assert month is not None
         assert day is not None

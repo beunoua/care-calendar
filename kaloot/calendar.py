@@ -7,7 +7,6 @@ import datetime
 from typing import Iterator
 
 
-
 @dataclass
 class Calendar:
     """Calendar class provides generic calendar helper functions."""
@@ -51,5 +50,3 @@ class Calendar:
         Father's day is the 3rd Sunday of June.
         """
         return self.month_sundays(6)[2]
-
-

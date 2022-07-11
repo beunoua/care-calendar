@@ -1,4 +1,3 @@
-
 from . import date
 
 import collections
@@ -38,7 +37,9 @@ class date_collection(collections.abc.Collection):
     ranges: list[date.date_range] = field(init=False, default_factory=list)
 
     def aslist(self) -> list[date.date]:
-        return sorted(self.date_list + [date for r in self.ranges for date in r.aslist()])
+        return sorted(
+            self.date_list + [date for r in self.ranges for date in r.aslist()]
+        )
 
     def __contains__(self, d):
         for r in self.ranges:

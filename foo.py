@@ -16,6 +16,11 @@ def main():
 
     holidays = kaloot.event.read_event_yaml("holidays-2022.yaml")
 
+    print(holidays)
+
+    exit()
+
+
     cal = kaloot.MasterCalendar(env)
     cal.features.append(kaloot.feature.EventCollectionFeatureMerge(holidays))
 
