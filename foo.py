@@ -27,13 +27,16 @@ def main():
     cal.features.append(all_holidays)
     cal.features.append(kaloot.feature.CustodyFeature(holidays.dates))
 
+    # template = env.get_template("year.html.j2")
+    # html = template.render(cal=cal)
+
     template = env.get_template("index.html.j2")
     html = template.render(
-    #     html_legend=cal.format_legend(),
+        # html_legend=cal.format_legend(),
         html_calendar=cal.render(),
-    #     html_comments=html_comments,
-    #     this_year=cal.year,
-    #     pdf_name=output_pdf,
+        # html_comments=html_comments,
+        this_year=cal.year,
+        # pdf_name=output_pdf,
     )
 
     print(html)

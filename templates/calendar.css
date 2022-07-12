@@ -1,84 +1,116 @@
 
-table, th, td {
+/* Debug */
+/*
+table, td {
     border: 1px solid black;
+} */
+
+
+
+/* Aligns rows in tr.year on the top */
+tr.year {
+    vertical-align: baseline;
 }
+
+/* Packs table rows and columns together for a neat rendering. */
+table {
+    border-collapse: collapse;
+}
+
+
+table.month {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    table-layout: auto;
+    width: 130px;
+}
+
+/* Margin between months (important: to take into account in table.month's width) */
+td.month {
+    padding-left: 20px;
+}
+
+
+/* -------------------------------------------------------------------------------- */
+/*
+
+Cell width
+----------
+
+table.month has a fixed with.
+
+The following settings set the width for the different month table components
+as follows:
+
+- the week id columns is x % of the row width,
+- all the features combined what's left,
+- the day number and day name are the set to a precise width so that it stays
+  consistent irrespectively of the cell content (minimum width can vary has
+  the font can be non-fixed width).
+- colored (empty) cells are 15 px,
+- other features width is auto.
+
+*/
+
+td.weekid {
+    width: 20px;
+}
+
+table.features {
+    width: 100%;
+}
+
+td.daynum, td.dayname {
+    width: 20px;
+}
+
+td.coloredcell {
+    width: 15px;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Borders */
+
+tr.week {
+    border: 2px solid black;
+}
+
+td.weekid {
+    border-right: 2px solid black;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Text alignment */
 
 h1.title {
     text-align: center;
 }
 
-table {
-    border-collapse: collapse;
+td.daynum, td.dayname, td.daycust {
+    text-align: center;
 }
-
-table.month {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: small;
-    padding: 0px 10px 0px 10px;
-    min-width: 120px;
-    border-bottom: 2px solid;
-}
-
-tr.year {
-    vertical-align: baseline;
-}
-
-/* td.month {
-    padding-left: 20px;
-} */
 
 td.weekid {
     text-align: center;
-    width: 20px;
-    border-right: 2px solid;
 }
 
-td.coloredcell {
-    min-width: 20px;
-}
-
-td.holidays, td.daynum, td.dayname, td.daycust {
-    width: 20px;
-    text-align: center;
-}
-
-td.daycust {
-    width: 35px;
-    text-align: center;
-}
+/* -------------------------------------------------------------------------------- */
+/* Background colors */
 
 tr.weekend {
     background-color: #A9A9A9;
 }
 
-
 td.férié {
     background-color: #FF0000;
 }
 
-/* Color holidays but not weekends */
 td.vacancesscolaires {
     background-color: #6495ED;
 }
 
 
-tr.di {
-    border-bottom: 2px solid;
-    border-color: black;
-}
-
-
-th.month_name {
-    border-bottom: 2px solid;
-    border-color: black;
-}
-
-tr.weekend,tr.weekday {
-    border-left: 2px solid;
-    border-right: 2px solid;
-}
-
-/* -----------------------------------------------*/
+/* -------------------------------------------------------------------------------- */
 /* Legend */
 
 div#legend {
@@ -92,14 +124,12 @@ table.legend {
     border-spacing: 10px 5px;
   }
 
-/* -----------------------------------------------*/
+/* -------------------------------------------------------------------------------- */
 /* Comments */
+
 div#comments {
     font-family: Arial, Helvetica, sans-serif;
     font-size:smaller;
     padding-top: 30px
 }
 
-
-
-/* -----------------------------------------------*/
