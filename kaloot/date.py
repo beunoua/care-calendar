@@ -63,26 +63,11 @@ class date(datetime.date):
     def is_weekend(self) -> bool:
         return self.weekday() > 4
 
-    def next_day(self):
+    def next(self):
         return self + datetime.timedelta(1)
 
-    def previous_day(self):
+    def previous(self):
         return self - datetime.timedelta(1)
-
-    def is_holiday(self, holiday_list: list[date_range]) -> bool:
-        for holiday in holiday_list:
-            if self in holiday:
-                return True
-        return False
-
-    def next_day_is_holiday(self, holiday_list: list[list[date]]) -> bool:
-        return self.next_day().is_holiday(holiday_list)
-
-    def previous_day_is_holiday(self, holiday_list: list[list[date]]) -> bool:
-        return self.previous_day().is_holiday(holiday_list)
-
-    def is_last_day_of_holidays(self, holidays: list[date]) -> bool:
-        return self == holidays[-1]
 
     def is_mothers_day(self) -> bool:
         from .calendar import Calendar
@@ -158,11 +143,20 @@ class date_collection(collections.abc.Collection):
     def __len__(self) -> int:
         return sum(len(r) for r in self.ranges) + len(self.date_list)
 
+    def __getitem__(self, key: int) -> date:
+        return self.aslist()[key]
+
     def add_range(self, date_range: date.date_range):
         self.ranges.append(date_range)
 
     def add_date(self, date: date.date):
         self.date_list.append(date)
+
+    def half(self) -> date:
+        """Returns the date that corresponds to half the collection."""
+        delta = datetime.timedelta(len(self) / 2)
+        return self[0] + delta
+
 
 
 EASTER_SUNDAY = {
