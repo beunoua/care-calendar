@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 
 
 from .date import date
-from .collections import date_collection
 from .event import Event
 
 

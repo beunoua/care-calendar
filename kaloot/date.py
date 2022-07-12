@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import collections
+from dataclasses import dataclass, field
 import datetime
-from typing import Union
+from typing import Iterator, Union
 
 
 def current_year() -> int:
@@ -133,17 +134,35 @@ class date_range:
             yield self.start + datetime.timedelta(days=delta)
 
 
-def date_description(
-    description: str, year: Union[int, date], month: int = None, day: int = None
-):
-    if isinstance(year, int):
-        assert month is not None
-        assert day is not None
-        obj = date(year, month, day)
-    else:
-        obj = year
-    obj.description = description
-    return obj
+@dataclass
+class date_collection(collections.abc.Collection):
+    """Stores list of dates and date ranges."""
+
+    date_list: list[date.date] = field(default_factory=list)
+    ranges: list[date.date_range] = field(init=False, default_factory=list)
+
+    def aslist(self) -> list[date.date]:
+        return sorted(
+            self.date_list + [date for r in self.ranges for date in r.aslist()]
+        )
+
+    def __contains__(self, d):
+        for r in self.ranges:
+            if d in r:
+                return True
+        return d in self.date_list
+
+    def __iter__(self) -> Iterator[date.date]:
+        return iter(self.all_dates)
+
+    def __len__(self) -> int:
+        return sum(len(r) for r in self.ranges) + len(self.date_list)
+
+    def add_range(self, date_range: date.date_range):
+        self.ranges.append(date_range)
+
+    def add_date(self, date: date.date):
+        self.date_list.append(date)
 
 
 EASTER_SUNDAY = {
@@ -170,9 +189,52 @@ EASTER_SUNDAY = {
 }
 
 
+def date_description(
+    description: str, year: Union[int, date], month: int = None, day: int = None
+):
+    if isinstance(year, int):
+        assert month is not None
+        assert day is not None
+        obj = date(year, month, day)
+    else:
+        obj = year
+    obj.description = description
+    return obj
+
+
 def paques(year: int = current_year()) -> date:
     return EASTER_SUNDAY[year]
 
 
 def pentecote(year: int = current_year()) -> date:
     return paques(year) + datetime.timedelta(49)
+
+
+def public_holidays(year: int = current_year()) -> date_collection:
+    """Returns the list public holidays.
+
+    Each date has a description.
+    """
+    delta = datetime.timedelta
+    day_paques = paques(year)
+    day_pentecote = pentecote(year)
+
+    col = date_collection(
+        [
+            date_description("jour de l'an", year, 1, 1),
+            date_description("fête du travail", year, 5, 1),
+            date_description("armistice 2nde guerre", year, 5, 8),
+            date_description("fête nationale", year, 7, 14),
+            date_description("assomption", year, 8, 15),
+            date_description("toussaint", year, 11, 1),
+            date_description("armistice 1ère guerre", year, 11, 11),
+            date_description("noël", year, 12, 25),
+            date_description("pâques", day_paques),
+            date_description("lundi de pâques", day_paques + delta(1)),
+            date_description("ascension", day_paques + delta(39)),
+            date_description("pentecôte", day_pentecote),
+            date_description("lundi de pentecôte", day_pentecote + delta(1)),
+        ]
+    )
+
+    return col

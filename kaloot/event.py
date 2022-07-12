@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from . import collections
 from . import date
 
-from datetime import timedelta
+from dataclasses import dataclass
+from typing import Any
 
 import yaml
 
@@ -13,7 +12,7 @@ import yaml
 class Event:
     name: str
     css_class: str
-    dates: collections.date_collection
+    dates: date.date_collection
 
     @classmethod
     def from_yaml(self, event_data: dict[str, Any]) -> Event:
@@ -23,8 +22,8 @@ class Event:
                     f"Misformatted event '{name}': missing required field '{key}'"
                 )
 
-        def parse_date_list(datestrlist: str) -> collections.date_collection:
-            collection = collections.date_collection()
+        def parse_date_list(datestrlist: str) -> date.date_collection:
+            collection = date.date_collection()
             for datestr in datestrlist:
 
                 if datestr is None:
@@ -41,7 +40,7 @@ class Event:
         return Event(name, data["css_class"], parse_date_list(data["dates"]))
 
 
-def read_event_yaml(path: str, year: int = None) -> list[collections.date_collection]:
+def read_event_yaml(path: str, year: int = None) -> list[date.date_collection]:
     """Reads a yaml file containing events and dates (or date ranges) for each event."""
     with open(path, "rt") as f:
         data = yaml.load(f, Loader=yaml.Loader)
@@ -53,5 +52,5 @@ def read_event_yaml(path: str, year: int = None) -> list[collections.date_collec
     return events
 
 
-def public_holidays(name: str, css_class: str) -> Event:
-    return Event(name, css_class, collections.public_holidays())
+def public_holidays(name: str = "férié", css_class: str = "férié") -> Event:
+    return Event(name, css_class, date.public_holidays())
