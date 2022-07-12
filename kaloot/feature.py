@@ -1,9 +1,10 @@
-from calendar import day_abbr
-from dataclasses import dataclass, field
 
 
-from .date import date
+from .custody import get_guardian
+from .date import date, date_collection
 from .event import Event
+
+from dataclasses import dataclass, field
 
 
 @dataclass(kw_only=True)
@@ -12,8 +13,9 @@ class Feature:
     attrs: dict[str, str] = field(default_factory=dict)
 
     def format_attrs(self, day: date) -> str:
-        attrs = {"class": " ".join(self.dynamic_css_class(day))}
-        attrs.update(self.attrs)
+        attrs = {}
+        if self.dynamic_css_class(day):
+            attrs["class"] = " ".join(self.dynamic_css_class(day))
         attrs_str = " ".join(f'{key}="{value}"' for key, value in attrs.items())
         return attrs_str
 
@@ -57,9 +59,7 @@ class EventCollectionFeature(ColorFeature):
     def dynamic_css_class(self, day: date) -> list[str]:
         css = self.css_class.copy()
         if day in self.collection:
-            # TODO:apply custom css
-            pass
-            # css.append(self.collection.css_name)
+            css.append(self.event.css_class)
         return css
 
 
@@ -77,3 +77,14 @@ class EventCollectionFeatureMerge(ColorFeature):
 
 def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
     return EventCollectionFeatureMerge(event_list)
+
+
+@dataclass
+class CustodyFeature(TextFeature):
+    holidays: date_collection
+
+    def __post_init__(self):
+        self.css_class = ["daycust"]
+
+    def format_text(self, day: date) -> str:
+        return get_guardian(day, self.holidays)

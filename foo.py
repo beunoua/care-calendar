@@ -25,6 +25,7 @@ def main():
 
     cal = kaloot.MasterCalendar(env)
     cal.features.append(all_holidays)
+    cal.features.append(kaloot.feature.CustodyFeature(holidays.dates))
 
     template = env.get_template("index.html.j2")
     html = template.render(

@@ -107,16 +107,23 @@ class date_range:
         start, end = [date.from_string(tok, year) for tok in tokens]
         return cls(start, end)
 
+    def __contains__(self, day: date) -> bool:
+        return self.start <= day <= self.end
+
+    def __iter__(self) -> Iterator[date]:
+        for delta in range((self.end - self.start).days + 1):
+            yield self.start + datetime.timedelta(days=delta)
+
+    def __len__(self) -> int:
+        """Returns the range length in days."""
+        return (self.end - self.start).days
+
     def aslist(self) -> list[date]:
         """Returns the list of all dates in the range."""
         return list(self)
 
-    def __contains__(self, day: date) -> bool:
-        return self.start <= day <= self.end
-
-    def __iter__(self):
-        for delta in range((self.end - self.start).days + 1):
-            yield self.start + datetime.timedelta(days=delta)
+    def ascollection(self) -> date_collection:
+        return date_collection(ranges=[self])
 
 
 @dataclass
@@ -124,7 +131,7 @@ class date_collection(collections.abc.Collection):
     """Stores list of dates and date ranges."""
 
     date_list: list[date.date] = field(default_factory=list)
-    ranges: list[date.date_range] = field(init=False, default_factory=list)
+    ranges: list[date.date_range] = field(default_factory=list)
 
     def aslist(self) -> list[date.date]:
         return sorted(
