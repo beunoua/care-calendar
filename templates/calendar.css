@@ -109,6 +109,11 @@ td.vacancesscolaires {
     background-color: #6495ED;
 }
 
+td.courses {
+    background-color: orange;
+}
+
+
 
 /* -------------------------------------------------------------------------------- */
 /* Legend */

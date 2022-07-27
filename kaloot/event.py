@@ -40,15 +40,15 @@ class Event:
         return Event(name, data["css_class"], parse_date_list(data["dates"]))
 
 
-def read_event_yaml(path: str, year: int = None) -> list[date.date_collection]:
+def read_event_yaml(path: str, year: int = None) -> dict[date.date_collection]:
     """Reads a yaml file containing events and dates (or date ranges) for each event."""
     with open(path, "rt") as f:
         data = yaml.load(f, Loader=yaml.Loader)
 
-    events = []
+    events = {}
     for data in data.items():
         e = Event.from_yaml(data)
-        events.append(e)
+        events[e.name] = e
     return events
 
 

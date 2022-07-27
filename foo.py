@@ -6,29 +6,25 @@ import sys
 import jinja2
 
 
-def read_holidays(path: str) -> kaloot.event.Event:
-    event_list = kaloot.event.read_event_yaml(path)
-    assert len(event_list) == 1
-    return event_list[0]
-
-
 def main():
     """Main function"""
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
     )
 
-    holidays = read_holidays("holidays-2022.yaml")
+    user_events = kaloot.event.read_event_yaml("holidays-2022.yaml")
+
     public_holidays = kaloot.event.public_holidays()
-    all_holidays = kaloot.feature.merge([holidays, public_holidays])
+    school_holidays = user_events["Vacances scolaires"]
 
+    features = [
+        kaloot.feature.merge([school_holidays, public_holidays]),
+        kaloot.feature.CustodyFeature(school_holidays.dates),
+        kaloot.feature.EventCollectionFeature(user_events["Courses"]),
+    ]
 
-    cal = kaloot.MasterCalendar(env)
-    cal.features.append(all_holidays)
-    cal.features.append(kaloot.feature.CustodyFeature(holidays.dates))
+    cal = kaloot.MasterCalendar(env, features=features)
 
-    # template = env.get_template("year.html.j2")
-    # html = template.render(cal=cal)
 
     template = env.get_template("index.html.j2")
     html = template.render(

@@ -8,3 +8,8 @@ Vacances scolaires:
     - 08/07 - 31/08
     - 22/10 - 06/11
     - 17/12 - 03/01/23
+
+Courses:
+  css_class: "courses"
+  dates:
+    - 01/01/2022

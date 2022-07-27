@@ -61,13 +61,14 @@ class MasterCalendar:
 
     def __post_init__(self):
         self._cal = Calendar(self.year)
-        self.features = [
+        base_features = [
             DayNumberFeature(css_class=[self.config.css_class["day_number"]]),
             DayAbbrFeature(
                 css_class=[self.config.css_class["day_name"]],
                 names=self.config.day_abbr,
             ),
         ]
+        self.features = base_features + self.features
 
     def render(self):
         template = self.env.get_template("year.html.j2")

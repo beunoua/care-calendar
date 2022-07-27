@@ -58,7 +58,7 @@ class EventCollectionFeature(ColorFeature):
 
     def dynamic_css_class(self, day: date) -> list[str]:
         css = self.css_class.copy()
-        if day in self.collection:
+        if day in self.event.dates:
             css.append(self.event.css_class)
         return css
 
@@ -81,10 +81,10 @@ def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
 
 @dataclass
 class CustodyFeature(TextFeature):
-    holidays: date_collection
+    holidays: Event
 
     def __post_init__(self):
-        self.css_class = ["daycust"]
+        self.css_class = [self.event.css_class]
 
     def format_text(self, day: date) -> str:
-        return get_guardian(day, self.holidays)
+        return get_guardian(day, self.holidays.dates)
