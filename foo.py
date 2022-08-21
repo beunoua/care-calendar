@@ -19,7 +19,7 @@ def main():
 
     features = [
         kaloot.feature.merge([school_holidays, public_holidays]),
-        kaloot.feature.CustodyFeature(school_holidays.dates),
+        kaloot.feature.CustodyFeature(school_holidays),
         kaloot.feature.EventCollectionFeature(user_events["Courses"]),
     ]
 

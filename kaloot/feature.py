@@ -84,7 +84,7 @@ class CustodyFeature(TextFeature):
     holidays: Event
 
     def __post_init__(self):
-        self.css_class = [self.event.css_class]
+        self.css_class = ["daycust"]
 
     def format_text(self, day: date) -> str:
         return get_guardian(day, self.holidays.dates)

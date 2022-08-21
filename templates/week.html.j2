@@ -5,7 +5,7 @@
         {% for day in week %}
             <tr class="{{master.format_css_day(day)}}">
             {% for feat in master.features %}
-                <td {{feat.format_attrs(day)}}>{{feat.format_text(day)}}</td>
+                <td {{ feat.format_attrs(day) }}>{{ feat.format_text(day) }}</td>
             {% endfor %}
             </tr>
         {% endfor %}
