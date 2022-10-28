@@ -10,6 +10,7 @@ def main():
     """Main function"""
     env = jinja2.Environment(
         loader=jinja2.loaders.FileSystemLoader(searchpath="templates"),
+        trim_blocks = True,lstrip_blocks = True
     )
 
     user_events = kaloot.event.read_event_yaml("holidays-2022.yaml")

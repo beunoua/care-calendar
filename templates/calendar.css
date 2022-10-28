@@ -22,7 +22,11 @@ table.month {
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
     table-layout: auto;
-    width: 130px;
+    width: 150px;
+}
+
+td.features {
+    font-family: Menlo;
 }
 
 /* Margin between months (important: to take into account in table.month's width) */
@@ -52,21 +56,29 @@ as follows:
 
 */
 
-td.weekid {
-    width: 20px;
-}
 
 table.features {
     width: 100%;
 }
 
-td.daynum, td.dayname {
+td.daycust {
+    width: 38px;
+}
+
+td.weekid {
     width: 20px;
 }
 
-td.coloredcell {
-    width: 15px;
+td.daynum, td.dayname {
+    width: 25px;
 }
+
+td.coloredcell {
+    width: 20px;
+}
+
+
+
 
 /* -------------------------------------------------------------------------------- */
 /* Borders */
