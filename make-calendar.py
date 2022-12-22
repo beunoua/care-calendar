@@ -32,9 +32,8 @@ def parse_args() -> argparse.Namespace:
         help="The year to generate the calendar for",
     )
     parser.add_argument(
-        "holidays",
+        "--holidays",
         help="The YAML file containing the school holidays",
-        type=valid_file,
     )
     parser.add_argument(
         "--comments",
@@ -56,6 +55,11 @@ def parse_args() -> argparse.Namespace:
     )
 
     args = parser.parse_args()
+
+    if args.holidays is None:
+        args.holidays = pathlib.Path(f"holidays-{args.year}.yaml")
+    args.holidays = valid_file(args.holidays)
+
     if args.output is None:
         args.output = pathlib.Path(f"calendar-{args.year}.html")
 
