@@ -13,18 +13,13 @@ class Calendar:
     year: int = current_year()
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
-    def iter_month_dates(self, month: int) -> Iterator[date]:
-        """Iterates over a month dates."""
-        for date in self._cal.itermonthdates(self.year, month):
-            if date.month == month:
-                yield date
-
     def iter_month_weeks(self, month: int) -> Iterator[list[date]]:
         """Iterates over a month weeks."""
         for week in self._cal.monthdatescalendar(self.year, month):
             yield [date.from_date(d) for d in week if d.month == month]
 
     def iter_month_dates(self, month: int) -> Iterator[date]:
+        """Iterates over a month dates."""
         for d in self._cal.itermonthdates(self.year, month):
             if d.month == month:
                 yield date(d.year, d.month, d.day)

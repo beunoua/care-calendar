@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from . import date
-
 from dataclasses import dataclass
 from typing import Any
 
-import yaml
+from . import date
 
 
 @dataclass
@@ -40,17 +38,5 @@ class Event:
         return Event(name, data["css_class"], parse_date_list(data["dates"]))
 
 
-def read_event_yaml(path: str, year: int = None) -> dict[date.date_collection]:
-    """Reads a yaml file containing events and dates (or date ranges) for each event."""
-    with open(path, "rt") as f:
-        data = yaml.load(f, Loader=yaml.Loader)
-
-    events = {}
-    for data in data.items():
-        e = Event.from_yaml(data)
-        events[e.name] = e
-    return events
-
-
-def public_holidays(name: str = "férié", css_class: str = "férié") -> Event:
-    return Event(name, css_class, date.public_holidays())
+def get_public_holidays(year: int, name: str = "férié", css_class: str = "férié") -> Event:
+    return Event(name, css_class, date.public_holidays(year))

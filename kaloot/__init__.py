@@ -1,9 +1,12 @@
-from . import calendar
-from . import custody
-from . import date
-from . import event
-from . import feature
-from . import html
+from . import (
+    calendar,
+    custody,
+    date,
+    event,
+    feature,
+    html,
+    io,
+)
 
 from .html import MasterCalendar
 

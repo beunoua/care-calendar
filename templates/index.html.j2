@@ -2,7 +2,13 @@
 {% block title %}Calendrier de garde {{this_year}}{% endblock %}
 {% block content %}
     <h1 class="title">Calendrier de Garde {{this_year}}</h1>
+    <div id="legend">
+        {{html_legend}}
+    </div>
     <div id="calendar">
         {{html_calendar}}
+    </div>
+    <div id="comments">
+        {{html_comments}}
     </div>
 {% endblock %}

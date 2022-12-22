@@ -1,9 +1,9 @@
 <tr class="week">
-    <td class="{{master.config.css_class["week_number"]}}">{{week_id}}</td>
+    <td class="{{master.get_css_class_week_number()}}">{{week_id}}</td>
     <td class="features">
         <table class="features">
         {% for day in week %}
-            <tr class="{{master.format_css_day(day)}}">
+            <tr class="{{master.get_css_class_date(day)}}">
             {% for feat in master.features %}
                 <td {{ feat.format_attrs(day) }}>{{ feat.format_text(day).strip() }}</td>
             {% endfor %}
