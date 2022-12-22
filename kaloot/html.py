@@ -1,18 +1,20 @@
+
+from dataclasses import dataclass, field
+from typing import Optional
+
+import bs4
+import jinja2
+
 from .feature import Feature, DayAbbrFeature, DayNumberFeature
 from .calendar import Calendar
 from .date import current_year, date
 
 
-from dataclasses import dataclass, field
-
-import bs4
-import jinja2
-
 
 @dataclass
 class MasterConfiguration:
 
-    css_class: dict[str:str] = field(
+    css_class: dict[str, str] = field(
         default_factory=lambda: {
             "legend": "legend",
             "month": "month",
@@ -55,8 +57,8 @@ class MasterCalendar:
 
     env: jinja2.Environment
     year: int = current_year()
-    config: MasterConfiguration = MasterConfiguration()
-    _cal: Calendar = field(init=False, repr=False, default=None)
+    config: MasterConfiguration = field(default_factory=MasterConfiguration)
+    _cal: Optional[Calendar] = field(init=False, repr=False, default=None)
     features: list[Feature] = field(default_factory=list)
 
     def __post_init__(self):
@@ -74,7 +76,6 @@ class MasterCalendar:
         template = self.env.get_template("year.html.j2")
         html = template.render(cal=self)
         return html
-        return self.format_month(1)
 
     def format_month(self, month: int) -> str:
         template = self.env.get_template("month.html.j2")

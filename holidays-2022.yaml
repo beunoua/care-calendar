@@ -1,4 +1,6 @@
 
+# Les jours fériés sont calculés automatiquement.
+
 Vacances scolaires:
   css_class: "vacancesscolaires"
   dates:
