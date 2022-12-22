@@ -1,3 +1,5 @@
+"""kaloot.event - Event class and related functions."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,12 +10,20 @@ from . import date
 
 @dataclass
 class Event:
+    """Event class.
+
+    An event is a named collection of dates.
+    It also has a CSS class name associated with it.
+    """
+
     name: str
     css_class: str
     dates: date.date_collection
 
     @classmethod
-    def from_yaml(self, event_data: dict[str, Any]) -> Event:
+    def from_yaml(cls, event_data: tuple[str, dict[str, Any]]) -> Event:
+        """Creates an Event from a YAML event data tuple."""
+
         def assert_field_present(key: str) -> None:
             if key not in data:
                 raise KeyError(
@@ -33,10 +43,14 @@ class Event:
             return collection
 
         name, data = event_data
+
         assert_field_present("css_class")
         assert_field_present("dates")
-        return Event(name, data["css_class"], parse_date_list(data["dates"]))
+        return cls(name, data["css_class"], parse_date_list(data["dates"]))
 
 
-def get_public_holidays(year: int, name: str = "férié", css_class: str = "férié") -> Event:
+def get_public_holidays(
+    year: int, name: str = "férié", css_class: str = "férié"
+) -> Event:
+    """Returns a public holiday event for the given year."""
     return Event(name, css_class, date.public_holidays(year))

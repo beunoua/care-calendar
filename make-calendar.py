@@ -1,4 +1,3 @@
-
 import argparse
 import pathlib
 import sys
@@ -8,6 +7,7 @@ import kaloot
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments"""
+
     def valid_file(path: str):
         path_ = pathlib.Path(path)
         if not path_.exists():
@@ -29,7 +29,8 @@ def parse_args() -> argparse.Namespace:
         "--year",
         type=int,
         default=kaloot.date.current_year(),
-        help="The year to generate the calendar for")
+        help="The year to generate the calendar for",
+    )
     parser.add_argument(
         "holidays",
         help="The YAML file containing the school holidays",
@@ -48,7 +49,8 @@ def parse_args() -> argparse.Namespace:
         default="templates",
     )
     parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         help="The output HTML calendar file",
         type=pathlib.Path,
     )
@@ -58,7 +60,6 @@ def parse_args() -> argparse.Namespace:
         args.output = pathlib.Path(f"calendar-{args.year}.html")
 
     return args
-
 
 
 def main():
@@ -75,7 +76,8 @@ def main():
         template_search_path=args.template_search_path,
         public_holidays=public_holidays,
         school_holidays=school_holidays,
-        comments=html_comments)
+        comments=html_comments,
+    )
 
     kaloot.io.write_html(args.output, html)
     print("Wrote calendar to", args.output)

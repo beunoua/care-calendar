@@ -1,3 +1,5 @@
+"""kaloot.custody - Provides functions to get the guardian for a given day."""
+
 from .date import date, date_collection
 
 
@@ -8,9 +10,9 @@ def guardian_transition(first: str, second: str) -> str:
 
 def get_holidays(day: date, holidays: date_collection) -> date_collection:
     """Returns the holidays a date belongs to."""
-    for r in holidays.ranges:
-        if day in r:
-            return r.ascollection()
+    for range_ in holidays.ranges:
+        if day in range_:
+            return range_.ascollection()
     return date_collection([])
 
 

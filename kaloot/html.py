@@ -1,3 +1,4 @@
+"""kaloot.html - HTML rendering of the calendar."""
 
 from dataclasses import dataclass, field
 import os
@@ -12,8 +13,10 @@ from .event import Event
 from .feature import CustodyFeature, Feature, DayAbbrFeature, DayNumberFeature
 from .feature import merge as merge_features
 
+
 @dataclass
 class MasterConfiguration:
+    """Stores the configuration parameters for the calendar."""
 
     css_class: dict[str, str] = field(
         default_factory=lambda: {
@@ -63,9 +66,9 @@ class MasterConfiguration:
     )
 
 
-
 @dataclass
 class MasterCalendar:
+    """Master calendar class."""
 
     env: jinja2.Environment
     year: int = current_year()
@@ -153,20 +156,27 @@ class MasterCalendar:
         return html
 
 
-def render(*, template_search_path: os.PathLike, public_holidays: Event,
-    school_holidays: Event, comments: str
+def render(
+    *,
+    template_search_path: os.PathLike,
+    public_holidays: Event,
+    school_holidays: Event,
+    comments: str
 ):
     """Renders the calendar."""
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(template_search_path),
         autoescape=jinja2.select_autoescape(["html", "xml"]),
-        trim_blocks=True, lstrip_blocks=True
+        trim_blocks=True,
+        lstrip_blocks=True,
     )
     cal = create_calendar(env, public_holidays, school_holidays)
     return cal.render((public_holidays, school_holidays), comments)
 
 
-def create_calendar(env: jinja2.Environment, public_holidays: Event, school_holidays: Event):
+def create_calendar(
+    env: jinja2.Environment, public_holidays: Event, school_holidays: Event
+):
     """Creates the calendar for the current year."""
     features = [
         merge_features([school_holidays, public_holidays]),
@@ -174,9 +184,3 @@ def create_calendar(env: jinja2.Environment, public_holidays: Event, school_holi
     ]
     cal = MasterCalendar(env, features=features)
     return cal
-
-
-
-
-
-

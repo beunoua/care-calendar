@@ -1,7 +1,6 @@
-"""Defines kaloot's input/output functions."""
+"""kaloot.io - Defines kaloot's input/output functions."""
 
 import os
-from typing import Optional
 
 import markdown
 import yaml
@@ -10,7 +9,7 @@ from .event import Event
 
 
 def read_user_events(path: os.PathLike) -> dict[str, Event]:
-    """Read user events from a YAML file"""
+    """Reads user events from a YAML file"""
     user_events = read_event_yaml(path)
     if len(user_events) == 0:
         raise ValueError("No user events found")
@@ -22,29 +21,29 @@ def read_user_events(path: os.PathLike) -> dict[str, Event]:
 
 
 def read_comments_markdown(path: os.PathLike) -> str:
-    """Read the markdown comment file.
+    """Reads the markdown comment file.
 
     Returns the comments formatted in HTML.
     """
-    with open(path, "rt") as f:
-        text = f.read()
+    with open(path, "rt", encoding="utf-8") as input_file:
+        text = input_file.read()
     return markdown.markdown(text)
 
 
-def read_event_yaml(path: os.PathLike, year: Optional[int] = None) -> dict[str, Event]:
+def read_event_yaml(path: os.PathLike) -> dict[str, Event]:
     """Reads a yaml file containing events and dates (or date ranges) for each event."""
 
-    with open(path, "rt") as f:
-        data = yaml.load(f, Loader=yaml.Loader)
+    with open(path, "rt", encoding="utf-8") as input_file:
+        data = yaml.load(input_file, Loader=yaml.Loader)
 
     events = {}
     for data in data.items():
-        e = Event.from_yaml(data)
-        events[e.name] = e
+        event = Event.from_yaml(data)
+        events[event.name] = event
     return events
 
 
 def write_html(path: os.PathLike, html: str):
     """Writes the HTML calendar to a file."""
-    with open(path, "wt") as f:
-        f.write(html)
+    with open(path, "wt", encoding="utf-8") as output_file:
+        output_file.write(html)

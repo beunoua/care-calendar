@@ -1,104 +1,147 @@
+"""Provides the ``date``, ``date_range`` and ``date_collection`` classes."""
+
 from __future__ import annotations
 
 import collections
 from dataclasses import dataclass, field
 import datetime
-from typing import Iterator, Union
+from typing import Iterator, Optional
 
 
 def current_year() -> int:
+    """Returns the current year."""
     return datetime.datetime.now().year
 
 
-class date(datetime.date):
+class date(datetime.date):  # pylint: disable=invalid-name  # conforms to datetime.date
+    """Provides a date class with additional methods compared to ``datetime.date``.
+
+    The ``date`` class also provides a ``description`` attribute that can be used to
+    store a description of the date.
+    """
+
+    description: str
+
+    def __new__(cls, *args, **kwargs):
+        description = kwargs.pop("description", "")
+        obj = super().__new__(cls, *args, **kwargs)
+        obj.description = description
+        return obj
+
+    def name(self) -> str:
+        """Returns the name of the date's day."""
+        return self.strftime("%A")
+
     @classmethod
-    def from_string(cls, date_string: str, year: int = None) -> date:
+    def from_string(cls, date_string: str, year: int = current_year()) -> date:
         """Returns a new `date` from a string."""
         tokens = [token.strip() for token in date_string.split("/")]
         if len(tokens) == 3:
-            day, month, year = tokens
-            if len(year) == 2:
-                year = "20{}".format(year)
+            day_s, month_s, year_s = tokens
+            if len(year_s) == 2:
+                year_s = f"20{year_s}"
+            day, month, year = int(day_s), int(month_s), int(year_s)
         elif len(tokens) == 2:
-            year = current_year() if year is None else year
-            day, month = tokens
+            day_s, month_s = tokens
+            day, month = int(day_s), int(month_s)
         else:
             raise ValueError(f"Invalid date string: {date_string:!r}")
         try:
-            return cls(int(year), int(month), int(day))
+            return cls(year, month, day)
         except ValueError as exc:
             raise ValueError(f"day is out of range: {year}/{month}/{day}") from exc
 
     @classmethod
-    def from_date(cls, d: datetime.date) -> date:
-        return cls.fromordinal(d.toordinal())
+    def from_date(cls, day: datetime.date) -> date:
+        """Returns a new ``date`` from a ``datetime.date``."""
+        return cls.fromordinal(day.toordinal())
 
-    def astuple(self) -> tuple(int):
+    def astuple(self) -> tuple[int, int, int]:
+        """Returns a tuple of the date's year, month and day."""
         return (self.year, self.month, self.day)
 
     def weekid(self) -> int:
+        """Returns the week number of the year."""
         return self.isocalendar()[1]
 
     def is_monday(self):
+        """Returns ``True`` if the date is a Monday, ``False`` otherwise."""
         return self.weekday() == 0
 
     def is_tuesday(self):
+        """Returns ``True`` if the date is a Tuesday, ``False`` otherwise."""
         return self.weekday() == 1
 
     def is_wednesday(self):
+        """Returns ``True`` if the date is a Wednesday, ``False`` otherwise."""
         return self.weekday() == 2
 
     def is_thursday(self):
+        """Returns ``True`` if the date is a Thursday, ``False`` otherwise."""
         return self.weekday() == 3
 
     def is_friday(self):
+        """Returns ``True`` if the date is a Friday, ``False`` otherwise."""
         return self.weekday() == 4
 
     def is_saturday(self):
+        """Returns ``True`` if the date is a Saturday, ``False`` otherwise."""
         return self.weekday() == 5
 
     def is_sunday(self):
+        """Returns ``True`` if the date is a Sunday, ``False`` otherwise."""
         return self.weekday() == 6
 
     def is_weekend(self) -> bool:
+        """Returns ``True`` if the date is a weekend day, ``False`` otherwise."""
         return self.weekday() > 4
 
-    def next(self):
+    def next(self) -> date:
+        """Returns the next day."""
         return self + datetime.timedelta(1)
 
-    def previous(self):
+    def previous(self) -> date:
+        """Returns the previous day."""
         return self - datetime.timedelta(1)
 
     def is_mothers_day(self) -> bool:
+        """Returns ``True`` if the date is Mother's Day, ``False`` otherwise."""
         from .calendar import Calendar
 
         return self == Calendar(self.year).mothers_day()
 
     def is_fathers_day(self) -> bool:
+        """Returns ``True`` if the date is Father's Day, ``False`` otherwise."""
         from .calendar import Calendar
 
         return self == Calendar(self.year).fathers_day()
 
     def is_even_year(self) -> bool:
+        """Returns ``True`` if the date is in an even year, ``False`` otherwise."""
         return self.year % 2 == 0
 
     def is_odd_year(self) -> bool:
+        """Returns ``True`` if the date is in an odd year, ``False`` otherwise."""
         return not self.is_even_year()
 
     def is_even_week(self) -> bool:
+        """Returns ``True`` if the date is in an even week, ``False`` otherwise."""
         return self.weekid() % 2 == 0
 
     def is_odd_week(self) -> bool:
+        """Returns ``True`` if the date is in an odd week, ``False`` otherwise."""
         return not self.is_even_week()
 
 
 @dataclass
-class date_range:
+class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
+    """Represents a range of dates."""
+
     start: date
     end: date
 
     @classmethod
-    def from_string(cls, date_range_str: str, year: int = None) -> list[date]:
+    def from_string(cls, date_range_str: str, year: int = current_year()) -> date_range:
         """Returns a new date_range from a string representation."""
         if "-" not in date_range_str:
             raise ValueError(f"invalid date range string '{date_range_str}'")
@@ -108,9 +151,11 @@ class date_range:
         return cls(start, end)
 
     def __contains__(self, day: date) -> bool:
+        """Returns ``True`` if the date is in the range, ``False`` otherwise."""
         return self.start <= day <= self.end
 
     def __iter__(self) -> Iterator[date]:
+        """Returns an iterator over the dates in the range."""
         for delta in range((self.end - self.start).days + 1):
             yield self.start + datetime.timedelta(days=delta)
 
@@ -123,47 +168,58 @@ class date_range:
         return list(self)
 
     def ascollection(self) -> date_collection:
+        """Returns a ``date_collection`` with all dates within the range."""
         return date_collection(ranges=[self])
 
 
 @dataclass
-class date_collection(collections.abc.Collection):
+class date_collection(
+    collections.abc.Collection
+):  # pylint: disable=invalid-name  # conforms to datetime.date
     """Stores list of dates and date ranges."""
 
-    date_list: list[date.date] = field(default_factory=list)
-    ranges: list[date.date_range] = field(default_factory=list)
+    date_list: list[date] = field(default_factory=list)
+    ranges: list[date_range] = field(default_factory=list)
 
-    def aslist(self) -> list[date.date]:
+    def aslist(self) -> list[date]:
+        """Returns the sorted list of all dates in the collection."""
         return sorted(
             self.date_list + [date for r in self.ranges for date in r.aslist()]
         )
 
-    def __contains__(self, d):
-        for r in self.ranges:
-            if d in r:
+    def __contains__(self, day: object) -> bool:
+        """Returns ``True`` if the date is in the collection, ``False`` otherwise."""
+        if not isinstance(day, date):
+            return False
+        for _range in self.ranges:
+            if day in _range:
                 return True
-        return d in self.date_list
+        return day in self.date_list
 
-    def __iter__(self) -> Iterator[date.date]:
-        return iter(self.all_dates)
+    def __iter__(self) -> Iterator[date]:
+        """Returns an iterator over the dates in the collection."""
+        return iter(self.date_list)
 
     def __len__(self) -> int:
+        """Returns the number of dates in the collection."""
         return sum(len(r) for r in self.ranges) + len(self.date_list)
 
     def __getitem__(self, key: int) -> date:
+        """Returns the date at the given index."""
         return self.aslist()[key]
 
-    def add_range(self, date_range: date.date_range):
-        self.ranges.append(date_range)
+    def add_range(self, the_range: date_range):
+        """Adds a date range to the collection."""
+        self.ranges.append(the_range)
 
-    def add_date(self, date: date.date):
-        self.date_list.append(date)
+    def add_date(self, the_date: date):
+        """Adds a date to the collection."""
+        self.date_list.append(the_date)
 
     def half(self) -> date:
         """Returns the date that corresponds to half the collection."""
         delta = datetime.timedelta(len(self) / 2)
         return self[0] + delta
-
 
 
 EASTER_SUNDAY = {
@@ -191,8 +247,12 @@ EASTER_SUNDAY = {
 
 
 def date_description(
-    description: str, year: Union[int, date], month: int = None, day: int = None
+    description: str,
+    year: int | date,
+    month: Optional[int] = None,
+    day: Optional[int] = None,
 ):
+    """Returns a new ``date`` with a description."""
     if isinstance(year, int):
         assert month is not None
         assert day is not None
@@ -204,10 +264,12 @@ def date_description(
 
 
 def paques(year: int = current_year()) -> date:
+    """Returns the date of Easter Sunday."""
     return EASTER_SUNDAY[year]
 
 
 def pentecote(year: int = current_year()) -> date:
+    """Returns the date of Pentecote."""
     return paques(year) + datetime.timedelta(49)
 
 

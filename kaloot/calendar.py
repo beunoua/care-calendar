@@ -1,9 +1,15 @@
-from .date import current_year, date, pentecote
+"""kaloot.calendar - Provides generic the ``Calendar`` class.
+
+The ``Calendar`` class provides additional generic calendar helper functions
+over ``calendar.Calendar``.
+"""
 
 import calendar
 from dataclasses import dataclass, field
 import datetime
 from typing import Iterator
+
+from .date import current_year, date, pentecote
 
 
 @dataclass
@@ -20,13 +26,13 @@ class Calendar:
 
     def iter_month_dates(self, month: int) -> Iterator[date]:
         """Iterates over a month dates."""
-        for d in self._cal.itermonthdates(self.year, month):
-            if d.month == month:
-                yield date(d.year, d.month, d.day)
+        for day in self._cal.itermonthdates(self.year, month):
+            if day.month == month:
+                yield date(day.year, day.month, day.day)
 
     def month_sundays(self, month: int) -> list[date]:
         """Returns all Sundays for a given month."""
-        return [d for d in self.iter_month_dates(month) if d.is_sunday()]
+        return [day for day in self.iter_month_dates(month) if day.is_sunday()]
 
     def mothers_day(self) -> date:
         """Returns the day of Mother's day.
