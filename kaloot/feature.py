@@ -56,8 +56,11 @@ class DayAbbrFeature(TextFeature):
 class ColorFeature(Feature):
     """Base class for features represented as colored cells."""
 
+    CSS_CLASS_DEFAULT = "coloredcell"
+
     def __post_init__(self):
-        self.css_class = ["coloredcell"]
+        if not self.css_class:
+            self.css_class = [self.CSS_CLASS_DEFAULT]
 
     def format_text(self, day: date) -> str:
         return "&nbsp"

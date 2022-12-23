@@ -1,7 +1,7 @@
 <table class="{{master.config.css_class['legend']}}">
 {% for event in features %}
   <tr>
-    <td class="{{event.css_class}}"></td>
+    <td class="{{colored_cell_css_class}} {{event.css_class}}"></td>
     <td>{{event.name}}</td>
   </tr>
 {% endfor %}

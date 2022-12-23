@@ -10,7 +10,7 @@ import jinja2
 from .calendar import Calendar
 from .date import current_year, date
 from .event import Event
-from .feature import CustodyFeature, Feature, DayAbbrFeature, DayNumberFeature
+from .feature import CustodyFeature, Feature, DayAbbrFeature, DayNumberFeature, ColorFeature
 from .feature import merge as merge_features
 
 
@@ -136,6 +136,7 @@ class MasterCalendar:
         html = template.render(
             master=self,
             features=events,
+            colored_cell_css_class=ColorFeature.CSS_CLASS_DEFAULT,
         )
         return html
 
