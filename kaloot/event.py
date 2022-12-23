@@ -21,15 +21,15 @@ class Event:
     dates: date.date_collection
 
     @classmethod
-    def from_yaml(cls, event_data: tuple[str, dict[str, Any]]) -> Event:
-        """Creates an Event from a YAML event data tuple."""
+    def from_yaml(cls, name: str,  event_data: dict[str, Any], year: int = date.current_year()) -> Event:
+        """Creates an Event from a YAML event data tuple.
 
-        def assert_field_present(key: str) -> None:
-            if key not in data:
-                raise KeyError(
-                    f"Misformatted event '{name}': missing required field '{key}'"
-                )
-
+        Arguments:
+            name: The event name.
+            event_data: A tuple containing the css class and a list of dates.
+            year: The year of the event. This is necessay when dates are formatted
+                without a year.
+        """
         def parse_date_list(datestrlist: str) -> date.date_collection:
             collection = date.date_collection()
             for datestr in datestrlist:
@@ -37,16 +37,18 @@ class Event:
                 if datestr is None:
                     raise ValueError(f"collection: {name}: empty date string")
                 if "-" in datestr:
-                    collection.add_range(date.date_range.from_string(datestr))
+                    collection.add_range(date.date_range.from_string(datestr, year))
                 else:
-                    collection.add_date(date.date.from_string(datestr))
+                    collection.add_date(date.date.from_string(datestr, year))
             return collection
 
-        name, data = event_data
+        if "css_class" not in event_data:
+            raise KeyError(f"Misformatted event '{name}': missing required field 'css_class'")
 
-        assert_field_present("css_class")
-        assert_field_present("dates")
-        return cls(name, data["css_class"], parse_date_list(data["dates"]))
+        if "dates" not in event_data:
+            raise KeyError(f"Misformatted event '{name}': missing required field 'dates'")
+
+        return cls(name, event_data["css_class"], parse_date_list(event_data["dates"]))
 
 
 def get_public_holidays(
