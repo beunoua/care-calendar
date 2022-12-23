@@ -1,0 +1,16 @@
+comments: comments.md
+template_dir: templates
+
+year: 2026
+
+Vacances scolaires:
+  css_class: "vacancesscolaires"
+  dates:
+    - 20/12/2025 - 04/01/2026
+    - 21/02 - 08/03
+    - 18/04 - 03/05
+    - 04/07 - 31/08
+    # Insérer toussaint et noël
+
+
+# Les jours fériés sont calculés automatiquement.
