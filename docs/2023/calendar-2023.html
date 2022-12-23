@@ -1,0 +1,5871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+    <title>Calendrier de garde 2023</title>
+    <style>
+/* Debug */
+/*
+table, td {
+    border: 1px solid black;
+} */
+
+
+
+/* Aligns rows in tr.year on the top */
+tr.year {
+    vertical-align: baseline;
+}
+
+/* Packs table rows and columns together for a neat rendering. */
+table {
+    border-collapse: collapse;
+}
+
+
+table.month {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    table-layout: auto;
+    width: 140px;
+}
+
+td.features {
+    font-family: Menlo;
+}
+
+/* Margin between months (important: to take into account in table.month's width) */
+td.month {
+    padding-left: 20px;
+}
+
+
+/* -------------------------------------------------------------------------------- */
+/*
+
+Cell width
+----------
+
+table.month has a fixed with.
+
+The following settings set the width for the different month table components
+as follows:
+
+- the week id columns is x % of the row width,
+- all the features combined what's left,
+- the day number and day name are the set to a precise width so that it stays
+  consistent irrespectively of the cell content (minimum width can vary has
+  the font can be non-fixed width).
+- colored (empty) cells are 15 px,
+- other features width is auto.
+
+*/
+
+
+table.features {
+    width: 100%;
+}
+
+td.daycust {
+    width: 38px;
+}
+
+td.weekid {
+    width: 20px;
+}
+
+td.daynum, td.dayname {
+    width: 25px;
+}
+
+td.coloredcell {
+    width: 20px;
+}
+
+
+
+
+/* -------------------------------------------------------------------------------- */
+/* Borders */
+
+tr.week {
+    border: 2px solid black;
+}
+
+td.weekid {
+    border-right: 2px solid black;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Text alignment */
+
+h1.title {
+    text-align: center;
+}
+
+td.daynum, td.dayname, td.daycust {
+    text-align: center;
+}
+
+td.weekid {
+    text-align: center;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Background colors */
+
+tr.weekend {
+    background-color: #A9A9A9;
+}
+
+td.férié {
+    background-color: #FF0000;
+}
+
+td.vacancesscolaires {
+    background-color: #6495ED;
+}
+
+td.courses {
+    background-color: orange;
+}
+
+
+
+/* -------------------------------------------------------------------------------- */
+/* Legend */
+
+div#legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+table.legend {
+    padding-left: 30px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+    font-family: Menlo;
+    font-size: 0.875em;
+  }
+
+/* -------------------------------------------------------------------------------- */
+/* Comments */
+
+div#comments {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:smaller;
+    padding-top: 30px
+}
+</style>
+</head>
+<body>
+    <div id="content">    <h1 class="title">Calendrier de Garde 2023</h1>
+    <div id="legend">
+        <table class="legend">
+  <tr>
+    <td class="coloredcell férié"></td>
+    <td>férié</td>
+  </tr>
+  <tr>
+    <td class="coloredcell vacancesscolaires"></td>
+    <td>Vacances scolaires</td>
+  </tr>
+</table>
+    </div>
+    <div id="calendar">
+        <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+    <title></title>
+    <style>
+/* Debug */
+/*
+table, td {
+    border: 1px solid black;
+} */
+
+
+
+/* Aligns rows in tr.year on the top */
+tr.year {
+    vertical-align: baseline;
+}
+
+/* Packs table rows and columns together for a neat rendering. */
+table {
+    border-collapse: collapse;
+}
+
+
+table.month {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    table-layout: auto;
+    width: 140px;
+}
+
+td.features {
+    font-family: Menlo;
+}
+
+/* Margin between months (important: to take into account in table.month's width) */
+td.month {
+    padding-left: 20px;
+}
+
+
+/* -------------------------------------------------------------------------------- */
+/*
+
+Cell width
+----------
+
+table.month has a fixed with.
+
+The following settings set the width for the different month table components
+as follows:
+
+- the week id columns is x % of the row width,
+- all the features combined what's left,
+- the day number and day name are the set to a precise width so that it stays
+  consistent irrespectively of the cell content (minimum width can vary has
+  the font can be non-fixed width).
+- colored (empty) cells are 15 px,
+- other features width is auto.
+
+*/
+
+
+table.features {
+    width: 100%;
+}
+
+td.daycust {
+    width: 38px;
+}
+
+td.weekid {
+    width: 20px;
+}
+
+td.daynum, td.dayname {
+    width: 25px;
+}
+
+td.coloredcell {
+    width: 20px;
+}
+
+
+
+
+/* -------------------------------------------------------------------------------- */
+/* Borders */
+
+tr.week {
+    border: 2px solid black;
+}
+
+td.weekid {
+    border-right: 2px solid black;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Text alignment */
+
+h1.title {
+    text-align: center;
+}
+
+td.daynum, td.dayname, td.daycust {
+    text-align: center;
+}
+
+td.weekid {
+    text-align: center;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Background colors */
+
+tr.weekend {
+    background-color: #A9A9A9;
+}
+
+td.férié {
+    background-color: #FF0000;
+}
+
+td.vacancesscolaires {
+    background-color: #6495ED;
+}
+
+td.courses {
+    background-color: orange;
+}
+
+
+
+/* -------------------------------------------------------------------------------- */
+/* Legend */
+
+div#legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+table.legend {
+    padding-left: 30px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+    font-family: Menlo;
+    font-size: 0.875em;
+  }
+
+/* -------------------------------------------------------------------------------- */
+/* Comments */
+
+div#comments {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:smaller;
+    padding-top: 30px
+}
+</style>
+</head>
+<body>
+    <div id="content">
+<table class="master_calendar">
+<tr class="year">
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Janvier
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    52
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekend di">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    1
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    2
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    3
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    4
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    5
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Février
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    5
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday me">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    6
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    7
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    8
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    9
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Mars
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    9
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday me">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    10
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    11
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    12
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    13
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Avril
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    13
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekend sa">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    14
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    15
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    16
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    17
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Mai
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    18
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    19
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    20
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    21
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    22
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Juin
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    22
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday je">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    23
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    24
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    25
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    26
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Juillet
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    26
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekend sa">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    27
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    28
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    29
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    30
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    31
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Août
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    31
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday ma">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    32
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    33
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    34
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    35
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Septembre
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    35
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday ve">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    36
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    37
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    38
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    39
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Octobre
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    39
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekend di">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    40
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    41
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    42
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    43
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    44
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Novembre
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    44
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday me">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    45
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell férié">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    46
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    47
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    48
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+  <td class="month">
+  <table class="month">
+ <thead>
+  <tr class="month_name">
+   <th colspan="2">
+    Décembre
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr class="week">
+   <td class="weekid">
+    48
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday ve">
+      <td class="daynum">
+       01
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       02
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       03
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    49
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       04
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       05
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       06
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       07
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       08
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       09
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       10
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    50
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       11
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       12
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       13
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       14
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       15
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       L→B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       16
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       17
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    51
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       18
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       19
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       20
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       21
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       22
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       23
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       24
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr class="week">
+   <td class="weekid">
+    52
+   </td>
+   <td class="features">
+    <table class="features">
+     <tr class="weekday lu">
+      <td class="daynum">
+       25
+      </td>
+      <td class="dayname">
+       Lu
+      </td>
+      <td class="coloredcell vacancesscolaires férié">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ma">
+      <td class="daynum">
+       26
+      </td>
+      <td class="dayname">
+       Ma
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday me">
+      <td class="daynum">
+       27
+      </td>
+      <td class="dayname">
+       Me
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday je">
+      <td class="daynum">
+       28
+      </td>
+      <td class="dayname">
+       Je
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekday ve">
+      <td class="daynum">
+       29
+      </td>
+      <td class="dayname">
+       Ve
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B
+      </td>
+     </tr>
+     <tr class="weekend sa">
+      <td class="daynum">
+       30
+      </td>
+      <td class="dayname">
+       Sa
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       B→L
+      </td>
+     </tr>
+     <tr class="weekend di">
+      <td class="daynum">
+       31
+      </td>
+      <td class="dayname">
+       Di
+      </td>
+      <td class="coloredcell vacancesscolaires">
+      </td>
+      <td class="daycust">
+       L
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+  </td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>
+    </div>
+    <div id="comments">
+        <h1>Détails</h1>
+<p>Ce calendrier reprend les règles de l'ordonnance d'orientation et de mesure provisoires
+du 27 juillet 2021.</p>
+<h2>En période scolaire</h2>
+<ul>
+<li>chez la mère du vendredi des semaines impaires à la sortie des classes
+au mardi des semaines paires à la sortie des classes et du mercredi des semaines
+paires à 18h30 au vendredi des semaines paires à la sortie des classes</li>
+<li>chez le père du vendredi des semaines paires à la sortie des classes
+au vendredi des semaines impaires à la sortie des classes et du mardi des semaines
+paires à la sortie des classes au mercredi des semaines paires à 18h30</li>
+</ul>
+<h2>Pendant les vacances scolaires</h2>
+<ul>
+<li>les années paires, la première moitié chez la mère, et la seconde chez le père</li>
+<li>les années impaires, la première moitié chez le père, et la seconde chez la mère</li>
+</ul>
+<h2>Règles générales</h2>
+<ol>
+<li>
+<p>À charge pour le parent qui débute sa période de résidence d'aller chercher
+les enfants à l'école ou au domicile de l'autre parent ou de les faire chercher
+par une personne de confiance.</p>
+</li>
+<li>
+<p>Tout changement de résidence des enfants doit faire l'objet d'une information
+préalable de l'autre parent.</p>
+</li>
+<li>
+<p>Par dérogation, le père bénéficiera d'un droit de visite de 9 heures à 18 heures
+le jours de la fête des pères et la mère selon les mêmes modalités le jour de la fête des
+mères.</p>
+</li>
+<li>
+<p>La première moitié des vacances débute le premier jour de la date officielle des
+vacances scolaires, soit habituellement le samedi à la sortie des classes pour les enfants
+ayant cours le samedi ou la veille (vendredi) à la sortie des classes pour les enfants
+n'ayant pas court le samedi.</p>
+</li>
+<li>
+<p>La seconde moitié des vacances se termine la veille du jour de la date officielle de
+la rentrée scolaire, soit habituellement le dimanche à 18 heures.</p>
+</li>
+<li>
+<p>Pendant les vacances scolaires, l'échange de résidence se fait le samedi à 18 heures.</p>
+</li>
+<li>
+<p>Les dates de vacances scolaires à prendre en considération sont celles de l'académie
+dans laquelle demeurent les enfants non scolarisés ou dont dépendent les établissements
+dans lesquels sont scolarisés les enfants</p>
+</li>
+</ol>
+    </div>
+</div>
+</body>
+</html>

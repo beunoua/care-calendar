@@ -9,6 +9,19 @@ COMMENTS_MD = comments.md
 	cp $^ docs/$@
 	cd docs/$@ && ln -s calendar-$@.html index.html
 
+2024: config-2024.yaml $(COMMENTS_MD)
+	python make-calendar.py $<
+	mkdir -p docs/$@
+	mv calendar-$@.html docs/$@
+	cp $^ docs/$@
+	cd docs/$@ && ln -s calendar-$@.html index.html
+
+2025: config-2025.yaml $(COMMENTS_MD)
+	python make-calendar.py $<
+	mkdir -p docs/$@
+	mv calendar-$@.html docs/$@
+	cp $^ docs/$@
+	cd docs/$@ && ln -s calendar-$@.html index.html
 
 
 

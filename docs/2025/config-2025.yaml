@@ -1,0 +1,15 @@
+comments: comments.md
+template_dir: templates
+
+year: 2025
+
+Vacances scolaires:
+  css_class: "vacancesscolaires"
+  dates:
+    - 21/12/2024 - 05/01/2025
+    - 15/02 - 02/03
+    - 12/04 - 27/04
+    - 05/07 - 31/08
+
+
+# Les jours fériés sont calculés automatiquement.
