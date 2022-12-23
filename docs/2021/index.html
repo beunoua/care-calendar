@@ -1,0 +1,346 @@
+<html>
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon"
+      type="image/png"
+      href="favicon/favicon-32x32.png">
+<title>Calendrier de Garde 2021</title>
+<style type="text/css">/*
+table, th, td {
+    border: 1px solid black;
+} */
+
+h1.title {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+table.month {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    padding: 0px 10px 0px 10px;
+    min-width: 120px;
+    border-bottom: 2px solid;
+}
+
+tr.year {
+    vertical-align: baseline;
+}
+
+td.month {
+    padding-left: 20px;
+}
+
+td.weekid {
+    text-align: center;
+    width: 20px;
+    border-right: 2px solid;
+}
+
+td.status, td.daynum, td.dayname, td.status, td.daycust {
+    width: 20px;
+    text-align: center;
+}
+
+td.daycust {
+    width: 35px;
+    text-align: center;
+}
+
+tr.weekend {
+    background-color: #A9A9A9;
+}
+
+
+td.férié {
+    background-color: #FF0000;
+}
+
+/* Color holidays but not weekends */
+td.vacancesscolaires {
+    background-color: #6495ED;
+}
+
+
+tr.di {
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+
+th.month_name {
+    border-bottom: 2px solid;
+    border-color: black;
+}
+
+tr.weekend,tr.weekday {
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+
+/* -----------------------------------------------*/
+/* Legend */
+
+div#legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+table.legend {
+    padding-left: 30px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+  }
+
+/* -----------------------------------------------*/
+/* Comments */
+div#comments {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:smaller;
+    padding-top: 30px
+}
+
+
+
+/* -----------------------------------------------*/</style>
+</head>
+<body>
+
+<h1 class="title">Calendrier de Garde 2021</h1>
+
+<div id="legend">
+<table class="legend">
+<tr>
+<td class="status vacancesscolaires"</td>
+<td>vacances scolaires</td>
+</tr>
+<tr>
+<td class="status férié"</td>
+<td>férié</td>
+</tr>
+</table>
+</div>
+<div id="calendar">
+<table class="year">
+<tbody>
+<tr class="year">
+<td class="month">
+<table class="month"><tbody><tr class=month_name><th colspan="5" class="month_name">Septembre</th></tr>
+<tr class="weekday me"><td rowspan="5" class="weekid">35</td>
+<td class="daynum">01</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">02</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">03</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">04</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">05</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">36</td>
+<td class="daynum">06</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">07</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">08</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">09</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">10</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">11</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">12</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">37</td>
+<td class="daynum">13</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">14</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">15</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">16</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">17</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">18</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">19</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">38</td>
+<td class="daynum">20</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">21</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">22</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">23</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">24</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">25</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">26</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="4" class="weekid">39</td>
+<td class="daynum">27</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">28</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">29</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">30</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr></tbody></table>
+</td>
+<td class="month">
+<table class="month"><tbody><tr class=month_name><th colspan="5" class="month_name">Octobre</th></tr>
+<tr class="weekday ve"><td rowspan="3" class="weekid">39</td>
+<td class="daynum">01</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">02</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">03</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">40</td>
+<td class="daynum">04</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">05</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">06</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">07</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">08</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">09</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">10</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">41</td>
+<td class="daynum">11</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">12</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">13</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">14</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">15</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">16</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">17</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">42</td>
+<td class="daynum">18</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">19</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">20</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">21</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">22</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">23</td><td class="dayname">Sa</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">24</td><td class="dayname">Di</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">43</td>
+<td class="daynum">25</td><td class="dayname">Lu</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">26</td><td class="dayname">Ma</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">27</td><td class="dayname">Me</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">28</td><td class="dayname">Je</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">29</td><td class="dayname">Ve</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend sa"><td class="daynum">30</td><td class="dayname">Sa</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend di"><td class="daynum">31</td><td class="dayname">Di</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr></tbody></table>
+</td>
+<td class="month">
+<table class="month"><tbody><tr class=month_name><th colspan="5" class="month_name">Novembre</th></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">44</td>
+<td class="daynum">01</td><td class="dayname">Lu</td><td class="status vacancesscolaires férié">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">02</td><td class="dayname">Ma</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday me"><td class="daynum">03</td><td class="dayname">Me</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday je"><td class="daynum">04</td><td class="dayname">Je</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">05</td><td class="dayname">Ve</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend sa"><td class="daynum">06</td><td class="dayname">Sa</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">07</td><td class="dayname">Di</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">45</td>
+<td class="daynum">08</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">09</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">10</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">11</td><td class="dayname">Je</td><td class="status férié">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">12</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">13</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">14</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">46</td>
+<td class="daynum">15</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">16</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">17</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">18</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">19</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">20</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">21</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">47</td>
+<td class="daynum">22</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">23</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">24</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">25</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">26</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">27</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">28</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="2" class="weekid">48</td>
+<td class="daynum">29</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">30</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr></tbody></table>
+</td>
+<td class="month">
+<table class="month"><tbody><tr class=month_name><th colspan="5" class="month_name">Décembre</th></tr>
+<tr class="weekday me"><td rowspan="5" class="weekid">48</td>
+<td class="daynum">01</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">02</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">03</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">04</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">05</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">49</td>
+<td class="daynum">06</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">07</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">08</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">09</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">10</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend sa"><td class="daynum">11</td><td class="dayname">Sa</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekend di"><td class="daynum">12</td><td class="dayname">Di</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">50</td>
+<td class="daynum">13</td><td class="dayname">Lu</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">14</td><td class="dayname">Ma</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekday me"><td class="daynum">15</td><td class="dayname">Me</td><td class="status">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekday je"><td class="daynum">16</td><td class="dayname">Je</td><td class="status">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">17</td><td class="dayname">Ve</td><td class="status">&nbsp;</td><td class="daycust">L→B</td></tr>
+<tr class="weekend sa"><td class="daynum">18</td><td class="dayname">Sa</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend di"><td class="daynum">19</td><td class="dayname">Di</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday lu"><td rowspan="7" class="weekid">51</td>
+<td class="daynum">20</td><td class="dayname">Lu</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ma"><td class="daynum">21</td><td class="dayname">Ma</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday me"><td class="daynum">22</td><td class="dayname">Me</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday je"><td class="daynum">23</td><td class="dayname">Je</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekday ve"><td class="daynum">24</td><td class="dayname">Ve</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">B</td></tr>
+<tr class="weekend sa"><td class="daynum">25</td><td class="dayname">Sa</td><td class="status vacancesscolaires férié">&nbsp;</td><td class="daycust">B→L</td></tr>
+<tr class="weekend di"><td class="daynum">26</td><td class="dayname">Di</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday lu"><td rowspan="5" class="weekid">52</td>
+<td class="daynum">27</td><td class="dayname">Lu</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ma"><td class="daynum">28</td><td class="dayname">Ma</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday me"><td class="daynum">29</td><td class="dayname">Me</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday je"><td class="daynum">30</td><td class="dayname">Je</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr>
+<tr class="weekday ve"><td class="daynum">31</td><td class="dayname">Ve</td><td class="status vacancesscolaires">&nbsp;</td><td class="daycust">L</td></tr></tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="comments">
+<h1>Détails.</h1>
+<p>Ce calendrier reprend les règles de l'ordonnance d'orientation et de mesure provisoires
+du 27 juillet 2021.</p>
+<h2>En période scolaire</h2>
+<ul>
+<li>chez la mère du vendredi des semaines impaires à la sortie des classes
+au mardi des semaines paires à la sortie des classes et du mercredi des semaines
+paires à 18h30 au vendredi des semaines paires à la sortie des classes</li>
+<li>chez le père du vendredi des semaines paires à la sortie des classes
+au vendredi des semaines impaires à la sortie des classes et du mardi des semaines
+paires à la sortie des classes au mercredi des semaines paires à 18h30</li>
+</ul>
+<h2>Pendant les vacances scolaires</h2>
+<ul>
+<li>les années paires, la première moitié chez la mère, et la seconde chez le père</li>
+<li>les années impaires, la première moitié chez le père, et la seconde chez la mère</li>
+</ul>
+<h2>Règles générales</h2>
+<ol>
+<li>
+<p>À charge pour le parent qui débute sa période de résidence d'aller chercher
+les enfants à l'école ou au domicile de l'autre parent ou de les faire chercher
+par une personne de confiance.</p>
+</li>
+<li>
+<p>Tout changement de résidence des enfants doit faire l'objet d'une information
+préalable de l'autre parent.</p>
+</li>
+<li>
+<p>Par dérogation, le père bénéficiera d'un droit de visite de 9 heures à 18 heures
+le jours de la fête des pères et la mère selon les mêmes modalités le jour de la fête des
+mères.</p>
+</li>
+<li>
+<p>La première moitié des vacances débute le premier jour de la date officielle des
+vacances scolaires, soit habituellement le samedi à la sortie des classes pour les enfants
+ayant cours le samedi ou la veille (vendredi) à la sortie des classes pour les enfants
+n'ayant pas court le samedi.</p>
+</li>
+<li>
+<p>La seconde moitié des vacances se termine la veille du jour de la date officielle de
+la rentrée scolaire, soit habituellement le dimanche à 18 heures.</p>
+</li>
+<li>
+<p>Pendant les vacances scolaires, l'échange de résidence se fait le samedi à 18 heures.</p>
+</li>
+<li>
+<p>Les dates de vacances scolaires à prendre en considération sont celles de l'académie
+dans laquelle demeurent les enfants non scolarisés ou dont dépendent les établissements
+dans lesquels sont scolarisés les enfants</p>
+</li>
+</ol>
+</div>
+<footer>
+    <p><a href="2021/calendar-2021.pdf">Télécharger au format pdf</a></p>
+</footer>
+</body>
+</html>
