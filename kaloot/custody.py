@@ -16,6 +16,22 @@ def get_holidays(day: date, holidays: date_collection) -> date_collection:
     return date_collection([])
 
 
+def get_holidays_transition_date(holidays: date_collection) -> date:
+    """Returns the transition date for a given set of holidays.
+
+    On regular holidays, the transition day is always the first Saturday of the holidays.
+
+    On summer holidays, the transition is the day in the middle of the holidays.
+    If the number of holiday days is odd, the August guardian gets one more day than
+    the July guardian, so the transition is the day before the half.
+    """
+    if is_summer_holidays(holidays):
+        if holidays.has_odd_number_of_days():
+            return holidays.half().previous()
+        return holidays.half()
+    return holidays[0].next_saturday()
+
+
 def get_guardian_holidays(day: date, holidays: date_collection) -> str:
     """Returns the guardian on an holiday day."""
 
@@ -24,24 +40,31 @@ def get_guardian_holidays(day: date, holidays: date_collection) -> str:
         first, second = "L", "B"
 
     holidays = get_holidays(day, holidays)
-    day_before_half = holidays.half().previous()
+    transition_day = get_holidays_transition_date(holidays)
 
-    if day == day_before_half:
-        return guardian_transition(first, second)
-
-    if day < day_before_half:
+    if day < transition_day:
         return first
+
+    if day == transition_day:
+        return guardian_transition(first, second)
 
     # Now we're in the second half.
     # If it is January, the guardian is the second guardian from last year.
     if day.month == 1:
         first, second = second, first
 
-    if day == holidays[-1]:
-        guardian = get_guardian_regular_week(day.next(), holidays)
+    # If it is the last day of the holidays, we need to check the next day:
+    # if the guardian on the next day is not the current guardian, we need to transition.
+    if day.is_last_day_of(holidays):
+        guardian = get_next_week_guardian(day, holidays)
         if guardian[0] != second:
             return guardian_transition(second, first)
     return second
+
+
+def get_next_week_guardian(day: date, holidays: date_collection) -> str:
+    """Returns the guardian for the next week."""
+    return get_guardian_regular_week(day.next(), holidays)
 
 
 def get_guardian_even_week(day: date, holidays: date_collection) -> str:
@@ -94,3 +117,13 @@ def get_guardian(day: date, holidays: date_collection) -> str:
     if day in holidays:
         return get_guardian_holidays(day, holidays)
     return get_guardian_regular_week(day, holidays)
+
+
+def is_summer_holidays(holidays: date_collection) -> bool:
+    """Returns True if the holidays are summer holidays."""
+    return 6 <= holidays[0].month <= 7
+
+
+def is_regular_holidays(holidays: date_collection) -> bool:
+    """Returns True if the holidays are regular holidays, i.e. not summer holidays."""
+    return not is_summer_holidays(holidays)

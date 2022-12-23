@@ -124,6 +124,14 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
         """Returns ``True`` if the date is in an odd year, ``False`` otherwise."""
         return not self.is_even_year()
 
+    def is_even_month(self) -> bool:
+        """Returns ``True`` if the date is in an even month, ``False`` otherwise."""
+        return self.month % 2 == 0
+
+    def is_odd_month(self) -> bool:
+        """Returns ``True`` if the date is in an odd month, ``False`` otherwise."""
+        return not self.is_even_month()
+
     def is_even_week(self) -> bool:
         """Returns ``True`` if the date is in an even week, ``False`` otherwise."""
         return self.weekid() % 2 == 0
@@ -131,6 +139,26 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
     def is_odd_week(self) -> bool:
         """Returns ``True`` if the date is in an odd week, ``False`` otherwise."""
         return not self.is_even_week()
+
+    def is_even_day(self) -> bool:
+        """Returns ``True`` if the date is in an even day, ``False`` otherwise."""
+        return self.day % 2 == 0
+
+    def is_odd_day(self) -> bool:
+        """Returns ``True`` if the date is in an odd day, ``False`` otherwise."""
+        return not self.is_even_day()
+
+    def next_saturday(self) -> date:
+        """Returns the next Saturday."""
+        if self.is_saturday():
+            return self + datetime.timedelta(7)
+        return self + datetime.timedelta(5 - self.weekday())
+
+    def is_last_day_of(self, collection: date_collection) -> bool:
+        """Returns ``True`` if the date is the last day of the collection, ``False`` otherwise."""
+        return self == collection[-1]
+
+
 
 
 @dataclass
@@ -161,7 +189,11 @@ class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
 
     def __len__(self) -> int:
         """Returns the range length in days."""
-        return (self.end - self.start).days
+        return (self.end - self.start).days + 1
+
+    def number_of_days(self) -> int:
+        """Returns the range length in days."""
+        return len(self)
 
     def aslist(self) -> list[date]:
         """Returns the list of all dates in the range."""
@@ -170,6 +202,11 @@ class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
     def ascollection(self) -> date_collection:
         """Returns a ``date_collection`` with all dates within the range."""
         return date_collection(ranges=[self])
+
+    def half(self) -> date:
+        """Returns the date that corresponds to middle of the range."""
+        delta = datetime.timedelta(len(self) / 2)
+        return self.aslist()[0] + delta
 
 
 @dataclass
@@ -208,6 +245,10 @@ class date_collection(
         """Returns the date at the given index."""
         return self.aslist()[key]
 
+    def number_of_days(self) -> int:
+        """Returns the number of days in the collection."""
+        return len(self)
+
     def add_range(self, the_range: date_range):
         """Adds a date range to the collection."""
         self.ranges.append(the_range)
@@ -220,6 +261,14 @@ class date_collection(
         """Returns the date that corresponds to half the collection."""
         delta = datetime.timedelta(len(self) / 2)
         return self[0] + delta
+
+    def has_even_number_of_days(self) -> bool:
+        """Returns ``True`` if the collection has an even number of days, ``False`` otherwise."""
+        return len(self) % 2 == 0
+
+    def has_odd_number_of_days(self) -> bool:
+        """Returns ``True`` if the collection has an odd number of days, ``False`` otherwise."""
+        return not self.has_even_number_of_days()
 
 
 EASTER_SUNDAY = {
