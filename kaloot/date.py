@@ -159,8 +159,6 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
         return self == collection[-1]
 
 
-
-
 @dataclass
 class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
     """Represents a range of dates."""

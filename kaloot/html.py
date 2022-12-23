@@ -11,7 +11,13 @@ from .calendar import Calendar
 from .config import UserConfiguration
 from .date import current_year, date
 from .event import Event
-from .feature import CustodyFeature, Feature, DayAbbrFeature, DayNumberFeature, ColorFeature
+from .feature import (
+    CustodyFeature,
+    Feature,
+    DayAbbrFeature,
+    DayNumberFeature,
+    ColorFeature,
+)
 from .feature import merge as merge_features
 
 
@@ -73,7 +79,9 @@ class MasterCalendar:
 
     user_config: UserConfiguration
     env: jinja2.Environment = field(init=False, repr=False)
-    config: HTMLConfiguration = field(init=False, repr=False, default_factory=HTMLConfiguration)
+    config: HTMLConfiguration = field(
+        init=False, repr=False, default_factory=HTMLConfiguration
+    )
     _cal: Calendar = field(init=False, repr=False)
     features: list[Feature] = field(default_factory=list)
 

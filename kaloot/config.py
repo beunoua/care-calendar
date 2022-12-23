@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from .event import Event, get_public_holidays
 
+
 @dataclass
 class UserConfiguration:
     """Stores parameters read from the user configuration file."""
