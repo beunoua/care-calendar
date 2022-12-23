@@ -125,15 +125,22 @@ class MasterCalendar:
         )
         return html
 
+    def get_weekend_weekday_css_class(self, day: date) -> str:
+        """Returns the weekend or weekday css specific class."""
+        if day.is_weekend():
+            return self.config.css_class["weekend"]
+        return self.config.css_class["weekday"]
+
+    def get_weekday_css_class(self, day: date) -> str:
+        """Returns the css class for a specific day of the week, i.e. Monday, Tuesday..."""
+        return self.config.day_abbr[day.weekday()].lower()
+
     def get_css_class_date(self, day: date) -> str:
         """Returns css classes for a specific day."""
-        # Weekend/weekday specific classes.
-        css = []
-        if day.weekday() in (5, 6):
-            css.append(self.config.css_class["weekend"])
-        else:
-            css.append(self.config.css_class["weekday"])
-        css.append(self.config.day_abbr[day.weekday()].lower())
+        css = [
+            self.get_weekend_weekday_css_class(day),
+            self.get_weekday_css_class(day),
+        ]
         return " ".join(css)
 
     def get_css_class_week_number(self) -> str:

@@ -39,6 +39,7 @@ class DayNumberFeature(TextFeature):
     """Feature for day number."""
 
     def format_text(self, day: date) -> str:
+        """Returns the day number for the given day."""
         return f"{day.day:02d}"
 
 
@@ -49,12 +50,17 @@ class DayAbbrFeature(TextFeature):
     names: list[str]
 
     def format_text(self, day: date) -> str:
+        """Returns the day abbreviation for the given day."""
         return f"{self.names[day.weekday()]}"
 
 
 @dataclass
 class ColorFeature(Feature):
-    """Base class for features represented as colored cells."""
+    """Base class for features represented as colored cells.
+
+    Colored cells are meant to contain no text and therefore contain a ``&nbsp;``
+    character so that the cell is not squashed.
+    """
 
     CSS_CLASS_DEFAULT = "coloredcell"
 
@@ -68,11 +74,12 @@ class ColorFeature(Feature):
 
 @dataclass
 class EventCollectionFeature(ColorFeature):
-    """Feature for event collection."""
+    """Feature for event collection, which is a ``ColorFeature`` with an ``Event``."""
 
     event: Event
 
     def dynamic_css_class(self, day: date) -> list[str]:
+        """Returns the list of CSS classes that apply for this day."""
         css = self.css_class.copy()
         if day in self.event.dates:
             css.append(self.event.css_class)
@@ -86,16 +93,12 @@ class EventCollectionFeatureMerge(ColorFeature):
     event_list: list[Event]
 
     def dynamic_css_class(self, day: date) -> list[str]:
+        """Returns the list of CSS classes that apply for this day."""
         css = self.css_class.copy()
         for event in self.event_list:
             if day in event.dates:
                 css.append(event.css_class)
         return css
-
-
-def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
-    """Merge several ``Event`` instances into a ``EventCollectionFeatureMerge``."""
-    return EventCollectionFeatureMerge(event_list)
 
 
 @dataclass
@@ -108,4 +111,11 @@ class CustodyFeature(TextFeature):
         self.css_class = ["daycust"]
 
     def format_text(self, day: date) -> str:
+        """Returns the custody for the given day."""
         return get_guardian(day, self.holidays.dates)
+
+
+def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
+    """Merge several ``Event`` instances into a ``EventCollectionFeatureMerge``."""
+    return EventCollectionFeatureMerge(event_list)
+

@@ -1,3 +1,8 @@
+"""kaloot.config - Defines the ``UserConfiguration`` class.
+
+The ``UserConfiguration`` class stores user actionable parameters.
+"""
+
 from dataclasses import dataclass, field
 from .event import Event, get_public_holidays
 
