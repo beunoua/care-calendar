@@ -2,12 +2,13 @@
 
 import os
 import pathlib
+from typing import Optional
 
 import markdown
 import yaml
 
-from .event import Event, get_public_holidays
-
+from .event import Event
+from .config import UserConfiguration
 
 def read_user_events(path: os.PathLike) -> dict[str, Event]:
     """Reads user events from a YAML file"""
@@ -21,11 +22,14 @@ def read_user_events(path: os.PathLike) -> dict[str, Event]:
     return user_events
 
 
-def read_comments_markdown(path: os.PathLike) -> str:
+def read_comments_markdown(path: Optional[os.PathLike]) -> str:
     """Reads the markdown comment file.
 
     Returns the comments formatted in HTML.
     """
+    if path is None:
+        return ""
+    check_file_exists(path)
     with open(path, "rt", encoding="utf-8") as input_file:
         text = input_file.read()
     return markdown.markdown(text)
@@ -44,7 +48,7 @@ def read_event_yaml(path: os.PathLike) -> dict[str, Event]:
     return events
 
 
-def read_configuration_file(path: os.PathLike) -> dict:
+def read_configuration_file(path: os.PathLike) -> UserConfiguration:
     """Reads the YAML configuration file"""
     with open(path, "rt", encoding="utf-8") as input_file:
         config = yaml.load(input_file, Loader=yaml.Loader)
@@ -56,16 +60,11 @@ def read_configuration_file(path: os.PathLike) -> dict:
         raise KeyError("Missing 'Vacances scolaires' in configuration file")
 
     # If the template search path is not specified, use the default.
-    if "template_search_path" not in config:
-        config["template_search_path"] = "templates"
-    check_directory_exists(config["template_search_path"])
+    if "template_dir" not in config:
+        config["template_dir"] = "templates"
+    check_directory_exists(config["template_dir"])
 
-    # If comments are specified, check if the file exists and read it.
-    if "comments" in config:
-        check_file_exists(config["comments"])
-        config["comments_html"] = read_comments_markdown(config["comments"])
-    else:
-        config["comments_html"] = ""
+    config["comments_html"] = read_comments_markdown(config.get("comments"))
 
     # Store school holidays into config["school_holidays"].
     config["school_holidays"] = Event.from_yaml(
@@ -74,10 +73,12 @@ def read_configuration_file(path: os.PathLike) -> dict:
         event_data=config["Vacances scolaires"],
     )
 
-    # Store public holidays into config["public_holidays"].
-    config["public_holidays"] = get_public_holidays(config["year"])
-
-    return config
+    return UserConfiguration(
+        year=config["year"],
+        template_search_path=config["template_dir"],
+        comments_html=config["comments_html"],
+        school_holidays=config["school_holidays"],
+)
 
 
 def write_html(path: os.PathLike, html: str):
@@ -86,7 +87,7 @@ def write_html(path: os.PathLike, html: str):
         output_file.write(html)
 
 
-def check_file_exists(path: str):
+def check_file_exists(path: os.PathLike):
     """Checks if a file exists and is a file."""
     path_ = pathlib.Path(path)
     if not path_.exists():
@@ -95,7 +96,7 @@ def check_file_exists(path: str):
         raise FileNotFoundError(f"'{path_}' is not a valid file")
 
 
-def check_directory_exists(path: str):
+def check_directory_exists(path: os.PathLike):
     path_ = pathlib.Path(path)
     if not path_.exists():
         raise FileNotFoundError(f"Directory '{path_}' does not exist")

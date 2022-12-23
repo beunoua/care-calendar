@@ -25,9 +25,10 @@ def main():
     args = parse_args()
     config = kaloot.io.read_configuration_file(args.config)
 
-    html = kaloot.html.render(config)
+    cal = kaloot.html.create_calendar(config)
+    html = cal.render()
 
-    output_path = args.output or pathlib.Path(f"calendar-{config['year']}.html")
+    output_path = args.output or pathlib.Path(f"calendar-{config.year}.html")
     kaloot.io.write_html(output_path, html)
     print("Wrote calendar to", output_path)
 
