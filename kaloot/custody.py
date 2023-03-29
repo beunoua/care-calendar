@@ -26,9 +26,7 @@ def get_holidays_transition_date(holidays: date_collection) -> date:
     the July guardian, so the transition is the day before the half.
     """
     if is_summer_holidays(holidays):
-        if holidays.has_odd_number_of_days():
-            return holidays.half().previous()
-        return holidays.half()
+        return holidays.half().previous()
     return holidays[0].next_saturday()
 
 

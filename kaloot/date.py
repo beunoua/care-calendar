@@ -185,6 +185,10 @@ class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
         for delta in range((self.end - self.start).days + 1):
             yield self.start + datetime.timedelta(days=delta)
 
+    def __getitem__(self, index: int) -> date:
+        """Returns the date at the given index."""
+        return self.aslist()[index]
+
     def __len__(self) -> int:
         """Returns the range length in days."""
         return (self.end - self.start).days + 1
