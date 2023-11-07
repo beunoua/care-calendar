@@ -28,6 +28,18 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
         obj.description = description
         return obj
 
+    def __add__(self, other: int | datetime.timedelta) -> date:
+        """Adds a number of days to the date."""
+        if isinstance(other, datetime.timedelta):
+            return super().__add__(other)
+        return self + datetime.timedelta(other)
+
+    def __sub__(self, other: int | datetime.timedelta) -> date:
+        """Subtracts a number of days from the date."""
+        if isinstance(other, datetime.timedelta):
+            return super().__sub__(other)
+        return self - datetime.timedelta(other)
+
     def name(self) -> str:
         """Returns the name of the date's day."""
         return self.strftime("%A")
@@ -98,11 +110,11 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
 
     def next(self) -> date:
         """Returns the next day."""
-        return self + datetime.timedelta(1)
+        return self + 1
 
     def previous(self) -> date:
         """Returns the previous day."""
-        return self - datetime.timedelta(1)
+        return self - 1
 
     def is_mothers_day(self) -> bool:
         """Returns ``True`` if the date is Mother's Day, ``False`` otherwise."""
@@ -184,6 +196,10 @@ class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
         """Returns an iterator over the dates in the range."""
         for delta in range((self.end - self.start).days + 1):
             yield self.start + datetime.timedelta(days=delta)
+
+    def __getitem__(self, index: int) -> date:
+        """Returns the date at the given index."""
+        return self.aslist()[index]
 
     def __len__(self) -> int:
         """Returns the range length in days."""
