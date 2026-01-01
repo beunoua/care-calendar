@@ -1,30 +1,33 @@
+PYTHON = uv run
+
+
 .PHONY: clean clean-test clean-pyc clean-build help
 
 COMMENTS_MD = comments.md
 
 2026: config-2026.yaml $(COMMENTS_MD)
-	python make-calendar.py $<
+	$(PYTHON) make-calendar.py $<
 	mkdir -p docs/$@
 	mv calendar-$@.html docs/$@
 	cp $^ docs/$@
 	cd docs/$@ && ln -s calendar-$@.html index.html
 
 2025: config-2025.yaml $(COMMENTS_MD)
-	python make-calendar.py $<
+	$(PYTHON) make-calendar.py $<
 	mkdir -p docs/$@
 	mv calendar-$@.html docs/$@
 	cp $^ docs/$@
 	cd docs/$@ && ln -s calendar-$@.html index.html
 
 2024: config-2024.yaml $(COMMENTS_MD)
-	python make-calendar.py $<
+	$(PYTHON) make-calendar.py $<
 	mkdir -p docs/$@
 	mv calendar-$@.html docs/$@
 	cp $^ docs/$@
 	cd docs/$@ && ln -s calendar-$@.html index.html
 
 2023: config-2023.yaml $(COMMENTS_MD)
-	python make-calendar.py $<
+	$(PYTHON) make-calendar.py $<
 	mkdir -p docs/$@
 	mv calendar-$@.html docs/$@
 	cp $^ docs/$@
@@ -32,7 +35,7 @@ COMMENTS_MD = comments.md
 
 
 help:
-	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
+	@$(PYTHON) -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -52,8 +55,5 @@ clean-pyc: ## remove Python file artifacts
 clean-test: ## remove test and coverage artifacts
 	rm -fr .cache/
 
-lint:
-	pylint kaloot make-calendar.py
-
 test: ## run tests quickly with the default Python
-	pytest tests
+	uv run pytest tests
