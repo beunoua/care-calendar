@@ -30,15 +30,15 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
 
     def __add__(self, other: int | datetime.timedelta) -> date:
         """Adds a number of days to the date."""
-        if isinstance(other, datetime.timedelta):
-            return super().__add__(other)
-        return self + datetime.timedelta(other)
+        if isinstance(other, int):
+            return self + datetime.timedelta(days=other)
+        return super().__add__(other)
 
     def __sub__(self, other: int | datetime.timedelta) -> date:
         """Subtracts a number of days from the date."""
-        if isinstance(other, datetime.timedelta):
-            return super().__sub__(other)
-        return self - datetime.timedelta(other)
+        if isinstance(other, int):
+            return self - datetime.timedelta(days=other)
+        return super().__sub__(other)
 
     def name(self) -> str:
         """Returns the name of the date's day."""
