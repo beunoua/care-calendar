@@ -34,7 +34,7 @@ mères.
 4. La première moitié des vacances débute le premier jour de la date officielle des
 vacances scolaires, soit habituellement le samedi à la sortie des classes pour les enfants
 ayant cours le samedi ou la veille (vendredi) à la sortie des classes pour les enfants
-n'ayant pas court le samedi.
+n'ayant pas cours le samedi.
 
 5. La seconde moitié des vacances se termine la veille du jour de la date officielle de
 la rentrée scolaire, soit habituellement le dimanche à 18 heures.
