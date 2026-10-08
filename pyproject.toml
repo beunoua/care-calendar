@@ -1,7 +1,7 @@
 [project]
 name = "care-calendar"
 version = "0.1.0"
-description = "Add your description here"
+description = "Generates yearly child custody calendars as HTML, from school holidays and court-ordered custody rules."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
