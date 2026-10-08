@@ -29,6 +29,8 @@ Vacances scolaires:
 custom:
   css_class: "customcare"
   dates:
-    - dates: 20/12/2025 - 04/01/2026
+    - dates: 27/07 - 01/08
       care: B
+    - dates: 21/08 - 23/08
+      care: L
 

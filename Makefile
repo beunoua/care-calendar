@@ -41,9 +41,6 @@ COMMENTS_MD = comments.md
 	cd docs/$@ && ln -s calendar-$@.html index.html
 
 
-help:
-	@$(PYTHON) -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
-
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
 clean-build: ## remove build artifacts
