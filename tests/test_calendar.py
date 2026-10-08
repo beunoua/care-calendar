@@ -10,7 +10,11 @@ from hypothesis.strategies import composite, integers, SearchStrategy
 
 @composite
 def calendar(draw: Callable[SearchStrategy[int], int]) -> Calendar:
-    random_year = draw(integers(min_value=datetime.MINYEAR, max_value=datetime.MAXYEAR))
+    # calendar.monthdatescalendar() pads the last week of December with dates from
+    # the following year, which overflows for datetime.MAXYEAR.
+    random_year = draw(
+        integers(min_value=datetime.MINYEAR, max_value=datetime.MAXYEAR - 1)
+    )
     return Calendar(random_year)
 
 
