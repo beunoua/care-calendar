@@ -187,9 +187,12 @@ def init_jinja_env(template_search_path: os.PathLike) -> jinja2.Environment:
 
 def create_calendar(config: UserConfiguration) -> MasterCalendar:
     """Creates the calendar for the current year."""
+    events = [config.school_holidays, config.public_holidays]
+    if config.custom_care is not None:
+        events.append(config.custom_care.event)
     features = [
-        merge_features([config.school_holidays, config.public_holidays]),
-        CustodyFeature(config.school_holidays),
+        merge_features(events),
+        CustodyFeature(holidays=config.school_holidays, custom=config.custom_care),
     ]
     cal = MasterCalendar(config, features=features)
     return cal

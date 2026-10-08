@@ -33,18 +33,6 @@ class Event:
                 without a year.
         """
 
-        def parse_date_list(datestrlist: str) -> date.date_collection:
-            collection = date.date_collection()
-            for datestr in datestrlist:
-
-                if datestr is None:
-                    raise ValueError(f"collection: {name}: empty date string")
-                if "-" in datestr:
-                    collection.add_range(date.date_range.from_string(datestr, year))
-                else:
-                    collection.add_date(date.date.from_string(datestr, year))
-            return collection
-
         if "css_class" not in event_data:
             raise KeyError(
                 f"Misformatted event '{name}': missing required field 'css_class'"
@@ -55,7 +43,23 @@ class Event:
                 f"Misformatted event '{name}': missing required field 'dates'"
             )
 
-        return cls(name, event_data["css_class"], parse_date_list(event_data["dates"]))
+        dates = parse_date_list(name, event_data["dates"], year)
+        return cls(name, event_data["css_class"], dates)
+
+
+def parse_date_list(
+    name: str, datestrlist: list[str], year: int
+) -> date.date_collection:
+    """Parses a list of date or date range strings into a ``date_collection``."""
+    collection = date.date_collection()
+    for datestr in datestrlist:
+        if datestr is None:
+            raise ValueError(f"collection: {name}: empty date string")
+        if "-" in datestr:
+            collection.add_range(date.date_range.from_string(datestr, year))
+        else:
+            collection.add_date(date.date.from_string(datestr, year))
+    return collection
 
 
 def get_public_holidays(

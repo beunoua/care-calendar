@@ -1,6 +1,68 @@
 """kaloot.custody - Provides functions to get the guardian for a given day."""
 
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any
+
 from .date import date, date_collection
+from .event import Event, parse_date_list
+
+GUARDIANS = ("B", "L")
+
+
+@dataclass
+class CustomCare:
+    """Days on which the guardian is agreed upon instead of computed from the rules.
+
+    Each period is a ``date_collection`` associated with the guardian for those days.
+    """
+
+    event: Event
+    periods: list[tuple[date_collection, str]] = field(default_factory=list)
+
+    @classmethod
+    def from_yaml(
+        cls, name: str, data: dict[str, Any], year: int
+    ) -> CustomCare:
+        """Creates a ``CustomCare`` from YAML data.
+
+        Expected format::
+
+            css_class: "customcare"
+            dates:
+              - dates: 20/12/2025 - 04/01/2026
+                care: B
+        """
+        for key in ("css_class", "dates"):
+            if key not in data:
+                raise KeyError(f"Misformatted '{name}': missing required field '{key}'")
+
+        all_dates = date_collection()
+        periods = []
+        for item in data["dates"]:
+            if not isinstance(item, dict) or "dates" not in item or "care" not in item:
+                raise ValueError(
+                    f"{name}: each entry must have 'dates' and 'care' fields, got {item!r}"
+                )
+            if item["care"] not in GUARDIANS:
+                raise ValueError(
+                    f"{name}: invalid 'care' value {item['care']!r}, "
+                    f"expected one of {GUARDIANS}"
+                )
+            dates = parse_date_list(name, [item["dates"]], year)
+            all_dates.ranges.extend(dates.ranges)
+            all_dates.date_list.extend(dates.date_list)
+            periods.append((dates, item["care"]))
+
+        return cls(Event(name, data["css_class"], all_dates), periods)
+
+    def guardian(self, day: date) -> str | None:
+        """Returns the agreed guardian for a day, or ``None`` if the day is not custom."""
+        for dates, guardian in self.periods:
+            if day in dates:
+                return guardian
+        return None
 
 
 def guardian_transition(first: str, second: str) -> str:
@@ -115,6 +177,38 @@ def get_guardian(day: date, holidays: date_collection) -> str:
     if day in holidays:
         return get_guardian_holidays(day, holidays)
     return get_guardian_regular_week(day, holidays)
+
+
+def get_guardian_with_custom(
+    day: date, holidays: date_collection, custom: CustomCare | None
+) -> str:
+    """Get the guardian for a day, taking custom care agreements into account.
+
+    Transitions are shown on the last day before a custom period, and on the last
+    day of a custom period, when the guardian changes.
+    """
+    if custom is None:
+        return get_guardian(day, holidays)
+
+    next_day = day.next()
+    next_custom = custom.guardian(next_day)
+
+    guardian = custom.guardian(day)
+    if guardian is not None:
+        if next_custom is None:
+            next_guardian = get_guardian(next_day, holidays)[0]
+            if next_guardian != guardian:
+                return guardian_transition(guardian, next_guardian)
+        elif next_custom != guardian:
+            return guardian_transition(guardian, next_custom)
+        return guardian
+
+    guardian = get_guardian(day, holidays)
+    if next_custom is None or guardian[-1] == next_custom:
+        return guardian
+    if guardian[0] == next_custom:
+        return next_custom
+    return guardian_transition(guardian[0], next_custom)
 
 
 def is_summer_holidays(holidays: date_collection) -> bool:

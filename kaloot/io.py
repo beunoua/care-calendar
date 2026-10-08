@@ -7,6 +7,7 @@ from typing import Optional
 import markdown
 import yaml
 
+from .custody import CustomCare
 from .event import Event
 from .config import UserConfiguration
 
@@ -49,11 +50,19 @@ def read_configuration_file(path: os.PathLike) -> UserConfiguration:
         event_data=config["Vacances scolaires"],
     )
 
+    if "custom" in config:
+        config["custom"] = CustomCare.from_yaml(
+            name="Pas normal",
+            year=config["year"],
+            data=config["custom"],
+        )
+
     return UserConfiguration(
         year=config["year"],
         template_search_path=config["template_dir"],
         comments_html=config["comments_html"],
         school_holidays=config["school_holidays"],
+        custom_care=config.get("custom"),
     )
 
 

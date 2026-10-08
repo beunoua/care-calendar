@@ -4,6 +4,7 @@ The ``UserConfiguration`` class stores user actionable parameters.
 """
 
 from dataclasses import dataclass, field
+from .custody import CustomCare
 from .event import Event, get_public_holidays
 
 
@@ -15,6 +16,7 @@ class UserConfiguration:
     template_search_path: str
     comments_html: str
     school_holidays: Event
+    custom_care: CustomCare | None = None
     public_holidays: Event = field(init=False)
 
     def __post_init__(self):
@@ -22,4 +24,7 @@ class UserConfiguration:
 
     @property
     def events(self) -> list[Event]:
-        return [self.public_holidays, self.school_holidays]
+        events = [self.public_holidays, self.school_holidays]
+        if self.custom_care is not None:
+            events.append(self.custom_care.event)
+        return events

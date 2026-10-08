@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 
-from .custody import get_guardian
+from .custody import CustomCare, get_guardian_with_custom
 from .date import date
 from .event import Event
 
@@ -106,13 +106,14 @@ class CustodyFeature(TextFeature):
     """Feature for the children custody."""
 
     holidays: Event
+    custom: CustomCare | None = None
 
     def __post_init__(self):
         self.css_class = ["daycust"]
 
     def format_text(self, day: date) -> str:
         """Returns the custody for the given day."""
-        return get_guardian(day, self.holidays.dates)
+        return get_guardian_with_custom(day, self.holidays.dates, self.custom)
 
 
 def merge(event_list: list[Event]) -> EventCollectionFeatureMerge:
