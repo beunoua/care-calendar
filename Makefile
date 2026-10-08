@@ -1,52 +1,18 @@
 PYTHON = uv run
 
 
-.PHONY: clean clean-test clean-pyc clean-build help
-
 COMMENTS_MD = comments.md
 
-2028: config-2028.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
-	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
-	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
+# One target per configuration file at the root, e.g. config-2028.yaml -> make 2028.
+YEARS := $(patsubst config-%.yaml,%,$(wildcard config-*.yaml))
 
+.PHONY: $(YEARS) clean clean-test clean-pyc clean-build test
 
-2027: config-2027.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
+$(YEARS): %: config-%.yaml $(COMMENTS_MD)
 	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
+	$(PYTHON) make-calendar.py $< -o docs/$@/calendar-$@.html
 	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
-
-2026: config-2026.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
-	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
-	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
-
-2025: config-2025.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
-	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
-	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
-
-2024: config-2024.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
-	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
-	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
-
-2023: config-2023.yaml $(COMMENTS_MD)
-	$(PYTHON) make-calendar.py $<
-	mkdir -p docs/$@
-	mv calendar-$@.html docs/$@
-	cp $^ docs/$@
-	cd docs/$@ && ln -s calendar-$@.html index.html
+	ln -sf calendar-$@.html docs/$@/index.html
 
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
