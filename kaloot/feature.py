@@ -69,7 +69,7 @@ class ColorFeature(Feature):
             self.css_class = [self.CSS_CLASS_DEFAULT]
 
     def format_text(self, day: date) -> str:
-        return "&nbsp"
+        return "&nbsp;"
 
 
 @dataclass
