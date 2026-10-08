@@ -57,7 +57,7 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
             day_s, month_s = tokens
             day, month = int(day_s), int(month_s)
         else:
-            raise ValueError(f"Invalid date string: {date_string:!r}")
+            raise ValueError(f"Invalid date string: {date_string!r}")
         try:
             return cls(year, month, day)
         except ValueError as exc:
