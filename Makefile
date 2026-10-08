@@ -5,6 +5,14 @@ PYTHON = uv run
 
 COMMENTS_MD = comments.md
 
+2028: config-2028.yaml $(COMMENTS_MD)
+	$(PYTHON) make-calendar.py $<
+	mkdir -p docs/$@
+	mv calendar-$@.html docs/$@
+	cp $^ docs/$@
+	cd docs/$@ && ln -s calendar-$@.html index.html
+
+
 2027: config-2027.yaml $(COMMENTS_MD)
 	$(PYTHON) make-calendar.py $<
 	mkdir -p docs/$@
