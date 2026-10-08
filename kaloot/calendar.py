@@ -9,14 +9,14 @@ from dataclasses import dataclass, field
 import datetime
 from typing import Iterator
 
-from .date import current_year, date, pentecote
+from .date import date, pentecote
 
 
 @dataclass
 class Calendar:
     """Calendar class provides generic calendar helper functions."""
 
-    year: int = current_year()
+    year: int
     _cal: calendar.Calendar = field(init=False, repr=False, default=calendar.Calendar())
 
     def iter_month_weeks(self, month: int) -> Iterator[list[date]]:

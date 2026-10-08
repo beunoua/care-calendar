@@ -9,7 +9,7 @@ import jinja2
 
 from .calendar import Calendar
 from .config import UserConfiguration
-from .date import current_year, date
+from .date import date
 from .event import Event
 from .feature import (
     CustodyFeature,

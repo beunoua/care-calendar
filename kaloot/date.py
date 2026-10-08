@@ -8,11 +8,6 @@ import datetime
 from typing import Iterator, Optional
 
 
-def current_year() -> int:
-    """Returns the current year."""
-    return datetime.datetime.now().year
-
-
 class date(datetime.date):  # pylint: disable=invalid-name  # conforms to datetime.date
     """Provides a date class with additional methods compared to ``datetime.date``.
 
@@ -45,7 +40,7 @@ class date(datetime.date):  # pylint: disable=invalid-name  # conforms to dateti
         return self.strftime("%A")
 
     @classmethod
-    def from_string(cls, date_string: str, year: int = current_year()) -> date:
+    def from_string(cls, date_string: str, year: int) -> date:
         """Returns a new `date` from a string."""
         tokens = [token.strip() for token in date_string.split("/")]
         if len(tokens) == 3:
@@ -179,7 +174,7 @@ class date_range:  # pylint: disable=invalid-name  # conforms to datetime.date
     end: date
 
     @classmethod
-    def from_string(cls, date_range_str: str, year: int = current_year()) -> date_range:
+    def from_string(cls, date_range_str: str, year: int) -> date_range:
         """Returns a new date_range from a string representation."""
         if "-" not in date_range_str:
             raise ValueError(f"invalid date range string '{date_range_str}'")
@@ -302,7 +297,7 @@ def date_description(
     return obj
 
 
-def paques(year: int = current_year()) -> date:
+def paques(year: int) -> date:
     """Returns the date of Easter Sunday (Gregorian calendar).
 
     Uses the Meeus/Jones/Butcher algorithm.
@@ -320,12 +315,12 @@ def paques(year: int = current_year()) -> date:
     return date(year, month, day + 1)
 
 
-def pentecote(year: int = current_year()) -> date:
+def pentecote(year: int) -> date:
     """Returns the date of Pentecote."""
     return paques(year) + datetime.timedelta(49)
 
 
-def public_holidays(year: int = current_year()) -> date_collection:
+def public_holidays(year: int) -> date_collection:
     """Returns the list public holidays.
 
     Each date has a description.

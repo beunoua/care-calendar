@@ -22,7 +22,7 @@ class Event:
 
     @classmethod
     def from_yaml(
-        cls, name: str, event_data: dict[str, Any], year: int = date.current_year()
+        cls, name: str, event_data: dict[str, Any], year: int
     ) -> Event:
         """Creates an Event from a YAML event data tuple.
 
