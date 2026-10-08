@@ -28,7 +28,7 @@ def read_comments_markdown(path: Optional[os.PathLike]) -> str:
 def read_configuration_file(path: os.PathLike) -> UserConfiguration:
     """Reads the YAML configuration file"""
     with open(path, "rt", encoding="utf-8") as input_file:
-        config = yaml.load(input_file, Loader=yaml.Loader)
+        config = yaml.safe_load(input_file)
 
     if "year" not in config:
         raise KeyError("Missing 'year' in configuration file")
