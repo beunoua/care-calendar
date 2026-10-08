@@ -248,8 +248,8 @@ class date_collection(
         return day in self.date_list
 
     def __iter__(self) -> Iterator[date]:
-        """Returns an iterator over the dates in the collection."""
-        return iter(self.date_list)
+        """Returns an iterator over all dates in the collection, in sorted order."""
+        return iter(self.aslist())
 
     def __len__(self) -> int:
         """Returns the number of dates in the collection."""
